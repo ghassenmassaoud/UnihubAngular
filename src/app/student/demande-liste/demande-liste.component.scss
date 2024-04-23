@@ -1,0 +1,130 @@
+.content {
+    padding: 20px;
+  }
+  
+  .content-block {
+    margin-bottom: 20px;
+  }
+  
+  .block-header {
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .materialTableHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .header-buttons-left {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .header-buttons-left li {
+    margin-right: 10px;
+  }
+  
+  .tbl-title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .tbl-search-box {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-icon {
+    font-size: 20px;
+    margin-right: 5px;
+  }
+  
+  .search-field {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 20px;
+  }
+  
+  .body {
+    height: 400px;
+  }
+  
+  .overflow-auto {
+    overflow: auto;
+  }
+  
+  .responsive_table {
+    width: 100%;
+  }
+  
+  .mat-cell {
+    padding: 8px;
+  }
+  
+  .advance-table {
+    /* Ajoutez des styles avancés ici */
+  }
+  
+  .mobile-label {
+    display: none;
+  }
+  
+  .badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+  
+  .badge-solid-green {
+    background-color: green;
+    color: #fff;
+  }
+  
+  .badge-solid-orange {
+    background-color: orange;
+    color: #fff;
+  }
+  
+  .no-results {
+    text-align: center;
+    margin-top: 20px;
+    font-style: italic;
+  }
+  
+  .mat-paginator {
+    margin-top: 20px;
+  }
+  
+  /* Styles pour la décoration */
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+  }
+
+  

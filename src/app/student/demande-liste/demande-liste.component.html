@@ -1,0 +1,94 @@
+<section class="content">
+    <div class="content-block">
+      @for (breadscrum of breadscrums; track breadscrum) {
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+        </app-breadcrumb>
+      </div>
+      }
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="materialTableHeader">
+              <div class="left">
+                <ul class="header-buttons-left ms-0">
+                  <li class="tbl-title">
+                    <h2>Demands</h2>
+                  </li>
+                  <li class="tbl-search-box">
+                    <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                    <input placeholder="Search" type="text" #filter class="browser-default search-field"
+                      aria-label="Search box">
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <p>hahahahahahahahah</p>
+            <div class="body overflow-auto">
+              <div class="responsive_table">
+                <table mat-table [dataSource]="dataSource" matSort class="mat-cell advance-table">
+                  
+                  <!-- ID Column -->
+                  <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+                  </ng-container>
+                  <!-- description Column -->
+                  <ng-container matColumnDef="description">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Class </mat-header-cell>
+                    <mat-cell *matCellDef="let row"><span class="mobile-label">Class:</span> {{row.description}} </mat-cell>
+                  </ng-container>
+                  <!-- DemandType Column -->
+                  <ng-container matColumnDef="DemandType">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Section </mat-header-cell>
+                    <mat-cell *matCellDef="let row"><span class="mobile-label">Section:</span> {{row.DemandType}} </mat-cell>
+                  </ng-container>
+      
+                  <!-- Creation Date Column -->
+                  <ng-container matColumnDef="CreationDate">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Creation Date</mat-header-cell>
+                    <mat-cell *matCellDef="let row"><span class="mobile-label">Creation Date:</span>
+                      {{row.CreationDate | date: 'MM/dd/yyyy' }}
+                    </mat-cell>
+                  </ng-container>
+                
+                  <!-- status Column -->
+                  <ng-container matColumnDef="status">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Status
+                    </mat-header-cell>
+                    <mat-cell mat-cell *matCellDef="let row">
+                      <span class="mobile-label">Status:</span>
+                      @if (row.status==='Seen') {
+                      <div>
+                        <span class="badge badge-solid-green">
+                          {{row.status}}</span>
+                      </div>
+                      }
+                      @if (row.status==='Unseen') {
+                      <div>
+                        <span class="badge badge-solid-orange">
+                          {{row.status}}</span>
+                      </div>
+                      }
+                    </mat-cell>
+                  </ng-container>
+                  <!-- actions -->
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
+                  <mat-row *matRowDef="let row; columns: displayedColumns;" [style.cursor]="'pointer'" matRipple>
+                  </mat-row>
+                </table>
+                <div class="no-results" [style.display]="dataLength === 0 ? '' : 'none'">
+                  No results
+                </div>
+                <mat-paginator #paginator [length]="dataLength" [pageIndex]="0" [pageSize]="10"
+                  [pageSizeOptions]="[5, 10, 25, 100]">
+                </mat-paginator>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
