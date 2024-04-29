@@ -1,0 +1,43 @@
+<div class="addContainer">
+  <div mat-dialog-content>
+    <form [formGroup]="classroomForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Classroom Name</mat-label>
+            <input matInput formControlName="idClassroom" required>
+        </mat-form-field>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+      <mat-form-field class="example-full-width mb-3" appearance="outline">
+        <mat-label>Speciality</mat-label>
+
+        <mat-select formControlName="speciality" class="form-control">
+          <mat-option  *ngFor="let spec of speciality" [value]="spec">{{ spec }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
+      <mat-form-field class="example-full-width mb-3" appearance="outline">
+        <mat-label>Student</mat-label>
+        <mat-select formControlName="student_id" required>
+          <mat-option *ngFor="let student of students$ | async" [value]="student.idUser">
+            {{ student.firstname + ' ' + student.lastname }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+     
+      <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+        <mat-form-field class="example-full-width mb-3" appearance="outline">
+          <mat-label>Student</mat-label>
+          <mat-select formControlName="student_id" required>
+            <mat-option *ngFor="let student of students" [value]="student.idUser">{{ student.firstname + ' ' + student.lastname}}
+           </mat-option>
+           </mat-select>
+           </mat-form-field>
+           </div> -->
+     
+      <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -21,6 +21,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { InsructorsComponent } from './insructors/insructors.component';
 import { HomeSecondeComponent } from './home-seconde/home-seconde.component';
+import { ClassroomComponent } from './teacher/classroom/classroom.component';
 
 export const APP_ROUTE: Route[] = [
   {
@@ -101,6 +102,8 @@ export const APP_ROUTE: Route[] = [
     loadChildren: () =>
       import('./coureses/coureses.routes').then((m) => m.COURESES_ROUTE),
   },
+  
+   
   {
     path: 'coureses-list',
     component: CouresesListComponent,
