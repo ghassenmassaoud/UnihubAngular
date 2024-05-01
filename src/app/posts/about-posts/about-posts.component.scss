@@ -1,0 +1,111 @@
+.breadcrumbs-title-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumbs-title {
+    margin-right: 500px; /* Ajustez la marge selon votre préférence */
+}
+
+.emoji {
+    font-size: 1.5em; /* Ajustez la taille de la police selon votre préférence */
+}
+.like-action, .love-action, .instructive-action, .solution-action, .dislike-action {
+    cursor: pointer;
+    margin-right: 10px;
+    padding: 5px 10px;
+}
+
+// .like-action {
+//     background-color: #28a745; /* Vert pour le bouton Like */
+// }
+
+// .love-action {
+//     background-color: #dc3545; /* Rouge pour le bouton Love */
+// }
+
+// .instructive-action {
+//     background-color: #ffc107; /* Jaune pour le bouton Instructive */
+// }
+
+// .solution-action {
+//     background-color: #007bff; /* Bleu pour le bouton Solution */
+// }
+
+// .dislike-action {
+//     background-color: #6c757d; /* Gris pour le bouton Dislike */
+// }
+.emoji-container {
+    display: flex;
+    list-style-type: none; /* Supprimer les puces de la liste */
+    padding: 0;
+    border: none;
+  }
+  
+  .emoji-item {
+    display: flex;
+    align-items: center;
+    margin-right: 100px; /* Espacement entre chaque paire emoji-nombre */
+  }
+  .emoji-item span {
+    font-size: 20px; /* Taille de police du texte */
+    font-family: 'VotrePolicePersonnalisee', sans-serif; /* Remplacez 'VotrePolicePersonnalisee' par le nom de votre police */
+  }
+  .element-with-line {
+    border-bottom: 1px solid black; /* Adds a black line below the element */
+  }
+  
+  .emoji-item button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 150px; /* Taille de police des emojis */
+    margin-right: 5px; /* Espacement entre l'emoji et le texte */
+  }
+  
+  .emoji-item:last-child {
+    margin-right: 0; /* Aucun espacement après le dernier élément */
+  }
+  
+.breadcrumbs-header {
+    display: flex;
+    justify-content: space-between; /* Align items horizontally with space between */
+    align-items: center;
+}
+
+.title-emoji-wrapper {
+    display: flex;
+    align-items: center;
+    flex-grow: 1; /* Allow the title-emoji wrapper to grow and occupy available space */
+}
+
+.breadcrumbs-title {
+    margin-right: 0px; /* Adjust spacing between title and emoji */
+}
+
+.emoji {
+    font-size: 24px; /* Adjust emoji size */
+}
+
+.report-button {
+    margin-left: 10px; /* Adjust spacing between title-emoji and button */
+}
+.meta-tags .tags {
+    font-weight: bold;
+    font-size: 25px; /* Taille de la police ajustée à 18px */
+}
+
+.widget.back-post .related-courses li {
+    margin-bottom: 20px;
+  }
+  
+  .widget.back-post .titles h4 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .widget.back-post .titles span {
+    font-size: 16px;
+    color: #888;
+  }
