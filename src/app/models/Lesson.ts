@@ -1,5 +1,6 @@
 import { Classroom } from "./Classroom";
 import { Task } from "./Task";
+import { Document } from "./Document";
 
 export class Lesson{
 
@@ -8,5 +9,7 @@ export class Lesson{
         visibility!: string;
         classroom!: Classroom;
         tasks!: Task[];
+        documents!: Document[];
+
       }
 

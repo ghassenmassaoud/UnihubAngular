@@ -13,7 +13,7 @@ export class ClassroomService {
   constructor(private http: HttpClient) { }
 
   addClassroom(classroomData: any,teacherId:number): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}add?teacherId=${teacherId}`, classroomData);
+    return this.http.post<any>(`${this.baseUrl}add?teacherId=` + teacherId, classroomData);
   }
 
   updateClassroom(classroomId: number, updatedClassroom: Classroom): Observable<Classroom> {
@@ -32,8 +32,8 @@ export class ClassroomService {
     return this.http.get<any>(`${this.baseUrl}all`);
   }
 
-  searchClassroomByNameOrTeacherName(name: string): Observable<Classroom[]> {
-    return this.http.get<Classroom[]>(`${this.baseUrl}search/${name}`);
+  searchClassroomByNameOrTeacherName(name: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}search/${name}`);
   }
 
   affectStudentToClassroom(studentId: number, classroomId: number): Observable<any> {

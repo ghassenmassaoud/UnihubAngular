@@ -6,6 +6,7 @@ export class Absence {
     statusAbsence!: string;
     dateAbsence!: Date;
     classroom!: Classroom;
+    studentId!: User; 
     //profile: Profile;
-    user!: User;
+    //user!: User;
   }

@@ -1,4 +1,6 @@
 import { Lesson } from "./Lesson";
+import { Document } from "./Document";
+
 
 export class Task{
     idTask!: number;
@@ -7,4 +9,6 @@ export class Task{
     mark!: number;
     taskState!: string;
     lesson!: Lesson[];
+    documents!: Document[]; 
+
 }

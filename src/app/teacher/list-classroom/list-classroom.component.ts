@@ -15,6 +15,8 @@ import { FormDialogComponent } from '../lectures/dialogs/form-dialog/form-dialog
 import { MatCell, MatCellDef } from '@angular/material/table';
 import { FeatherIconsComponent } from '@shared/components/feather-icons/feather-icons.component';
 import { User } from 'app/models/User';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 @Component({
   selector: 'app-list-classroom',
   standalone: true,
@@ -23,6 +25,8 @@ import { User } from 'app/models/User';
             BreadcrumbComponent,
             MatButtonModule,
             MatIconModule,
+            MatFormFieldModule,
+            MatInputModule,
             MatCellDef,
             MatCell,
             RouterModule,
@@ -48,6 +52,7 @@ export class ListClassroomComponent implements OnInit {
   classroomId!: number;
   editedClassroom: Classroom = {} as Classroom;
   editMode: boolean = false;
+  name: string = '';
 
   constructor(private router: Router,private route: ActivatedRoute, private classroomService: ClassroomService, public dialog: MatDialog,) { }
 
@@ -63,6 +68,17 @@ export class ListClassroomComponent implements OnInit {
 
 
   }
+  searchClassroom() {
+    this.classroomService.searchClassroomByNameOrTeacherName(this.name).subscribe({
+      next:(response: any) => {
+        this.classrooms = response;
+      },
+      error:(error) => {
+        console.log(error);
+      }
+  });
+  }
+  
   openClassroom(classroomId: number) {
 
     // Rediriger vers la page de la salle de classe avec l'ID ajouté à l'URL
