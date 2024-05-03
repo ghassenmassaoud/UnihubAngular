@@ -1,0 +1,101 @@
+<!-- <div *ngIf="comment">
+    <h2>Comment Details</h2>
+    <p><strong>Comment ID:</strong> {{ commentId }}</p>
+    <p *ngIf="comment.content"><strong>Content:</strong> {{ comment.content }}</p>
+    <p *ngIf="comment.commentDate"><strong>Comment Date:</strong> {{ comment.commentDate }}</p>
+    <p><strong>Likes:</strong> {{ comment.likes }}</p>
+    <p><strong>Report:</strong> {{ comment.report ? 'Yes' : 'No' }}</p>
+    <p><strong>Attachments:</strong></p>
+    <ul>
+      <li *ngFor="let attachment of comment.attachments">
+        <a href="{{ attachment.url }}" target="_blank">{{ attachment.name }}</a>
+      </li>
+    </ul>
+  </div>
+  
+  <div *ngIf="comment?.repliesCount > 0">
+    <h3>Replies ({{ comment.repliesCount }})</h3>
+    <ul>
+      <li *ngFor="let reply of comment.replies">
+        <div>
+          <p><strong>Reply ID:</strong> {{ reply.commentId }}</p>
+          <p *ngIf="reply.content"><strong>Content:</strong> {{ reply.content }}</p>
+          <p><strong>Reply Date:</strong> {{ reply.commentDate }}</p>
+          <p><strong>Likes:</strong> {{ reply.likes }}</p>
+          <p><strong>Report:</strong> {{ reply.report ? 'Yes' : 'No' }}</p>
+          <p><strong>Attachments:</strong></p>
+          <ul>
+            <li *ngFor="let attachment of reply.attachments">
+              <a href="{{ attachment.url }}" target="_blank">{{ attachment.name }}</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div> -->
+  <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+    <div class="card">
+      <div class="chat">
+        <div class="chat-header clearfix">
+          <img src="assets/images/user/user2.jpg" alt="avatar">
+          <div class="chat-about">
+            <div class="chat-with">Comments</div>
+            <div class="chat-num-messages">{{ repliesCount }} comments</div>
+          </div>
+        </div>
+        <ng-scrollbar style="height: 449px" visibility="hover">
+          <div class="chat-history" id="chat-conversation">
+            <div *ngIf="comment">
+              <hr>
+              <!-- Afficher uniquement les commentaires qui ne sont pas des réponses -->
+              <div *ngIf="!comment.parentComment" class="comment-container">
+                <!-- Commentaire parent -->
+                <div class="comment">
+                  <div class="message-data text-end" style="margin-bottom: 10px;">
+                    <span class="message-data-time" *ngIf="comment.commentDate">{{ comment.commentDate }}</span>
+                  </div>
+                  <div *ngIf="comment.content" class="message other-message float-end">{{ comment.content }}</div>
+                  <a href="#" ><span class="text-danger"><i class="fa fa-heart"></i> {{ comment.likes }}</span></a>
+
+                  <!-- Affichage des pièces jointes du commentaire parent -->
+                  <div *ngFor="let attachment of comment.attachments" class="comment-attachment">
+                    <a href="{{ attachment.url }}" target="_blank">{{ attachment.name }}</a>
+                  </div>
+                </div>
+               
+                <!-- Espacement entre les commentaires et les réponses -->
+                <div class="comment-reply-space"></div>
+                <!-- Réponses du commentaire parent -->
+                <div class="message-data reply-container">
+                  <div *ngIf="comment?.repliesCount > 0" class="reply-container">
+                    <div class="reply" *ngFor="let reply of comment.replies">
+                      <div class="reply">
+                        <div class="reply-info">
+                          <div class="message-data " style="margin-bottom: 10px;">
+                            <span class="message-data-time" *ngIf="reply.commentDate">{{ reply.commentDate }}</span>
+                          </div>
+                          <a href="#" class="float-end"><span class="text-danger"><i class="fa fa-heart"></i> {{ reply.likes }}</span></a>
+                          <div *ngIf="reply.content" class="message my-message">{{ reply.content }}</div>
+                          <!-- Affichage des pièces jointes de la réponse -->
+                          <div *ngFor="let attachment of reply.attachments" class="comment-attachment">
+                            <a href="{{ attachment.url }}" target="_blank">{{ attachment.name }}</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-scrollbar>
+        <div class="chat-message clearfix">
+          <div class="chat-upload">
+            <button mat-mini-fab class="bg-deep-orange msr-2"><i class="material-icons">attach_file</i></button>
+            <button mat-mini-fab class="bg-deep-orange"><i class="material-icons">insert_emoticon</i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

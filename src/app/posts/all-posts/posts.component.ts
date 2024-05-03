@@ -14,6 +14,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { LikeAction } from 'app/models/post-like';
+import { RecommService } from 'app/recomm.service';
+import { use } from 'echarts';
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
@@ -38,12 +40,14 @@ export class PostsComponent implements OnInit {
   postId!: number  | undefined;
   showTagsAndAttachments: boolean = false; 
   filteredPosts: MyPosts[] = [];
-  searchInput: string = '';// Variable pour contrôler l'affichage des tags et des pièces jointes
+  searchInput: string = '';
   maxLengthToShow = 200; 
+  recommendations: MyPosts[] = [];
 
 
+userId= 1;
   
-  constructor(private ps: PostsService, private router: Router){
+  constructor(private ps: PostsService, private router: Router, private rc:RecommService){
 
   }
 
@@ -55,6 +59,19 @@ export class PostsComponent implements OnInit {
       data => {this.posts = data}
     )
   }
+
+  Recomm(): void {
+    this.rc.getRecomm(this.userId).subscribe({
+      next: (data: MyPosts[]) => {
+        console.log('Données de recommandation reçues :', data); // Vérifiez les données reçues
+        this.recommendations = data;
+      },
+      error: (error) => {
+        console.error('Erreur lors de la récupération des recommandations :', error);
+      }
+    });
+  }
+  
  
   toggleDetails(postId: number) {
     const post = this.posts.find(post => post.postId === postId);
@@ -114,12 +131,10 @@ export class PostsComponent implements OnInit {
     this.ps.deletePost(postId).subscribe({
       next: (response) => {
         console.log('Post deleted successfully:', response);
-        // Mettez à jour la liste des posts après la suppression
-        this.fetchPosts(); // Par exemple, une méthode pour recharger les posts après suppression
+        this.fetchPosts(); 
       },
       error: (error) => {
         console.error('Error deleting post:', error);
-        // Gérez l'erreur de suppression de post ici
       }
     });
 
@@ -128,7 +143,7 @@ export class PostsComponent implements OnInit {
     if (posts && Array.isArray(posts)) {
       return posts.length;
     } else {
-      return 0; // ou une valeur par défaut appropriée
+      return 0; 
     }
   }
   
@@ -140,7 +155,7 @@ export class PostsComponent implements OnInit {
       });
       return totalLikes;
     } else {
-      return 0; // ou une valeur par défaut appropriée
+      return 0; 
     }
   }
   getTotalViewsCount(posts: MyPosts[]): number {
@@ -153,30 +168,30 @@ export class PostsComponent implements OnInit {
       });
       return totalViews;
     } else {
-      return 0; // ou une valeur par défaut appropriée
+      return 0; 
     }
   }
   
-  getAverageLikesPerPost(posts: MyPosts[]): number {
-    const totalLikes = this.getTotalLikesCount(posts);
-    const totalPosts = this.getTotalPostCount(posts);
-    return totalPosts > 0 ? totalLikes / totalPosts : 0;
-  }
+  // getAverageLikesPerPost(posts: MyPosts[]): number {
+  //   const totalLikes = this.getTotalLikesCount(posts);
+  //   const totalPosts = this.getTotalPostCount(posts);
+  //   return totalPosts > 0 ? totalLikes / totalPosts : 0;
+  // }
   getReportedPostsPercentage(posts: MyPosts[]): number {
     if (!posts || !Array.isArray(posts)) {
-      return 0; // Retourne 0 si posts est undefined, null ou n'est pas un tableau
+      return 0; 
     }
   
     const reportedPosts = posts.filter(post => post && post.report);
     const totalPosts = this.getTotalPostCount(posts);
     const percentage = totalPosts > 0 ? (reportedPosts.length / totalPosts) * 100 : 0;
-    return parseFloat(percentage.toFixed(1)); // Formater le pourcentage avec une décimale
+    return parseFloat(percentage.toFixed(1)); 
   }
   
  
   getEmojiCount(posts: MyPosts[], emoji: string): number {
     if (!posts || !Array.isArray(posts)) {
-      return 0; // Retourne 0 si posts est undefined, null ou n'est pas un tableau
+      return 0; 
     }
   
     let count = 0;

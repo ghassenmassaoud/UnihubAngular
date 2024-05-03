@@ -26,6 +26,8 @@ import { AboutPostsComponent } from './posts/about-posts/about-posts.component';
 import { PostClassComponent } from './post-class/post-class.component';
 import { AddPostsComponent } from './posts/add-posts/add-posts.component';
 import { EditPostsComponent } from './posts/edit-posts/edit-posts.component';
+import { CommentsComponent } from './comment/comments/comments.component';
+import { AboutCommentComponent } from './comment/about-comment/about-comment.component';
 
 export const APP_ROUTE: Route[] = [
   // // { path: '', redirectTo: '/all-posts', pathMatch: 'full' }, // Redirection par défaut vers all-posts
@@ -58,7 +60,7 @@ export const APP_ROUTE: Route[] = [
   },
   {
     path: 'instructors',
-    component: InsructorsComponent,
+    component: CommentsComponent,
     loadChildren: () =>
       import('./insructors/instuctor.routes').then((m) => m.INSTRUCTORS_ROUTE),
   },
@@ -87,8 +89,8 @@ export const APP_ROUTE: Route[] = [
       import('./event-side-bar/event-side-bar.routes').then((m) => m.EVENTSIDEBAR_ROUTE),
   },
   {
-    path: 'event-single',
-    component: EventSingleComponent,
+    path: 'event-single/:commentId',
+    component: AboutCommentComponent,
     loadChildren: () =>
       import('./event-single/event-single.routes').then((m) => m.EVENTSINGLE_ROUTE),
   },

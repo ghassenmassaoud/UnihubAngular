@@ -57,7 +57,7 @@ export class PostsService {
         { headers: headers }
       );
     }
- 
+
     // addPost(postData: FormData): Observable<any> {
     //   const headers = new HttpHeaders();
     //   headers.append('Content-Type', 'multipart/form-data');
@@ -70,6 +70,8 @@ export class PostsService {
       
       return this.httpClient.post<any>(`${this.baseURL}addpost?userId=${userId}`, postData, { headers: headers });
     }
+
+
     
     // addPost(newPost: MyPosts): Observable<MyPosts> {
     //   return this.httpClient.post<MyPosts>(this.baseURL + 'addpost', newPost);

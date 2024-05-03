@@ -1,0 +1,114 @@
+/* comments.component.scss */
+.comments-container {
+    .comment {
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+  
+    .comment-info {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+  
+    .comment-content {
+      margin-bottom: 10px;
+    }
+  
+    .replies-container {
+      margin-left: 20px;
+    }
+  
+    .reply {
+      border: 1px solid #eee;
+      padding: 5px;
+      margin-bottom: 5px;
+    }
+  
+    .reply-info {
+      font-weight: bold;
+      margin-bottom: 3px;
+    }
+  
+    .reply-content {
+      margin-left: 10px;
+    }
+  }
+//   /* Style du conteneur des commentaires */
+// /* Style du conteneur des commentaires */
+// /* Style du conteneur des commentaires */
+// .comments-container {
+//     margin-top: 20px;
+//   }
+  
+//   /* Style du commentaire parent */
+//   .comment {
+//     background-color: #f3f3f3;
+//     padding: 10px;
+//     margin-bottom: 30px;
+//   }
+  
+//   .comment-info {
+//     display: flex;
+//     justify-content: space-between;
+//     margin-bottom: 5px;
+//   }
+  
+//   .comment-content {
+//     margin-bottom: 10px;
+//   }
+  
+//   /* Style des réponses */
+//   .reply-container {
+//     margin-left: 30px;
+//   }
+  
+//   .reply {
+//     background-color: #e0e0e0;
+//     padding: 5px;
+//     margin-bottom: 10px;
+//     position: relative;
+//   }
+  
+//   .reply:before {
+//     content: '';
+//     position: absolute;
+//     top: -10px;
+//     left: 10px;
+//     border-width: 0 10px 10px;
+//     border-style: solid;
+//     border-color: transparent transparent #e0e0e0;
+//   }
+  
+//   .reply-info {
+//     display: flex;
+//     justify-content: space-between;
+//     margin-bottom: 5px;
+//   }
+  
+//   .reply-content {
+//     margin-bottom: 5px;
+//   }
+  
+//   /* Style des pièces jointes */
+//   .attachment-heading {
+//     font-weight: bold;
+//     margin-bottom: 5px;
+//   }
+  
+//   .attachment-name {
+//     display: block;
+//     margin-bottom: 3px;
+//   }
+  
+//   .attachment-size {
+//     display: block;
+//   }
+  
+//   /* Style des séparateurs */
+//   hr {
+//     display: none; /* Pour supprimer la bordure */
+//   }
+.comment-reply-space {
+    margin-top: 100px; /* Vous pouvez ajuster la valeur selon vos besoins */
+  }

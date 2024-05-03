@@ -111,6 +111,20 @@
       </div>
     </div>
   </div>
+  <div *ngIf="recommendations && recommendations.length > 0">
+    <h3>Recommandations</h3>
+    <ul>
+      <li *ngFor="let post of recommendations">
+        <!-- Affichez les détails du post selon votre modèle -->
+        <p>{{ post.title }}</p>
+        <p>{{ post.content }}</p>
+        <!-- Ajoutez d'autres propriétés du post selon vos besoins -->
+      </li>
+    </ul>
+  </div>
+  
+  {{ recommendations | json }}
+
   
   
   <div style="text-align: center;">

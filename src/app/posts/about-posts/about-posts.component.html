@@ -17,267 +17,165 @@
 
 </head>
 <body class="course-single blog-post-page blog-post-single-page">
-    <!-- <div class="row clearfix">
-        <div class="col-lg-4 col-md-12">
-            <div class="card">
-                <div class="contact-grid">
-                    <div class="card-body no-padding height-9">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12">
-                                <div class="card project_widget">
-                                    <div class="header">
-                                        <h5 class="col-orange">Post Details</h5>
-                                    </div>
-                                    <div class="body">
-                                        <h4>{{ post.title }}</h4>
-                                        <p>{{ post.content }}</p>
-                                        <ul *ngIf="post.tags && post.tags.length > 0">
-                                            <li *ngFor="let tag of post.tags">{{ tag }}</li>
-                                        </ul>
-                                        
-                                        <ul *ngIf="post.attachment && post.attachment.length > 0">
-                                            <li *ngFor="let attachment of post.attachment">{{ attachment.name }}</li>
-                                        </ul>
-                                        <hr>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-
-    <br> <br>
-        <div class="react-wrapper">
-            <div class="react-wrapper-inner">
-                <div class="react-breadcrumbs">
-                    <div class="breadcrumbs-wrap">
-                        <div class="breadcrumbs-inner">
-                            <div class="container">
-                                <div class="breadcrumbs-text">
-                                   
-                                    <div class="breadcrumbs-title-wrapper" >
-                                        <h1 class="breadcrumbs-title" style="margin-right: 580px;">{{ post.title }}</h1>
-                                        <span class="emoji">{{ post.emoji }}</span>
-                                    </div>
-                                
-                            
-
-                                <ul class="user-section">
-                                        <!-- <li class="user">
-                                            <span><img src="assets/images/course-single/user.jpg" alt="user"></span>
-                                            <span>Natasha Pawel</span>
-                                        </li> -->
-                                        <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> {{ post.datePost }}</li>
-                                        
-                                         <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> {{ post.status }}</li> 
-                                    </ul>
-                                     
-                                    <!-- <div style="text-align: right;">
-                                        <button mat-raised-button class="minimized-button" style="background-color: rgb(147, 4, 4); color: white;">
-                                            <mat-icon aria-hidden="false" aria-label="Reported">report_problem</mat-icon> Report ! 
-                                        </button>
-
-                                    </div> -->
-                                    <button *ngIf="!post.reported" mat-raised-button class="minimized-button" style="background-color: rgb(147, 4, 4); color: white; cursor: not-allowed;"
-                                    (click)="reportPost()">
-                                <mat-icon aria-hidden="false" aria-label="Reported">report_problem</mat-icon> Report!
-                            </button>
-                            <!-- <button *ngIf="post.reported" mat-raised-button class="minimized-button" style="background-color: rgb(4, 147, 4); color: white;"
-                            (click)="unreportPost()">
-                        <mat-icon aria-hidden="false" aria-label="Unreported">check_circle</mat-icon> Unreport!
-                    </button> -->
-                    <button  mat-raised-button class="minimized-button" style="background-color: rgb(4, 147, 4); color: white;"
-                            (click)="unreportPost()">
-                        <mat-icon aria-hidden="false" aria-label="Unreported">check_circle</mat-icon> Unreport!
-                    </button>
-                            
-                          
-                                    
-                                        
-                                    
-                                    
-                                    
-                                     <!-- <div class="element-with-line"></div> -->
-
-                                </div>
-                                
-                            </div>
-                            
-                        </div>
-                        
-                    </div>
-                </div>
-
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <div class="back__course__page_grid react-courses__single-page pb---40 pt---110">
-                    <div class="container pb---70">
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <div class="blog-single-inner">
-                                    <div class="blog-content">
-                                        <p>{{ post.content }} </p>
-                                        <ul *ngIf="post.attachment && post.attachment.length > 0">
-                                            <li *ngFor="let attachment of post.attachment">{{ attachment.name }}</li>
-                                        </ul>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <div class="blog-tags">
-                                            <div class="row align-items-center">
-                                                <div class="col-md-6">
-                                                    <ul class="meta-tags">
-                                                        <li class="tags">Tags:</li>
-                                                        <li *ngFor="let tag of post.tags">
-                                                            <a [href]="'/tags/' + tag">{{ tag }}</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="emoji-container">
-                                                    <div class="emoji-item">
-                                                        <button (click)="likePost()"><span>👍</span> Like</button>
-                                                        <button (click)="lovePost()"><span>❤️</span> Love</button>
-                                                        <button (click)="solutionPost()"><span>✅</span> Solution</button>
-                                                        <button (click)="instructivePost()"><span>💡</span> Instructive</button>
-                                                        <button (click)="dislikePost()"><span>👎</span> Dislike</button>
+                            <br><br>
+                            <div *ngIf="post">
+                                <div class="react-wrapper">
+                                    <div class="react-wrapper-inner">
+                                        <div class="react-breadcrumbs">
+                                            <div class="breadcrumbs-wrap">
+                                                <div class="breadcrumbs-inner">
+                                                    <div class="container">
+                                                        <div class="breadcrumbs-text">
+                                                            <div class="breadcrumbs-title-wrapper">
+                                                                <h1 class="breadcrumbs-title">{{ post.title }}</h1>
+                                                                <span class="emoji">{{ post.emoji }}</span>
+                                                            </div>
+                                                            <ul class="user-section">
+                                                                <li>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+                                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                                        <polyline points="12 6 12 12 16 14"></polyline>
+                                                                    </svg>
+                                                                    {{ post.datePost }}
+                                                                </li>
+                                                                <li>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                                                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                                                        <circle cx="12" cy="12" r="3"></circle>
+                                                                    </svg>
+                                                                    {{ post.status }}
+                                                                </li>
+                                                            </ul>
+                                                            <button *ngIf="!post.reported" mat-raised-button class="minimized-button" style="background-color: rgb(147, 4, 4); color: white; cursor: not-allowed;" (click)="reportPost()">
+                                                                <mat-icon aria-hidden="false" aria-label="Reported">report_problem</mat-icon> Report!
+                                                            </button>
+                                                            <button mat-raised-button class="minimized-button" style="background-color: rgb(4, 147, 4); color: white;" (click)="unreportPost()">
+                                                                <mat-icon aria-hidden="false" aria-label="Unreported">check_circle</mat-icon> Unreport!
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                
                                             </div>
                                         </div>
-                                        <br>
-                                        <!-- <div class="author-comment">
-                                            <h4 class="title-comments">3 Comments</h4>
-                                            <ul class="meta-tags">
-                                                <li class="tags">Comments:</li>
-                                                <li *ngFor="let comment of post.comments"> {{ comment.title }} </li>
-                                            </ul> 
-                                            <ul>
-                                                <li>
-                                                    <div class="row">
-                                                        <div class="col-lg-1">
-                                                            <div class="image-comments"><img src="assets/images/course-single/user2.jpg" alt=""> </div>
+                                    </div>
+                                </div>
+                                <br><br>
+                                <br><br>
+                                <br><br>
+                                <br><br><br>
+                                <div class="back__course__page_grid react-courses__single-page pb---40 pt---110">
+                                    <div class="container pb---70">
+                                        <div class="row">
+                                            <div class="col-lg-8">
+                                                <div class="blog-single-inner">
+                                                    <div class="blog-content">
+                                                        <p>{{ post.content }}</p>
+                                                        <ul *ngIf="post.attachment && post.attachment.length > 0">
+                                                            <li *ngFor="let attachment of post.attachment">{{ attachment.name }}</li>
+                                                        </ul>
+                                                        <div class="blog-tags">
+                                                            <div class="row align-items-center">
+                                                                <div class="col-md-6">
+                                                                    <ul class="meta-tags">
+                                                                        <li class="tags">Tags:</li>
+                                                                        <li *ngFor="let tag of post.tags">
+                                                                            <a [href]="'/tags/' + tag">{{ tag }}</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="emoji-container">
+                                                                    <div class="emoji-item">
+                                                                        <button (click)="likePost()"><span>👍</span> Like</button>
+                                                                        <button (click)="lovePost()"><span>❤️</span> Love</button>
+                                                                        <button (click)="solutionPost()"><span>✅</span> Solution</button>
+                                                                        <button (click)="instructivePost()"><span>💡</span> Instructive</button>
+                                                                        <button (click)="dislikePost()"><span>👎</span> Dislike</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-lg-11">
-                                                            <div class="dsc-comments">
-                                                               
-                                                                <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-corner-up-left"><polyline points="9 14 4 9 9 4"></polyline><path d="M20 20v-7a4 4 0 0 0-4-4H4"></path></svg> Reply</a>
+                                                        <br>
+                                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                                            <div class="card">
+                                                                <div class="chat">
+                                                                    <div class="chat-header clearfix">
+                                                                        <img src="assets/images/user/user2.jpg" alt="avatar">
+                                                                        <div class="chat-about">
+                                                                            <div class="chat-with">Comments</div>
+                                                                            <div class="chat-num-messages">comments</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <ng-scrollbar style="height: 449px" visibility="hover">
+                                                                        <div class="chat-history" id="chat-conversation">
+                                                                            <div *ngIf="comments.length > 0">
+                                                                                <hr>
+                                                                                <div *ngFor="let comment of comments" class="comment-container">
+                                                                                    <div class="comment">
+                                                                                        <div class="message-data text-end" style="margin-bottom: 10px;">
+                                                                                            <span class="message-data-time" *ngIf="comment.commentDate">{{ comment.commentDate }}</span>
+                                                                                        </div>
+                                                                                        <div *ngIf="comment.content" class="message other-message float-end">{{ comment.content }}</div>
+                                                                                        <a href="#" ><span class="text-danger"><i class="fa fa-heart"></i> {{ comment.likes }}</span></a>
+                                                                                    </div>
+                                                                                    <div class="comment-reply-space"></div>
+                                                                                    <div class="message-data reply-container">
+                                                                                        <div  class="reply-container">
+                                                                                            <div class="reply" *ngFor="let reply of comment.replies">
+                                                                                                <div class="reply">
+                                                                                                    <div class="reply-info">
+                                                                                                        <div class="message-data " style="margin-bottom: 10px;">
+                                                                                                            <span class="message-data-time" *ngIf="reply.commentDate">{{ reply.commentDate }}</span>
+                                                                                                        </div>
+                                                                                                        <a href="#" class="float-end"><span class="text-danger"><i class="fa fa-heart"></i> {{ reply.likes }}</span></a>
+                                                                                                        <div *ngIf="reply.content" class="message my-message">{{ reply.content }}</div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </ng-scrollbar>
+                                                                    <div class="chat-message clearfix">
+                                                                        <div class="chat-upload">
+                                                                            <button mat-mini-fab class="bg-deep-orange msr-2"><i class="material-icons">attach_file</i></button>
+                                                                            <button mat-mini-fab class="bg-deep-orange"><i class="material-icons">insert_emoticon</i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </li>
-                                                <li>
-                                                    <div class="row">
-                                                        <div class="col-lg-1">
-                                                            <div class="image-comments"><img src="assets/images/course-single/user.jpg" alt=""> </div>
-                                                        </div>
-                                                        <div class="col-lg-11">
-                                                            <div class="dsc-comments">
-                                                                <h6>Jim Séchen <span class="reply"> <span class="date">May 11, 2022 at 14:44 pm</span></span></h6>
-                                                                <p>The little rotter my good sir faff about Charles bamboozled I such a fibber tomfoolery at public school.</p>
-                                                                <a href="#"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-corner-up-left"><polyline points="9 14 4 9 9 4"></polyline><path d="M20 20v-7a4 4 0 0 0-4-4H4"></path></svg> Reply</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="row">
-                                                        <div class="col-lg-1">
-                                                            <div class="image-comments"><img src="assets/images/course-single/user3.jpg" alt=""> </div>
-                                                        </div>
-                                                        <div class="col-lg-11">
-                                                            <div class="dsc-comments">
-                                                                <h6>Justin Case <span class="reply"> <span class="date">July 21, 2022 at 17:44 pm</span></span> </h6>
-                                                                <p>The little rotter my good sir faff about Charles bamboozled I such a fibber tomfoolery at public school.</p>
-                                                                <a href="#"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-corner-up-left"><polyline points="9 14 4 9 9 4"></polyline><path d="M20 20v-7a4 4 0 0 0-4-4H4"></path></svg> Reply</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div> -->
-                                        <!-- <div class="back-blog-form">
-                                            <div id="blog-form" class="blog-form">
-                                                <h3>Leave a Reply</h3>
-                                                <p>Your email address will not be published. Required fields are marked *</p>
-                                                <form>
-                                                    <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <div class="back-textarea">
-                                                                <textarea placeholder="Message"></textarea>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <div class="back-input">
-                                                                <input type="text" name="name" placeholder="Name">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <div class="back-input">
-                                                                <input type="email" name="email" placeholder="Email">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-12">
-                                                            <div class="back-input">
-                                                                <input type="text" name="website" placeholder="Website">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-12">
-                                                            <div class="back-check-box">
-                                                                <input type="checkbox" id="box-1"> Save my name, email, and website in this browser for the next time I comment.
-                                                            </div>
-                                                            <button type="submit" class="back-btn">Submit Comment <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
-                                                        </div>
-                                                    </div>
-                                                </form>
+                                                </div>
                                             </div>
-                                        </div> -->
+                                            <br><br>
+                                            <div class="col-lg-4 md-mt-60">
+                                                <div class="react-sidebar ml----90 float-right"> 
+                                                    <div class="widget back-post">
+                                                        <h3 class="widget-title">Popular Posts</h3>
+                                                        <ul class="related-courses">
+                                                            <li *ngFor="let post of topThreePosts">
+                                                                <div class="titles">
+                                                                    <h4><a href="coureses-single.html">{{ post.title }}</a></h4>
+                                                                    <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> {{ post.datePost }}</span>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="widget widget-tags">
+                                                        <h3 class="widget-title">Tags</h3>
+                                                        <ul class="tags">
+                                                            <li *ngFor="let tag of allTags"><a href="#">{{ tag }}</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 md-mt-60">
-                                <div class="react-sidebar ml----90 float-right"> 
-                                    <br><br><br> <br>
-                                    <br><br><br> <br>
-                                    <br><br><br> <br>
-
-                                    <div class="widget back-post">
-                                        <h3 class="widget-title">Popular Posts</h3>
-                                        <ul class="related-courses">
-                                          <li *ngFor="let post of topThreePosts">
-                                            <div class="titles">
-                                              <h4><a href="coureses-single.html">{{ post.title }}</a></h4>
-                                              <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> {{ post.datePost }}</span>
-                                            </div>
-                                          </li>
-                                        </ul>
-                                      </div>
-                
-                                      <div class="widget widget-tags">
-                                        <h3 class="widget-title">Tags</h3>
-                                        <ul class="tags">
-                                          <li *ngFor="let tag of allTags"><a href="#">{{ tag }}</a></li>
-                                        </ul>
-                                      </div>
-                                      
-                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                            
         <div id="backscrollUp">
             <span aria-hidden="true" class="arrow_carrot-up"></span>
         </div> 
