@@ -30,6 +30,9 @@ import { Lesson } from 'app/models/Lesson';
 import { Document } from 'app/models/Document';
 import { FormDialogLessonComponent } from './form-dialog-Lesson/form-dialog-Lesson.component';
 import { Absence } from 'app/models/Absence';
+import { FormDialogAbsenceComponent } from './form-dialog-Absence/form-dialog-Absence.component';
+import { Task } from 'app/models/Task';
+import { FormDialogTaskComponent } from './form-dialog-task/form-dialog-Task.component';
 
 @Component({
   selector: 'app-about-classroom',
@@ -77,6 +80,7 @@ export class AboutClassroomComponent  implements OnInit {
   enrolledStudents: User[] = []
   enrolledLessons: Lesson[]=[]
   enrolledAbsence: Absence[]=[]
+  enrolledTasks: Task[]=[]
   selectedClassroomId: number | null = null
   noClassroomSelected = false
   lessons: Lesson[] = []
@@ -84,6 +88,7 @@ export class AboutClassroomComponent  implements OnInit {
   dataSource!: MatTableDataSource<User>
   dataSource1!: MatTableDataSource<Lesson>
   dataSource2!:MatTableDataSource<Absence>
+  dataSource4!:MatTableDataSource<Task>
   dataSourceStudents!: MatTableDataSource<User>;
   dataSourceLessons!: MatTableDataSource<Lesson>;
   dataSourceAbsence!: MatTableDataSource<Absence>;
@@ -109,6 +114,7 @@ export class AboutClassroomComponent  implements OnInit {
         this.loadEnrolledStudents();
         this.loadLessons();
         this.loadAbsence();
+        this.loadTask();
       } else {
         // Si aucun identifiant n'est présent dans l'URL, gérer le cas approprié
         this.noClassroomSelected = true;
@@ -116,8 +122,6 @@ export class AboutClassroomComponent  implements OnInit {
       }
     });
 
-  // this.dataSource2 = new MatTableDataSource(this.enrolledAbsence);
-  // this.loadAbsence();
     this.dataSource = new MatTableDataSource<User>(this.enrolledStudents);
     this.loadEnrolledStudents();
   }
@@ -151,14 +155,10 @@ export class AboutClassroomComponent  implements OnInit {
   }
   addNew(): void {
     const dialogRef = this.dialog.open(FormDialogComponent, {
-      data: {
-        action: 'add',
-       students: {}, // Passer un objet vide comme enseignant lors de l'ajout
-      }
+      data: { classroomId: this.selectedClassroomId }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // Rafraîchir la liste des enseignants après la fermeture du dialogue
       this. loadEnrolledStudents();
     });
   }
@@ -207,11 +207,8 @@ downloadDocument(selectedDocument: Document): void {
 }
 addNewLess(): void {
   const dialogRef = this.dialog.open(FormDialogLessonComponent, {
-    data: {
-      action: 'add',
-     students: {}, // Passer un objet vide comme enseignant lors de l'ajout
-    }
-  });
+    data: { classroomId: this.selectedClassroomId }
+  })
 
   dialogRef.afterClosed().subscribe(result => {
     // Rafraîchir la liste des enseignants après la fermeture du dialogue
@@ -236,62 +233,58 @@ loadAbsence(): void {
     console.error('No classroom selected.');
   }
 }
+addNewAbsence(): void {
+  if (this.selectedClassroomId !== null) {
+    const dialogRef = this.dialog.open(FormDialogAbsenceComponent, {
+      data: { classroomId: this.selectedClassroomId }
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'success') {
+        this.loadAbsence(); // Rechargez les absences après l'ajout réussi
+      }
+    });
+  } else {
+    console.error('No classroom selected.');
+  }
+}
+///////////////////////Task////////////////////////
+loadTask(): void {
+    if (this.selectedClassroomId !== null) {
+      this.classroomService.getClassroom(this.selectedClassroomId).subscribe({
+        next: (classroom: any) => {
+          this.task.getTasksByClassroom(classroom.idClassroom).subscribe({
+            next: (tasks: Task[]) => {
+              this.enrolledTasks = tasks;
+              this.dataSource4 = new MatTableDataSource<Task>(this.enrolledTasks); // Mettez à jour le dataSource
+            },
+            error: (error) => {
+              console.error('Error loading enrolled lesson:', error);
+            }
+          });
+        },
+        error: (error) => {
+          console.error('Error loading classroom:', error);
+        }
+      });
+    } else {
+      this.noClassroomSelected = true;
+      console.error('No classroom selected.');
+    }
+}
+addNewTask(): void {
+  if (this.selectedClassroomId !== null) {
+    const dialogRef = this.dialog.open(FormDialogTaskComponent, {
+      data: { classroomId: this.selectedClassroomId }
+    });
 
-// loadAbsence(): void {
-//   if (this.selectedClassroomId !== null) {
-//     this.classroomService.getClassroom(this.selectedClassroomId).subscribe({
-//       next: (classroom: any) => {
-//         if (classroom && classroom.idClassroom) { // Vérifier si classroom et classroom.idClassroom sont définis
-//           this.abs.getAbsenceByClassroom(classroom.idClassroom).subscribe({
-//             next: (absences: Absence[]) => {
-//               this.enrolledAbsence = absences.map(absence => ({
-//                 ...absence,
-//                 student: this.classroomService.getEnrolledStudents(classroom.idClassroom) // Utiliser classroom.idClassroom
-//               }));
-//               this.dataSource2.data = this.enrolledAbsence;
-//             },
-//             error: (error) => {
-//               console.error('Error loading enrolled absences:', error);
-//             }
-//           });
-//         } else {
-//           console.error('Invalid classroom or classroom ID.');
-//         }
-//       },
-//       error: (error) => {
-//         console.error('Error loading classroom:', error);
-//       }
-//     });
-//   } else {
-//     this.noClassroomSelected = true;
-//     console.error('No classroom selected.');
-//   }
-// }
-
-
-// loadAbsence(): void {
-//   if (this.selectedClassroomId !== null) {
-//     this.classroomService.getClassroom(this.selectedClassroomId).subscribe({
-//       next: (classroom: any) => {
-//         this.abs.getAbsenceByClassroom(classroom.idClassroom).subscribe({
-//           next: (absences:Absence[]) => {
-//             this.enrolledAbsence = absences;
-//             this.dataSource2.data = this.enrolledAbsence; // Mettre à jour les données du dataSource
-//           },
-//           error: (error) => {
-//             console.error('Error loading enrolled absences:', error);
-//           }
-//         });
-//       },
-//       error: (error) => {
-//         console.error('Error loading classroom:', error);
-//       }
-//     });
-//   } else {
-//     this.noClassroomSelected = true;
-//     console.error('No classroom selected.');
-//   }
-
-// }
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'success') {
+        this.loadTask(); 
+      }
+    });
+  } else {
+    console.error('No classroom selected.');
+  }
+}
 }

@@ -86,9 +86,16 @@
     <div *ngIf="lessonForm.get('lessonName')?.hasError('required')">Lesson name is required</div>
   </div>
   <div>
+    <label for="visibility">Visibility:</label>
+    <select id="visibility" formControlName="visibility">
+      <option *ngFor="let option of visibility" [value]="option">{{ option }}</option>
+    </select>
+    <div *ngIf="lessonForm.get('visibility')?.hasError('required')">Visibility is required</div>
+  </div>
+  <!-- <div>
     <label for="classroom">Classroom:</label>
     <input type="number" id="classroom" formControlName="classroom">
-  </div>
+  </div> -->
   <div>
     <label for="file">File:</label>
     <input type="file" id="file" (change)="onFileChange($event)">

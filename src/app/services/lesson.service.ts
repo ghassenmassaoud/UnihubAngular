@@ -21,9 +21,12 @@ export class LessonService {
   //   return this.http.post<any>(`${this.baseUrl}add`,formData);
   // }
   
-  addLesson(lessonName: string, classroom: number, file: File): Observable<any> {
+  addLesson(lessonName: string,visibility:string, classroom: number, file: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('lesson', lessonName);
+    formData.append('Visibility', visibility);
+
+
     if (classroom !== null) {
       formData.append('classroom', classroom.toString());
     }

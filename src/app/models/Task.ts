@@ -5,7 +5,7 @@ import { Document } from "./Document";
 export class Task{
     idTask!: number;
     taskDescription!: string;
-    deadline!: Date;
+    deadline!: string;
     mark!: number;
     taskState!: string;
     lesson!: Lesson[];

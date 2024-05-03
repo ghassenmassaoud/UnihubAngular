@@ -49,17 +49,20 @@ export class FormDialogComponent implements OnInit {
   //classroomForm: FormGroup;
   students: any[] = [];
   students$!: Observable<any[]>;
+  classroomId: number | null = null; 
 
   //teachers: Teachers;
   constructor(
     public dialogRef: MatDialogRef<FormDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private classroomService: ClassroomService,
     private absenceService : AbsenceService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: { classroomId: number } 
   ) {
+    this.classroomId = data.classroomId;
+  
     this.classroomForm = this.fb.group({
-      idClassroom: ['', Validators.required], // Champs pour l'ID de la salle de classe
+      //idClassroom: ['', Validators.required], // Champs pour l'ID de la salle de classe
       speciality: ['', Validators.required], // Champs pour la spécialité
       student_id: ['', Validators.required] // Champs pour l'ID de l'étudiant
     });
@@ -74,62 +77,13 @@ export class FormDialogComponent implements OnInit {
       }
     });
   }
-  // ngOnInit(): void {
-  //   this.classroomForm = this.fb.group({
-  //     idClassroom: ['', Validators.required], // Champs pour l'ID de la salle de classe
-  //     speciality: ['', Validators.required], // Champs pour la spécialité
-  //     student_id: ['', Validators.required] // Champs pour l'ID de l'étudiant
-  //   });
-  // }
-
-    // Set the defaults
-  //   this.action = data.action;
-  //   if (this.action === 'edit') {
-  //     this.dialogTitle = data.teachers.name;
-  //     this.teachers = data.teachers;
-  //   } else {
-  //     this.dialogTitle = 'New Teachers';
-  //     const blankObject = {} as Teachers;
-  //     this.teachers = new Teachers(blankObject);
-  //   }
-    
-  // }
-  // formControl = new UntypedFormControl('', [
-  //   Validators.required,
-  //   // Validators.email,
-  // ]);
-  // getErrorMessage() {
-  //   return this.formControl.hasError('required')
-  //     ? 'Required field'
-  //     : this.formControl.hasError('email')
-  //       ? 'Not a valid email'
-  //       : '';
-  // }
-  // createContactForm(): UntypedFormGroup {
-  //   return this.fb.group({
-  //     idClassroom: ['', Validators.required], // Champs pour l'ID de la salle de classe
-  //     speciality: ['', Validators.required], // Champs pour la spécialité
-  //     student_id: ['', Validators.required] 
-      // email: [
-      //   this.teachers.email,
-      //   [Validators.required, Validators.email, Validators.minLength(5)],
-      // ],
-      // date: [
-      //   formatDate(this.teachers.date, 'yyyy-MM-dd', 'en'),
-      //   [Validators.required],
-      // ],
-      // gender: [this.teachers.gender],
-      // mobile: [this.teachers.mobile],
-      // department: [this.teachers.department],
-      // degree: [this.teachers.degree],
-  //   });
-  // }
+ 
   onSubmit(): void {
-    if (this.classroomForm.valid) {
-      const classroomId = this.classroomForm.value.idClassroom;
+    if (this.classroomForm.valid && this.classroomId !== null) {
+      //const classroomId = this.classroomForm.value.idClassroom;
       const studentId = this.classroomForm.value.student_id;
       // Appeler votre service pour affecter l'étudiant à la salle de classe
-      this.classroomService.affectStudentToClassroom(studentId, classroomId).subscribe({
+      this.classroomService.affectStudentToClassroom(studentId, this.classroomId).subscribe({
         next: (response) => {
           console.log('Student affected to classroom:', response);
           // Gérer la réponse si nécessaire
@@ -149,24 +103,5 @@ export class FormDialogComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  // public confirmAdd(): void {
-   
-  //     if (this.classroomForm.valid) {
-  //       const classroomId = this.classroomForm.value.idClassroom;
-  //       const studentId = this.classroomForm.value.student_id;
-  //       // Appeler votre service pour affecter l'étudiant à la salle de classe
-  //       this.classroomService.affectStudentToClassroom(studentId, classroomId).subscribe({
-  //         next: (response) => {
-  //           console.log('Student affected to classroom:', response);
-  //           // Gérer la réponse si nécessaire
-  //         },
-  //         error: (error) => {
-  //           console.error('Error affecting student to classroom:', error);
-  //           // Gérer l'erreur si nécessaire
-  //         }
-  //       });
-  //     } else {
-  //       // Gérer le cas où le formulaire n'est pas valide
-  //     }
-  //   }
+ 
 }
