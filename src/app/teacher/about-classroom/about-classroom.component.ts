@@ -33,6 +33,11 @@ import { Absence } from 'app/models/Absence';
 import { FormDialogAbsenceComponent } from './form-dialog-Absence/form-dialog-Absence.component';
 import { Task } from 'app/models/Task';
 import { FormDialogTaskComponent } from './form-dialog-task/form-dialog-Task.component';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { EditLessonDialogComponent } from './editLesson/editLesson.component';
+import { EditTaskDialogComponent } from './editTask/editTask.component';
+import { FormsModule } from '@angular/forms';
+import { EditAbsenceDialogComponent } from './editAbsence/editAbsence.component';
 
 @Component({
   selector: 'app-about-classroom',
@@ -50,14 +55,12 @@ import { FormDialogTaskComponent } from './form-dialog-task/form-dialog-Task.com
     MatFormFieldModule,
     MatInputModule,
    MatPaginator,
-   
+   FormsModule,
    MatTabsModule,
    MatTooltipModule,
-  
    MatSortModule,
    NgClass,
    MatCheckboxModule,
-   
    MatRippleModule,
    MatProgressSpinnerModule,
    MatMenuModule,
@@ -82,8 +85,12 @@ export class AboutClassroomComponent  implements OnInit {
   enrolledAbsence: Absence[]=[]
   enrolledTasks: Task[]=[]
   selectedClassroomId: number | null = null
+  selectedStudentId: number | null = null
+  selectedLessonId: number | null = null
   noClassroomSelected = false
   lessons: Lesson[] = []
+  searchDate: string = '';
+  statusFilter:string = '';
  user!:[]
   dataSource!: MatTableDataSource<User>
   dataSource1!: MatTableDataSource<Lesson>
@@ -102,9 +109,11 @@ export class AboutClassroomComponent  implements OnInit {
     public dialog: MatDialog,
     private  lesson:LessonService,
     private task:TaskService,
-    private abs:AbsenceService
+    private abs:AbsenceService,
+    private snackBar: MatSnackBar
 
   ) {}
+
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -162,6 +171,40 @@ export class AboutClassroomComponent  implements OnInit {
       this. loadEnrolledStudents();
     });
   }
+  deleteStudent(studentId: number) {
+    if (this.selectedClassroomId !== null) {
+      this.classroomService.removeStudentFromClassroom(this.selectedClassroomId, studentId).subscribe({
+        next: (response) => {
+          console.log('Student deleted:', response);
+          const index = this.enrolledStudents.findIndex((student) => student.idUser === studentId);
+          if (index !== -1) {
+            this.enrolledStudents.splice(index, 1);
+            this.showNotification('Student deleted successfully.');
+          }
+        },
+        error: (error) => {
+          console.error('Error deleting student:', error);
+          if (error.status === 404) {
+            console.error('Student not found or invalid URL:', error.error);
+          } else {
+            console.error('Other error:', error.error);
+          }
+        }
+      });
+    }
+  }
+  
+  showNotification(message: string) {
+    this.snackBar.open(message, '', {
+      duration: 2000,
+      verticalPosition: 'bottom',
+      horizontalPosition: 'center',
+      panelClass: 'snackbar-success',
+    });
+  }
+
+
+
   //////Lesson Parttt
   loadLessons(): void {
     if (this.selectedClassroomId !== null) {
@@ -215,6 +258,46 @@ addNewLess(): void {
     this. loadLessons();
   });
 }
+
+
+// Définissez une fonction pour ouvrir le dialogue d'édition de leçon
+editLesson(lessonId: number): void {
+  // Chargez les détails de la leçon à partir de son ID
+  this.lesson.getLesson(lessonId).subscribe({
+    next: (lesson: Lesson) => {
+      const dialogRef = this.dialog.open(EditLessonDialogComponent, {
+        data: { lesson: lesson }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result === 'success') {
+          this.loadLessons(); // Rechargez les leçons après l'édition réussie
+        }
+      });
+    },
+    error: (error) => {
+      console.error('Error loading lesson details:', error);
+    }
+  });
+}
+
+
+// Définissez une fonction pour supprimer une leçon
+deleteLesson(lessonId: number): void {
+  if (confirm('Do you really want to Delete this Lesson ?')) {
+    this.lesson.deleteLesson(lessonId).subscribe({
+      next: () => {
+        this.loadLessons(); // Rechargez les leçons après la suppression réussie
+        console.log('Lesson deleted successfully.');
+      },
+      error: (error) => {
+        console.error('Error deleting lesson:', error);
+      }
+    });
+  }
+}
+
+
 ///////////////////////Absenceeee///////////////////////////
 loadAbsence(): void {
   if (this.selectedClassroomId !== null) {
@@ -248,6 +331,64 @@ addNewAbsence(): void {
     console.error('No classroom selected.');
   }
 }
+editAbsence(absenceId: number): void {
+  // Chargez les détails de la leçon à partir de son ID
+  this.abs.getAbsence(absenceId).subscribe({
+    next: (absence: Absence) => {
+      const dialogRef = this.dialog.open(EditAbsenceDialogComponent, {
+        data: { absenceId: absence } // Utilisez taskId au lieu de task
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result === 'success') {
+          this.loadLessons(); // Rechargez les leçons après l'édition réussie
+        }
+      });
+    },
+    error: (error) => {
+      console.error('Error loading absence details:', error);
+    }
+  });
+}
+
+deleteAbcence(absenceId: number): void {
+  if (confirm('Do you really want to Delete this Absence ? ')) {
+    this.abs.deleteAbsence(absenceId).subscribe({
+      next: () => {
+        this.loadAbsence(); // Rechargez les leçons après la suppression réussie
+        console.log('Absence deleted successfully.');
+      },
+      error: (error) => {
+        console.error('Error deleting Absence:', error);
+      }
+    });
+  }
+}
+searchAbsence(status: string): void {
+  this.abs.searchByStatus(status).subscribe({
+    next: (absence: Absence[]) => {
+      console.log('Absence with Status found:', absence);
+      this.enrolledAbsence = absence;
+
+    },
+    error: (error) => {
+      console.error('Error searching Absence by Status', error);
+    }
+  });
+}
+searchAbsenceDate(date: string): void {
+  this.abs.searchByDate(date).subscribe({
+    next: (absence: Absence[]) => {
+      console.log('Absnece found:', absence);
+      this.enrolledAbsence = absence;
+    },
+    error: (error) => {
+      console.error('Error searching absences by date:', error);
+    }
+  });
+}
+
+
 ///////////////////////Task////////////////////////
 loadTask(): void {
     if (this.selectedClassroomId !== null) {
@@ -286,5 +427,51 @@ addNewTask(): void {
   } else {
     console.error('No classroom selected.');
   }
+}
+
+// Définissez une fonction pour ouvrir le dialogue d'édition de leçon
+editTask(taskId: number): void {
+  // Chargez les détails de la leçon à partir de son ID
+  this.task.getTask(taskId).subscribe({
+    next: (task: Task) => {
+      const dialogRef = this.dialog.open(EditTaskDialogComponent, {
+        data: { taskId: task } // Utilisez taskId au lieu de task
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result === 'success') {
+          this.loadLessons(); // Rechargez les leçons après l'édition réussie
+        }
+      });
+    },
+    error: (error) => {
+      console.error('Error loading task details:', error);
+    }
+  });
+}
+
+deleteTask(taskId: number): void {
+  if (confirm('Do you really want to Delete this Task ? ')) {
+    this.task.removeTask(taskId).subscribe({
+      next: () => {
+        this.loadLessons(); // Rechargez les leçons après la suppression réussie
+        console.log('Task deleted successfully.');
+      },
+      error: (error) => {
+        console.error('Error deleting lesson:', error);
+      }
+    });
+  }
+}
+searchTasks(date: string): void {
+  this.task.searchTaskByDate(date).subscribe({
+    next: (tasks: Task[]) => {
+      console.log('Tasks found:', tasks);
+      this.enrolledTasks = tasks;
+    },
+    error: (error) => {
+      console.error('Error searching tasks by date:', error);
+    }
+  });
 }
 }

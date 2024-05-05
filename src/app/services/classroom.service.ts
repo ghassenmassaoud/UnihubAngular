@@ -43,5 +43,8 @@ export class ClassroomService {
   getEnrolledStudents(classroomId: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}students/${classroomId}`);
   }
+  removeStudentFromClassroom(classroomId: number, studentId: number) {
+    return this.http.delete<any>(`${this.baseUrl}removeStudentFromClassroom/${classroomId}/${studentId}`);
+  }
 
 }

@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpEvent, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpHeaders, HttpParams, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { D } from '@fullcalendar/core/internal-common';
 import { Classroom } from 'app/models/Classroom';
@@ -36,9 +36,30 @@ export class LessonService {
 
     return this.http.post<any>(`${this.baseUrl}add`, formData);
   }
-  updateLesson(lesson: Lesson, lessonId: number): Observable<Lesson> {
-    return this.http.put<Lesson>(`${this.baseUrl}update/${lessonId}`, lesson);
+  updateLesson(lessonName: string, visibility: string, lessonId: number, file: File | null): Observable<any> {
+    const formData = new FormData();
+    formData.append('lesson', lessonName);
+    formData.append('Visibility', visibility);
+    if (file) {
+      formData.append('file', file);
+    }
+
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+
+    const options = {
+      headers: headers,
+      params: new HttpParams().set('lessonId', lessonId.toString())
+    };
+
+    return this.http.put<any>(`${this.baseUrl}update/${lessonId}`, formData, options)
+      .pipe(
+        catchError(error => {
+          return throwError('Failed to update lesson: ' + error.message);
+        })
+      );
   }
+ 
 
   getLesson(numLesson: number): Observable<Lesson> {
     return this.http.get<Lesson>(`${this.baseUrl}get/${numLesson}`);

@@ -10,6 +10,7 @@ import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { Lesson } from 'app/models/Lesson';
 
 @Component({
   selector: 'app-form-dialog-Lesson:not(h)',
@@ -34,13 +35,17 @@ export class FormDialogLessonComponent {
   lessonForm: FormGroup;
   fileToUpload: File | null = null;
   classroomId: number | null = null;
-  visibility:string[]=['EVERYONE','ONLY_ME']
+  lessonId :number | null =null;
+  visibility:string[]=['EVRYONE','ONLY_ME']
+  editedLesson: Lesson = {} as Lesson;
+
   constructor(
     private formBuilder: FormBuilder,
     private lessonService: LessonService,
-    @Inject(MAT_DIALOG_DATA) public data: { classroomId: number }
+    @Inject(MAT_DIALOG_DATA) public data: { classroomId: number  }
   ) {
    console.log(this.classroomId = data.classroomId);
+   
     this.lessonForm = this.formBuilder.group({
       lessonName: ['', Validators.required],
      visibility:['',Validators.required],
@@ -75,5 +80,25 @@ export class FormDialogLessonComponent {
         });
       }
     }
+    // updateClassroom(): void {
+    //   if (this.lessonForm.valid && this.classroomId !== null && this.data.lesson) {
+    //     const lessonId = this.data.lesson;
+    //     const lessonName = this.lessonForm.value.lessonName;
+    //     const visibility = this.lessonForm.value.visibility;
+    //     const file = this.fileToUpload;
+    
+    //     this.lessonService.updateLesson(lessonName, visibility,lessonId.idLesson, file).subscribe({
+    //       next: (response: any) => {
+    //         console.log('Lesson updated successfully:', response);
+    //         // Réinitialiser le formulaire ou rediriger vers une autre page, etc.
+    //       },
+    //       error: (error) => {
+    //         console.error('Error updating lesson:', error);
+    //         // Gérer l'erreur, par exemple, afficher un message à l'utilisateur
+    //       }
+    //     });
+    //   }
+    // }
+    
   }
 
