@@ -1,6 +1,5 @@
 import { MyPosts } from "./my-posts";
 import { PostLike } from "./post-like";
-import { Subscription } from "./subscription";
 
 export class User {
     idUser!: number;
@@ -15,5 +14,5 @@ export class User {
   posts: MyPosts[] = [];
   comments: Comment[] = [];
   postLikes: PostLike[] = [];
-  subscriptions: Subscription[] = [];
+//  subscriptions: Subscription[] = [];
 }

@@ -1,1 +1,208 @@
-<p>edit-comment works!</p>
+<!-- <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Content</th>
+              <th>Comment Date</th>
+              <th>Likes</th>
+              <th>Report</th>
+              <th>Replies</th>
+              <th>Action</th> 
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let comment of comments">
+              <tr>
+                <td>{{ comment.content }}</td>
+                <td>{{ comment.commentDate }}</td>
+                <td>{{ comment.likes }}</td>
+                <td>{{ comment.report ? 'Yes' : 'No' }}</td>
+                <td>{{ comment.replies }}</td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="edit-button" aria-label="Edit" >
+                      <mat-icon>edit</mat-icon> 
+                    </button>
+                    <button class="delete-button" aria-label="Delete" (click)="deleteComment(comment.commentId)">
+                      <mat-icon>delete</mat-icon> 
+                    </button>
+                    <button mat-raised-button class="minimized-button"  (click)="toggleReport(comment)">
+                        <mat-icon aria-hidden="false" aria-label="Reported">report_problem</mat-icon>
+                        {{ comment.report ? 'Unreport!' : 'Report!' }}
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+   -->
+
+
+   <!-- <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Content</th>
+              <th>Comment Date</th>
+              <th>Likes</th>
+              <th>Report</th>
+              <th>Replies</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let comment of comments">
+              <tr *ngIf="selectedCommentId !== comment.commentId; else editMode">
+                <td>{{ comment.content }}</td>
+                <td>{{ comment.commentDate }}</td>
+                <td>{{ comment.likes }}</td>
+                <td>{{ comment.report ? 'Yes' : 'No' }}</td>
+                <td>{{ comment.replies }}</td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="edit-button" aria-label="Edit" (click)="editComment(comment.commentId)">
+                      <mat-icon>edit</mat-icon> 
+                    </button>
+                    <button class="delete-button" aria-label="Delete" (click)="deleteComment(comment.commentId)">
+                      <mat-icon>delete</mat-icon> 
+                    </button>
+                    <button mat-raised-button class="minimized-button" (click)="toggleReport(comment)">
+                      <mat-icon aria-hidden="false" aria-label="Reported">report_problem</mat-icon>
+                      {{ comment.report ? 'Unreport!' : 'Report!' }}
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <ng-template #editMode>
+                <tr>
+                  <td>
+                    <input type="text" [(ngModel)]="editedComment.content" />
+                  </td>
+                  <td>{{ comment.commentDate }}</td>
+                  <td>{{ comment.likes }}</td>
+                  <td>{{ comment.report ? 'Yes' : 'No' }}</td>
+                  <td>{{ comment.replies }}</td>
+                  <td>
+                    <div class="action-buttons">
+                      <button mat-raised-button (click)="saveEditedComment()">Save</button>
+                      <button mat-raised-button (click)="cancelEdit()">Cancel</button>
+                    </div>
+                  </td>
+                </tr>
+              </ng-template>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+   --> 
+
+
+   <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Content</th>
+              <th>Comment Date</th>
+              <th>Likes</th>
+              <th>Report</th>
+              <th>Replies</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let comment of comments">
+              <tr *ngIf=" editMode">
+                <td>{{ comment.content }}</td>
+                <td>{{ comment.commentDate }}</td>
+                <td>{{ comment.likes }}</td>
+                <td>{{ comment.report ? 'Yes' : 'No' }}</td>
+                <td>{{ comment.replies }}</td>
+                <td>
+                  <div class="action-buttons">
+                    <!-- <button class="edit-button" aria-label="Edit" (click)="editComment(comment.commentId)">
+                      <mat-icon>edit</mat-icon> 
+                    </button> -->
+                    <button class="delete-button" aria-label="Delete" (click)="deleteComment(comment.commentId)">
+                      <mat-icon>delete</mat-icon> 
+                    </button>
+                    <button mat-raised-button class="minimized-button" (click)="toggleReport(comment)">
+                      <mat-icon aria-hidden="false" aria-label="Reported">report_problem</mat-icon>
+                      {{ comment.report ? 'Unreport!' : 'Report!' }}
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <ng-template #editMode>
+                <tr>
+                  <td>
+                    <!-- Formulaire d'édition -->
+                    <!-- <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <mat-label>Comment Content</mat-label>
+                                <textarea matInput formControlName="content"></textarea>
+                              </mat-form-field>
+                            </div>
+                          </div>                     
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>Date</mat-label>
+                              <input matInput [matDatepicker]="rpicker" formControlName="commentDate" required>
+                              <mat-datepicker-toggle matSuffix [for]="rpicker"></mat-datepicker-toggle>
+                              <mat-datepicker #rpicker></mat-datepicker>
+                              <mat-error *ngIf="commentForm.get('commentDate')?.hasError('required')">Please select date</mat-error>
+                            </mat-form-field>
+                          </div>
+                          <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <mat-label>Likes</mat-label>
+                                <input matInput formControlName="likes" required>
+                                <mat-error *ngIf="commentForm.get('likes')?.hasError('required')">Likes are required</mat-error>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                      <button type="submit" mat-raised-button color="primary">Save</button>
+                      <button type="button" mat-raised-button >Cancel</button>
+                    </form> -->
+                  </td>
+                  <td>{{ comment.commentDate }}</td>
+                  <td>{{ comment.likes }}</td>
+                  <td>{{ comment.report ? 'Yes' : 'No' }}</td>
+                  <td>{{ comment.replies }}</td>
+                  <td>
+                    <div class="action-buttons">
+                      <!-- <button class="edit-button" aria-label="Edit" (click)="editComment(comment.commentId)">
+                        <mat-icon>edit</mat-icon> 
+                      </button> -->
+                      <button class="delete-button" aria-label="Delete" (click)="deleteComment(comment.commentId)">
+                        <mat-icon>delete</mat-icon> 
+                      </button>
+                      <button mat-raised-button class="minimized-button" (click)="toggleReport(comment)">
+                        <mat-icon aria-hidden="false" aria-label="Reported">report_problem</mat-icon>
+                        {{ comment.report ? 'Unreport!' : 'Report!' }}
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </ng-template>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

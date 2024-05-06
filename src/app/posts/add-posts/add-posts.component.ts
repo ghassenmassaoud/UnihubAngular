@@ -63,7 +63,7 @@ export class AddPostsComponent {
       views: [0],
       status: ['', Validators.required],
       report: [false],
-      attachment: ['']
+   //   attachment: ['']
     });
     this.status = Object.values(Status);
 
@@ -100,10 +100,10 @@ export class AddPostsComponent {
     formData.append('likes', this.postForm.get('likes')!.value);
     formData.append('views', this.postForm.get('views')!.value);
 
-    const fileInput = this.postForm.get('attachment')!.value;
-if (fileInput && fileInput instanceof File) {
-  formData.append('attachment', fileInput, fileInput.name);
-}
+//     const fileInput = this.postForm.get('attachment')!.value;
+// if (fileInput && fileInput instanceof File) {
+//   formData.append('attachment', fileInput, fileInput.name);
+// }
 
     // const fileInput = this.postForm.get('attachment')!.value;
     // if (fileInput && fileInput.length > 0) {
@@ -138,6 +138,8 @@ if (fileInput && fileInput instanceof File) {
   navigateToBlogs() {
     this.router.navigate(['/blog']);
   }
+
+
 
   
 }

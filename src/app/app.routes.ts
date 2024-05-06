@@ -28,6 +28,10 @@ import { AddPostsComponent } from './posts/add-posts/add-posts.component';
 import { EditPostsComponent } from './posts/edit-posts/edit-posts.component';
 import { CommentsComponent } from './comment/comments/comments.component';
 import { AboutCommentComponent } from './comment/about-comment/about-comment.component';
+import { EditCommentComponent } from './comment/edit-comment/edit-comment.component';
+import { UserpostsComponent } from './posts/userposts/userposts.component';
+import { UserDetailsPostsComponent } from './posts/user-details-posts/user-details-posts.component';
+import { UserAddPostsComponent } from './posts/user-add-posts/user-add-posts.component';
 
 export const APP_ROUTE: Route[] = [
   // // { path: '', redirectTo: '/all-posts', pathMatch: 'full' }, // Redirection par défaut vers all-posts
@@ -65,8 +69,8 @@ export const APP_ROUTE: Route[] = [
       import('./insructors/instuctor.routes').then((m) => m.INSTRUCTORS_ROUTE),
   },
   {
-    path: 'home-seconde',
-    component: HomeSecondeComponent,
+    path: 'home-seconde/:postId',
+    component: UserDetailsPostsComponent,
     loadChildren: () =>
       import('./home-seconde/HomeSeconde.routes').then((m) => m.HOMESECONDE_ROUTE),
   },
@@ -78,13 +82,13 @@ export const APP_ROUTE: Route[] = [
   },
   {
     path: 'event',
-    component: EventComponent,
+    component: UserAddPostsComponent,
     loadChildren: () =>
       import('./event/event.routes').then((m) => m.EVENT_ROUTE),
   },
   {
     path: 'event-side-bar',
-    component: EventSideBarComponent,
+    component: UserpostsComponent,
     loadChildren: () =>
       import('./event-side-bar/event-side-bar.routes').then((m) => m.EVENTSIDEBAR_ROUTE),
   },
@@ -138,7 +142,7 @@ export const APP_ROUTE: Route[] = [
   },
   {
     path: 'contact',
-    component: ContactComponent,
+    component: EditCommentComponent,
     loadChildren: () =>
       import('./contact/contact.routes').then((m) => m.CONTACT_ROUTE),
   },

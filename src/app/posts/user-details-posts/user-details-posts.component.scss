@@ -90,6 +90,23 @@
     font-size: 16px;
     color: #888;
   }
+  .breadcrumbs-title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.favorite {
+    background-color: rgb(245, 160, 81); /* Couleur de fond pour un bouton favori */
+    color: white; /* Couleur du texte */
+  }
+  
+  .not-favorite {
+    background-color: rgb(190, 42, 64); /* Couleur de fond pour un bouton non favori */
+    color: white; /* Couleur du texte */
+  }
+.breadcrumbs-title-wrapper .btn {
+    margin-left: 10px; /* Ajoutez un espace entre le titre/emoji et le bouton */
+}
 
   .button-clicked {
     transform: scale(1.1); /* Agrandir le bouton de 10% */

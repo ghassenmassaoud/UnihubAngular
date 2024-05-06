@@ -1,0 +1,125 @@
+/* Style pour la mise en page générale */
+.react-blog-page {
+    padding-bottom: 40px;
+    padding-top: 110px;
+  }
+  
+  .container {
+    padding-bottom: 70px;
+  }
+  
+  /* Style pour chaque post individuel */
+  .single-blog {
+    margin-bottom: 40px;
+    border-bottom: 1px solid #eaeaea;
+  }
+  
+  .inner-blog {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .views-text {
+    color: #999999; /* Couleur gris pour le texte */
+    font-size: 14px; /* Taille de police */
+}
+  
+  .blog-content {
+    margin-top: 20px;
+  }
+  .large-title {
+    font-size: 32px; /* Adjust the font size as needed */
+    font-weight: bold; /* Optional: Add bold font weight */
+    color: #333333; /* Optional: Set the color */
+    text-decoration: none; /* Optional: Remove underline from links */
+    transition: color 0.3s ease; /* Optional: Add smooth color transition on hover */
+}
+.breadcrumbs-title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .breadcrumbs-title {
+    margin-right: 250px; /* Ajustez la marge selon vos besoins */
+  }
+  .btn {
+    background-color: rgb(190, 42, 64); /* Couleur de fond pour un bouton non favori */
+    color: white; /* Couleur du texte */
+  }
+.large-title:hover {
+    color: #007bff; /* Optional: Change color on hover */
+}
+  .blog-title a {
+    color: #333333;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .blog-title a:hover {
+    color: #007bff; /* Couleur de lien au survol */
+  }
+
+
+  .date-part {
+    color: #999999;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .blog-desc {
+    color: #666666;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  .button__sec {
+    margin-top: 20px;
+  }
+  
+  .blog-btn {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .blog-btn:hover {
+    background-color: #0056b3; /* Couleur de fond au survol */
+  }
+  
+  .share-course {
+    margin-top: 15px;
+  }
+  
+  .widget-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .titles {
+    margin-bottom: 10px;
+  }
+  
+  .tags a {
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    background-color: #f2f2f2;
+    color: #333333;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .tags a:hover {
+    background-color: #e5e5e5; /* Couleur de fond au survol */
+  }
+  

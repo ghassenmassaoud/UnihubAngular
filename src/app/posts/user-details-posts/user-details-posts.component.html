@@ -16,8 +16,8 @@
      <link rel="shortcut icon" type="image/x-icon" href="assets/images/fav.png">
 
 </head>
-<body class="course-single blog-post-page blog-post-single-page">
-                            <br><br>
+<section class="content" >
+    <br><br>
                             <div *ngIf="post">
                                 <div class="react-wrapper">
                                     <div class="react-wrapper-inner">
@@ -26,10 +26,17 @@
                                                 <div class="breadcrumbs-inner">
                                                     <div class="container">
                                                         <div class="breadcrumbs-text">
-                                                            <div class="breadcrumbs-title-wrapper">
-                                                                <h1 class="breadcrumbs-title">{{ post.title }}</h1>
-                                                                <span class="emoji">{{ post.emoji }}</span>
-                                                            </div>
+                                                            <div class="breadcrumbs-title-wrapper d-flex justify-content-between align-items-center">
+                                                                <div>
+                                                                    <h1 class="breadcrumbs-title">{{ post.title }}</h1>
+                                                                    <span class="emoji">{{ post.emoji }}</span>
+                                                                </div>
+                                                                    <button class="btn"  [ngClass]="{ 'favorite': isFavorite, 'not-favorite': !isFavorite }"  (click)="ToFavorites(userId, postId)">
+                                                                      {{ isFavorite ? 'Remove from Favorites' : 'Add to My Favorite List' }} ❤️
+                                                                    </button>
+                                                                </div>
+
+                                                            
                                                             <ul class="user-section">
                                                                 <li>
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
@@ -46,12 +53,7 @@
                                                                     {{ post.status }}
                                                                 </li>
                                                             </ul>
-                                                            <!-- <button *ngIf="!post.reported" mat-raised-button class="minimized-button" style="background-color: rgb(147, 4, 4); color: white; cursor: not-allowed;" (click)="reportPost()">
-                                                                <mat-icon aria-hidden="false" aria-label="Reported">report_problem</mat-icon> Report!
-                                                            </button>
-                                                            <button  mat-raised-button class="minimized-button" style="background-color: rgb(4, 147, 4); color: white;" (click)="unreportPost()">
-                                                                <mat-icon aria-hidden="false" aria-label="Unreported">check_circle</mat-icon> Unreport!
-                                                            </button> -->
+                                                       
                                                           
                                                         </div>
                                                     </div>
@@ -72,9 +74,7 @@
                                                 <div class="blog-single-inner">
                                                     <div class="blog-content">
                                                         <p>{{ post.content }}</p>
-                                                        <ul *ngIf="post.attachment && post.attachment.length > 0">
-                                                            <li *ngFor="let attachment of post.attachment">{{ attachment.name }}</li>
-                                                        </ul>
+                        
                                                         <div class="blog-tags">
                                                             <div class="row align-items-center">
                                                                 <div class="col-md-6">
@@ -100,13 +100,10 @@
                                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
                                                             <div class="card">
                                                                 <div class="chat">
-                                                                    <div class="chat-header clearfix">
-                                                                        <img src="assets/images/user/user2.jpg" alt="avatar">
-                                                                        <div class="chat-about">
+                                                                    <div class="chat-header clearfix">                                                                        <div class="chat-about">
                                                                             <!-- <div class="chat-with">Comments</div> -->
-                                                                            <button class="btn btn-primary" (click)="navigateToComments()">Comments</button>
+                                                                            <h4 class="primary" >Comments</h4>
 
-                                                                            <div class="chat-num-messages">comments</div>
                                                                         </div>
                                                                     </div>
                                                                     <ng-scrollbar style="height: 449px" visibility="hover">
@@ -141,14 +138,16 @@
                                                                             </div>
                                                                         </div>
                                                                     </ng-scrollbar>
-                                                                     <!-- <div class="chat-message clearfix">
-                                                                        <textarea class="form-control" rows="3" placeholder="Add a comment..." ></textarea>
-                                                                        <button class="btn btn-primary">Add Comment</button> -->
+                                                                    <div class="chat-message clearfix">
+                                                                       
+                                                                        <textarea class="form-control" rows="3" placeholder="Add a comment..." [(ngModel)]="commentContent"></textarea>
+                                                                        <button class="btn btn-primary" (click)="addNewComment()">Share</button>
+                                                                        
                                                                         <!-- <div class="chat-upload">
                                                                             <button mat-mini-fab class="bg-deep-orange msr-2"><i class="material-icons">attach_file</i></button>
                                                                             <button mat-mini-fab class="bg-deep-orange"><i class="material-icons">insert_emoticon</i></button>
                                                                         </div> -->
-                                                                    <!-- </div> -->
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>

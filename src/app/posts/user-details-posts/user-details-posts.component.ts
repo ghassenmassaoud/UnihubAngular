@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -10,31 +12,39 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FileUploadComponent } from '@shared/components/file-upload/file-upload.component';
 import { SortService } from 'app/PopularPost';
 import { CommentsService } from 'app/comments.service';
-import { Comment } from 'app/models/comment';
 import { MyPosts } from 'app/models/my-posts';
-import { LikeAction } from 'app/models/post-like';
 import { PostsService } from 'app/posts.service';
-import { StateService } from 'app/state.service';
+import { LikeAction } from 'app/models/post-like';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { Comment } from 'app/models/comment';
+import { StateService } from 'app/state.service';
+
+import { WordCheckService } from 'app/wordchek';
+
 
 @Component({
-  selector: 'app-about-posts',
+  selector: 'app-user-details-posts',
   standalone: true,
-  imports: [  
-      CommonModule,
-      MatInputModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatOptionModule,
-    FileUploadComponent,
-    NgScrollbarModule,
-    MatButtonModule,MatIconModule
-  ],
-  templateUrl: './about-posts.component.html',
-  styleUrl: './about-posts.component.scss',
-  providers: [PostsService]
+  imports: [ CommonModule,
+     FormsModule,
+     ReactiveFormsModule,
+     MatFormFieldModule,
+     MatInputModule,
+     MatDatepickerModule,
+     MatSelectModule,
+     NgScrollbarModule,
+     MatOptionModule,
+     FileUploadComponent,
+     MatButtonModule,
+     
+         MatIconModule],
+  templateUrl: './user-details-posts.component.html',
+  styleUrl: './user-details-posts.component.scss'
 })
-export class AboutPostsComponent {
+export class UserDetailsPostsComponent {
+
+  isFavorite: boolean = false;
+  userId =1;
   postId!: number;
   post: any;
   comments: Comment[] = [];
@@ -53,26 +63,68 @@ export class AboutPostsComponent {
   dislikeBold: boolean = false;
   unreportDisplayed = false;
   reportDisplayed = false;
+  //newCommentContent: string[] = [];
+  favoritePosts: number[] = [];
+
+  commentContent: string = ''; // Ajoutez la propriété commentContent
 
 
 
 
 
-  constructor(private route: ActivatedRoute, private stateService: StateService, private cs: CommentsService,private router: Router, private ps: PostsService, private sortService: SortService) {}
+
+  constructor(private route: ActivatedRoute, private wordCheckService: WordCheckService,private stateService: StateService, private cs: CommentsService,private router: Router, private ps: PostsService, private sortService: SortService) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.postId = Number(params.get('postId'));
+      console.log(this.postId);
       this.loadPost();
     });
     this.loadAllPosts();
     this.ps.getPosts().subscribe(posts => {
       this.allTags = this.extractTagsFromPosts(posts);
+      this.loadFavoritePosts(); // Charger les posts favoris au chargement de la page
       this.loadLikeStatus(); // Charger l'état de like au chargement de la page
+
 
     });
   }
+  addNewComment() {
+    if (this.commentContent.trim() !== '') {
+      const newComment: Comment = new Comment();
+      newComment.content = this.commentContent;
+      
+      this.cs.addComment(newComment, this.postId,this.userId).subscribe({
+        next: () => {
+          alert('Le commentaire a été ajouté avec succès.');
+          this.commentContent = ''; // Efface le contenu du commentaire après l'ajout
+        },
+        error: (error) => {
+          console.error('Une erreur s\'est produite lors de l\'ajout du commentaire : ', error);
+          alert('Une erreur s\'est produite lors de l\'ajout du commentaire. Veuillez réessayer.');
+        }
+      });
+    } else {
+      alert('Veuillez saisir du contenu pour votre commentaire.');
+    }
+  }
 
+
+  replyToComment(parentId: number): void {
+    // parentId: ID of the comment being replied to
+    // Assuming userId and postId are already set in your component
+    this.cs.replyComment(parentId, this.userId, this.postId)
+      .subscribe(response => {
+        // Handle successful reply
+        console.log('Reply added successfully:', response);
+        // Reload comments after adding a reply
+        this.loadComments();
+      }, error => {
+        // Handle error if reply fails
+        console.error('Error adding reply:', error);
+      });
+  }
   loadLikeStatus(): void {
     const storedLikes = localStorage.getItem('userLikes');
     if (storedLikes) {
@@ -102,7 +154,61 @@ export class AboutPostsComponent {
     }
   }
 
+  loadFavoritePosts(): void {
+    const storedFavorites = localStorage.getItem('userFavorites');
+    if (storedFavorites) {
+      this.favoritePosts = JSON.parse(storedFavorites);
+      // Vérifier pour chaque post s'il est en favori ou non
+      this.favoritePosts.forEach(postId => {
+        if (postId === this.postId) {
+          this.isFavorite = true;
+        }
+      });
+    }
+  }
+  ToFavorites(userId: number, postId: number): void {
+    const isPostFavorite = this.favoritePosts.includes(postId);
+  
+    if (isPostFavorite) {
+      // Le post est déjà dans les favoris, donc on le retire
+      this.ps.unfavoritePost(userId, postId).subscribe({
+        next: () => {
+          // Mettre à jour l'état de l'icône favori
+          this.favoritePosts = this.favoritePosts.filter(id => id !== postId);
+          this.isFavorite = false;
+          this.updateFavoritesInLocalStorage();
 
+        },
+        error: (error) => {
+          console.error('Erreur lors du retrait des favoris :', error);
+        }
+      });
+    } else {
+      // Le post n'est pas dans les favoris, donc on l'ajoute
+      this.ps.favoriteList(userId, postId).subscribe({
+        next: (response: any) => {
+          // Afficher la réponse textuelle (exemple)
+          console.log(response);
+          this.isFavorite = true;
+
+  
+          // Mettre à jour l'état de l'icône favori
+          this.favoritePosts.push(postId);
+          this.updateFavoritesInLocalStorage();
+        },
+        error: (error) => {
+          console.error('Erreur lors de l\'ajout aux favoris :', error);
+        }
+      });
+    }
+
+  }
+  
+  updateFavoritesInLocalStorage(): void {
+   console.log( localStorage.setItem('userFavorites', JSON.stringify(this.favoritePosts)));
+  }
+  
+  
 
   toggleReport(): void {
     if (!this.post.reported) {
@@ -129,13 +235,6 @@ export class AboutPostsComponent {
 }
 
 
-navigateToComments() {
-  // Charger les commentaires du post spécifique
-  this.cs.getCommentsForPost(this.postId).subscribe(comments => {
-    // Naviguer vers la page de commentaires avec les commentaires chargés
-    this.router.navigate(['/contact', { postId: this.postId, comments: comments }]);
-  });
-}
   reportPost(): void {
       this.ps.ReportPost(this.postId).subscribe({
           next: () => {
@@ -202,45 +301,7 @@ navigateToComments() {
     this.instructiveBold = false;
     this.dislikeBold = false;
   }
-  updateLikeStatus(action: LikeAction): void {
-    this.ps.addPostAction(this.postId, 1, action).subscribe({
-      next: (data) => {
-        this.post = data;
-        this.resetBoldState();
-        switch (action) {
-          case LikeAction.like:
-            this.likeBold = true;
-            break;
-          case LikeAction.love:
-            this.loveBold = true;
-            break;
-          case LikeAction.solution:
-            this.solutionBold = true;
-            break;
-          case LikeAction.instructive:
-            this.instructiveBold = true;
-            break;
-          case LikeAction.dislike:
-            this.dislikeBold = true;
-            break;
-          default:
-            break;
-        }
-        console.log('Post liked successfully:', data);
-        this.updateLikesInLocalStorage(action);
-      },
-      error: (error) => {
-        console.error('Error liking post:', error);
-      }
-    });
-  }
 
-  updateLikesInLocalStorage(action: LikeAction): void {
-    const storedLikes = localStorage.getItem('userLikes');
-    let userLikes = storedLikes ? JSON.parse(storedLikes) : {};
-    userLikes[this.postId] = action;
-    localStorage.setItem('userLikes', JSON.stringify(userLikes));
-  }
   likePost(): void {
     this.isLikeClicked = true; // Activer l'effet visuel
     setTimeout(() => {
@@ -257,12 +318,9 @@ navigateToComments() {
       },
       error: (error) => {
         console.error('Error liking post:', error);
-      },
-
+      }
     });
     this.updateLikeStatus(LikeAction.like);
-
-   // this.stateService.addAction({ action: 'like', postId: this.postId });
 
   }
   
@@ -350,6 +408,46 @@ navigateToComments() {
     this.updateLikeStatus(LikeAction.dislike);
 
 
+  }
+  
+  updateLikeStatus(action: LikeAction): void {
+    this.ps.addPostAction(this.postId, 1, action).subscribe({
+      next: (data) => {
+        this.post = data;
+        this.resetBoldState();
+        switch (action) {
+          case LikeAction.like:
+            this.likeBold = true;
+            break;
+          case LikeAction.love:
+            this.loveBold = true;
+            break;
+          case LikeAction.solution:
+            this.solutionBold = true;
+            break;
+          case LikeAction.instructive:
+            this.instructiveBold = true;
+            break;
+          case LikeAction.dislike:
+            this.dislikeBold = true;
+            break;
+          default:
+            break;
+        }
+        console.log('Post liked successfully:', data);
+        this.updateLikesInLocalStorage(action);
+      },
+      error: (error) => {
+        console.error('Error liking post:', error);
+      }
+    });
+  }
+
+  updateLikesInLocalStorage(action: LikeAction): void {
+    const storedLikes = localStorage.getItem('userLikes');
+    let userLikes = storedLikes ? JSON.parse(storedLikes) : {};
+    userLikes[this.postId] = action;
+    localStorage.setItem('userLikes', JSON.stringify(userLikes));
   }
 
   loadAllPosts(): void {

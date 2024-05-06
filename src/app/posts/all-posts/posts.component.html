@@ -7,42 +7,6 @@
         </div>
         <h5 class="dashboard-title">Dashboard</h5>
         <br>
-
-<!--         
-        <table>
-          <thead>
-            <tr>
-              <th>Content</th>
-              <th>Title</th>
-              <th>Date</th>
-              <th>Tags</th>
-              <th>Likes</th>
-              <th>Sentiment Score</th>
-              <th>Emoji</th>
-              <th>Status</th>
-              <th>Attachment</th>
-              <th>Report</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let post of posts">
-              <td>{{ post.content }}</td>
-              <td>{{ post.title }}</td>
-              <td>{{ post.datePost }}</td>
-              <td>{{ post.tags }}</td>
-              <td>{{ post.likes }}</td>
-              <td>{{ post.sentimentScore }}</td>
-              <td>{{ post.emoji }}</td>
-              <td>{{ post.status }}</td>
-              <td>
-                <ul>
-                  <li *ngFor="let attachment of post.attachment">{{ attachment.name }}</li>
-                </ul>
-              </td>
-              <td>{{ post.report }}</td>
-            </tr>
-          </tbody>
-        </table> -->
       
    <div class="statistics-container">
     <div class="statistic-box">
@@ -90,15 +54,15 @@
    
     <div class="emoji-container">
       <div class="emoji-item">
-        <span class="emoji">😊✅</span>
+        <span class="emoji">👏✅</span>
         <span class="count">{{ getEmojiCount(posts, '😊✅') }}</span>
       </div>
       <div class="emoji-item">
-        <span class="emoji">🙂💡</span>
+        <span class="emoji">🙂</span>
         <span class="count">{{ getEmojiCount(posts, '🙂\uD83D\uDCA1') }}</span>
       </div>
       <div class="emoji-item">
-        <span class="emoji">😐👏</span>
+        <span class="emoji">😐</span>
         <span class="count">{{ getEmojiCount(posts, '😐\uD83D\uDC4F') }}</span>
       </div>
       <div class="emoji-item">
@@ -111,20 +75,38 @@
       </div>
     </div>
   </div>
-  <div *ngIf="recommendations && recommendations.length > 0">
-    <h3>Recommandations</h3>
-    <ul>
-      <li *ngFor="let post of recommendations">
-        <!-- Affichez les détails du post selon votre modèle -->
-        <p>{{ post.title }}</p>
-        <p>{{ post.content }}</p>
-        <!-- Ajoutez d'autres propriétés du post selon vos besoins -->
-      </li>
-    </ul>
-  </div>
-  
-  {{ recommendations | json }}
 
+  <div class="body">
+    <div class="row">
+      <p>Recommendations</p>
+      <div class="col-md-6" *ngFor="let post of recommendations">
+        <div class="card-body">
+          <h5 class="card-title">
+            <span>{{ post.title }}</span>
+            <span class="emoji-container">{{ post.emoji }}</span>
+          </h5>
+          <p class="text-muted"><time>{{ post.datePost }}</time></p>
+          <p class="card-text" *ngIf="post.content.length <= maxLengthToShow">
+            {{ post.content }}
+          </p>
+          <div class="text-center mb-3" *ngIf="post.content.length > maxLengthToShow">
+            <p>
+              {{ post.content | slice:0:maxLengthToShow }}...
+            </p>
+            <button mat-raised-button color="primary" (click)="toggleDetails(post.postId)">
+              Read More
+            </button>
+          </div>
+          <div class="author">
+            <a href="#"><span class="text-danger"><i class="fa fa-heart"></i> {{ post.likes }}</span></a>
+            <div class="stats"> 
+              <a href="#"><i class="far fa-comment-dots"></i>{{ post.comments }}</a> 
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
   
   
   <div style="text-align: center;">
@@ -142,16 +124,17 @@
                 <i class="fas fa-search"></i>
               </button>
             </div>
-          </form>
-        </div>
+          </form>        </div>
+        
         <br>
 
         <div class="body">
           <div class="row">
-            <div class="col-md-6" *ngFor="let post of posts">
-              <div *ngIf="!searchInput || post.tags.includes(searchInput)">
-                <div class="card">
+            <div class="col-md-6" *ngFor="let post of filteredPosts">
+                  <div class="card">
                   <div class="card-body">
+                    <div *ngIf="!searchInput || post.tags.includes(searchInput) || post.title.toLowerCase().includes(searchInput) || post.report">
+
                     <h5 class="card-title">
                       <span>{{ post.title }}</span>
                       <span class="emoji-container">{{ post.emoji }}</span>
@@ -183,6 +166,11 @@
                         <button class="delete-button" aria-label="Delete" (click)="deletePost(post.postId)">
                           <mat-icon>delete</mat-icon> 
                         </button>
+                        
+                      <button mat-raised-button class="minimized-button"  (click)="toggleReport(post)">
+                        <mat-icon aria-hidden="false" aria-label="Reported">report_problem</mat-icon>
+                        {{ post.report ? 'Unreport!' : 'Report!' }}
+                    </button>
                       </div>
                     </div>
                   </div>

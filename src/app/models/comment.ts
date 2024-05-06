@@ -1,4 +1,3 @@
-import { AttachComment } from "./attach-comment";
 import { CommentLike } from "./comment-like";
 import { MyPosts } from "./my-posts";
 
@@ -13,5 +12,5 @@ export class Comment {
     commentLikes: CommentLike[] = [];
     post!: MyPosts;
     report!: boolean;
-    attachment: AttachComment[] = [];
+   // attachment: AttachComment[] = [];
 }

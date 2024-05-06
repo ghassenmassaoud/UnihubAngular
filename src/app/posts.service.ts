@@ -2,6 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MyPosts } from './models/my-posts';
+import { LikeAction } from './models/post-like';
+import { map } from 'rxjs/operators'; // Import de l'opérateur map depuis rxjs/operators
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +22,20 @@ export class PostsService {
     getPostById(postId: number): Observable<MyPosts> {
       return this.httpClient.get<MyPosts>(`${this.baseURL}getpost/${postId}`);
     }
+    // addPostAction(postId: number, userId: number, action: string): Observable<any> {
+    //   const url = `${this.baseURL}${postId}/${userId}?action=${action}`;
+    //   return this.httpClient.post(url, {});
+    // }
     addPostAction(postId: number, userId: number, action: string): Observable<any> {
       const url = `${this.baseURL}${postId}/${userId}?action=${action}`;
-      return this.httpClient.post(url, {});
+      return this.httpClient.post(url, {}).pipe(
+        map((response: any) => {
+          if (action === LikeAction.dislike) {
+            response.likes--; // Décrémenter le nombre de likes si l'action est un dislike
+          }
+          return response;
+        })
+      );
     }
 
     filterPostsByTags(tags: string): Observable<MyPosts[]> {
@@ -47,6 +61,13 @@ export class PostsService {
       return this.httpClient.delete<MyPosts>(`${this.baseURL}delete/${postId}`);
     }
 
+    favoriteList(userId: number, postId: number): Observable<any> {
+      return this.httpClient.post<any>(`${this.baseURL}add?userId=${userId}&postId=${postId}`, {});
+    }
+    unfavoritePost(userId: number, postId: number): Observable<any> {
+      const url = `${this.baseURL}remove?userId=${userId}&postId=${postId}`;
+      return this.httpClient.post<any>(url, {});
+    }
     editPost(userId: number, postId: number, postData: FormData): Observable<any> {
       const headers = new HttpHeaders();
       headers.append('Content-Type', 'multipart/form-data');
@@ -58,52 +79,15 @@ export class PostsService {
       );
     }
 
-    // addPost(postData: FormData): Observable<any> {
-    //   const headers = new HttpHeaders();
-    //   headers.append('Content-Type', 'multipart/form-data');
-      
-    //   return this.httpClient.post<any>(this.baseURL, postData, { headers: headers });
-    // }
     addPost(postData: FormData, userId:number): Observable<any> {
-      const headers = new HttpHeaders();
-      headers.append('Content-Type', 'multipart/form-data');
+      // const headers = new HttpHeaders();
+      // headers.append('Content-Type', 'multipart/form-data');
       
-      return this.httpClient.post<any>(`${this.baseURL}addpost?userId=${userId}`, postData, { headers: headers });
+      return this.httpClient.post<any>(`${this.baseURL}addpost?userId=${userId}`, postData);
     }
 
 
-    
-    // addPost(newPost: MyPosts): Observable<MyPosts> {
-    //   return this.httpClient.post<MyPosts>(this.baseURL + 'addpost', newPost);
-    // }
-    
-    // addPost(newPost: MyPosts): Observable<MyPosts> {
-    //   return this.httpClient.post<MyPosts>(this.baseURL + 'addpost/'+ idUsers ,newPost);
-    // }
-    // *********correct
-    // addPost(, userId: number): Observable<any> {
-    //   // const headers = new HttpHeaders().set('Content-Type', 'multipart/form-data');
-    //   return this.httpClient.post<any>(`${this.baseURL}addpost?userId=${userId}`, post);
-    // }
-    // addPost(post: FormData): Observable<any> {
-    //   const headers = new HttpHeaders().set('Content-Type', 'multipart/form-data');
-    //   return this.httpClient.post<any>(`${this.baseURL}addpost`, post, { headers });
-    // }
-
-    // addPost(post: MyPosts, studentId?: number, file?: FileList): Observable<any> {
-    //   const formData = new FormData();
-    //   formData.append('post', JSON.stringify(post)); // Ajoutez la partie 'post' avec les données JSON de l'objet MyPosts
-    
-    //   // Ajouter d'autres données au formulaire FormData si nécessaire
-    //   if (studentId) {
-    //     formData.append('studentId', studentId.toString());
-    //   }
-    //   if (file) {
-    //     formData.append('file', file[0]);
-    //   }
-    
-    //   return this.httpClient.post<any>(this.baseURL + 'addpost', formData);
-    // }
+  
     
   }
 

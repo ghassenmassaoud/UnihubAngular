@@ -39,10 +39,11 @@ export class PostsComponent implements OnInit {
   posts!: MyPosts[];
   postId!: number  | undefined;
   showTagsAndAttachments: boolean = false; 
-  filteredPosts: MyPosts[] = [];
+  filteredPosts!: MyPosts[] ;
   searchInput: string = '';
   maxLengthToShow = 200; 
   recommendations: MyPosts[] = [];
+
 
 
 userId= 1;
@@ -56,8 +57,12 @@ userId= 1;
   ngOnInit() {
     console.log('On init ..')
     this.ps.getPosts().subscribe(
-      data => {this.posts = data}
+      data => {
+        this.filteredPosts = data 
+       return this.posts = data     }
     )
+    this.Recomm();
+
   }
 
   Recomm(): void {
@@ -111,10 +116,46 @@ userId= 1;
     });
   }
 
+  // filterPosts() {
+  //   this.filteredPosts = this.posts.filter(post =>
+  //     post.tags.some(tag => tag.toLowerCase().includes(this.searchInput.toLowerCase()))
+  //   );
+  // }
+
+
+  // filterPosts() {
+  //   this.filteredPosts = this.posts.filter(post => {
+  //     const searchLower = this.searchInput.toLowerCase().trim();
+  
+  //     const matchesTag = post.tags.some(tag => tag.toLowerCase() === searchLower);
+  //     const matchesTitle = post.title.toLowerCase().includes(searchLower); // Utilisation de includes pour le titre
+  //     const matchesStatus = post.status?.toLowerCase().includes(searchLower); // Utilisation de includes pour le statut
+  //     const matchesReported = searchLower === 'reported' && post.report;
+  //     const matchesNotReported = searchLower === 'not reported' && !post.report;
+  
+  //     return matchesTag || matchesTitle || matchesStatus || matchesReported || matchesNotReported;
+  //   });
+  // }
+
+
+  
   filterPosts() {
-    this.filteredPosts = this.posts.filter(post =>
-      post.tags.some(tag => tag.toLowerCase().includes(this.searchInput.toLowerCase()))
-    );
+    this.filteredPosts = this.posts.filter(post => {
+      const searchLower = this.searchInput.toLowerCase().trim();
+  
+      const matchesTag = post.tags.some(tag => tag.toLowerCase() === searchLower);
+      const matchesTitle = post.title.toLowerCase().includes(searchLower);
+      const matchesReported = searchLower === 'reported' && post.report;
+      const matchesNotReported = searchLower === 'not reported' && !post.report;
+  
+      // Ajoutez une condition pour vérifier si searchInput est vide pour afficher tous les posts
+      if (!searchLower) {
+        return true;
+      }
+  
+      // Ajoutez une condition pour filtrer par titre et par statut
+      return matchesTag || matchesTitle || matchesReported || matchesNotReported;
+    });
   }
 
   fetchPosts(): void {
@@ -127,6 +168,7 @@ userId= 1;
       }
     });
   }
+
   deletePost(postId: number): void {
     this.ps.deletePost(postId).subscribe({
       next: (response) => {
@@ -202,4 +244,28 @@ userId= 1;
     });
     return count;
   }
+  toggleReport(post: any): void {
+    if (post.report) {
+        this.ps.UnReportPost(post.postId).subscribe({
+            next: () => {
+                post.report = false;
+                console.log('Post unmarked as reported.', post.report);
+            },
+            error: (error) => {
+                console.error('Error unmarking post as reported:', error);
+            },
+        });
+    } else {
+        this.ps.ReportPost(post.postId).subscribe({
+            next: () => {
+                post.report = true;
+                console.log('Post marked as reported.', post.report);
+            },
+            error: (error) => {
+                console.error('Error marking post as reported:', error);
+            },
+        });
+    }
+}
+
 }  

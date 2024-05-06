@@ -1,0 +1,46 @@
+
+<div class="inbox-center table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th colspan="1">
+            <div class="inbox-header">
+              Share New Post
+            </div>
+          </th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+
+<form class="composeForm" [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <div class="form-line">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" id="subject" required>
+        <mat-error *ngIf="postForm.get('title')?.invalid && postForm.get('title')?.touched">
+          Title is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <ckeditor [editor]="Editor" formControlName="content" data="<p>Hello, world!</p>" required></ckeditor>
+    <mat-error *ngIf="postForm.get('content')?.invalid && postForm.get('content')?.touched">
+      Content is required
+    </mat-error>
+    <div class="form-line">
+      <mat-form-field class="example-full-width mb-3" appearance="outline">
+        <mat-label>Tags</mat-label>
+        <input matInput formControlName="tags" required pattern="#[a-zA-Z0-9]+">
+        <mat-error *ngIf="postForm.get('tags')?.invalid && postForm.get('tags')?.touched">
+          Tags are required and must start with '#'
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-lg-12">
+      <div class="m-l-25 m-b-20">
+        <button mat-flat-button color="primary" class="msr-2" type="submit"(click)="navigateToPosts()">Send</button>
+        <button mat-flat-button color="warn" type="button" (click)="navigateToPosts()">Discard</button>
+      </div>
+    </div>
+  </form>
+  

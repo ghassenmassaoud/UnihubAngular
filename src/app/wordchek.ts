@@ -19,6 +19,9 @@ export class WordCheckService {
   }
 
   containsBadWords(text: string): boolean {
+    if (text == null) {
+      return false; // Ou traiter le cas où le texte est null selon votre logique
+  }
     text = text.toLowerCase();
     for (const badWord of this.badWords) {
       const pattern = new RegExp('\\b' + badWord + '\\b');

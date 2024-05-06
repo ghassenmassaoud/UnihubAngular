@@ -13,6 +13,6 @@ export class RecommService {
     
    }
    getRecomm(userId: number): Observable<any> {
-    return this.httpClient.get<any>(`${this.baseURL}user/${userId}`);
+    return this.httpClient.get<any>(`${this.baseURL}user?userId=${userId}`);
   }
 }

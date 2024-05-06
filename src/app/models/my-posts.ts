@@ -1,5 +1,3 @@
-import { Subscription } from "rxjs";
-import { Attachement } from "./attachement";
 import { PostLike } from "./post-like";
 import { User } from "./user";
 export enum Status {
@@ -15,7 +13,7 @@ export class MyPosts {
     tags!: string[];
     datePost!: string; 
 
-    attachment!: Attachement[]; 
+  //  attachment!: Attachement[]; 
     likes!: number;
     views!: number;
     status?: string; 
@@ -23,7 +21,7 @@ export class MyPosts {
     comments!: Comment[]; 
     report!: boolean;
 
-    subscriptions!: Subscription[]; 
+ //   subscriptions!: Subscription[]; 
     postLikes!: PostLike[]; 
 
     sentimentScore!: number;

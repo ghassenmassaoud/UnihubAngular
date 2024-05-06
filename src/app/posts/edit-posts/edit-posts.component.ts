@@ -50,7 +50,7 @@ export class EditPostsComponent {
       views: [0],
       status: ['', Validators.required],
       report: [false],
-      attachment: ['']
+    //  attachment: ['']
     });
   }
   
@@ -98,7 +98,7 @@ export class EditPostsComponent {
     formData.append('views', this.postForm.get('views')?.value);
     formData.append('status', this.postForm.get('status')?.value);
     formData.append('report', this.postForm.get('report')?.value);
-    formData.append('attachment', this.selectedFile || '');
+  //  formData.append('attachment', this.selectedFile || '');
 
     return this.ps.editPost(userId, postId, formData).subscribe(
       (response) => {
