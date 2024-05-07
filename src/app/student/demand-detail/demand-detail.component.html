@@ -16,7 +16,7 @@
 
    <div *ngIf="recommend(demande.description).length !== 0">
      <div class="sendmail-buttons">
-       <button *ngFor="let rec of recommend(demande.description)" (click)="sendmail(rec)">{{ rec }}</button>
+       <button *ngFor="let rec of recommend(demande.description)" (click)="sendmail(rec)" button type="button" class="btn btn-outline-primary">{{ rec }}</button>
      </div>
    </div>
    <hr>
