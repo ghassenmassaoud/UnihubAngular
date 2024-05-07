@@ -1,0 +1,84 @@
+<section class="content">
+    <div class="content-block">
+      @for (breadscrum of breadscrums; track breadscrum) {
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+        </app-breadcrumb>
+      </div>
+      }
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="materialTableHeader">
+              <div class="left">
+                <ul class="header-buttons-left ms-0">
+                  <li class="tbl-title">
+                    <h2>Seen Demands</h2>
+                  </li>
+                  <li class="tbl-search-box">
+                    <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                    <input placeholder="Search" type="text" #filter class="browser-default search-field"
+                      aria-label="Search box" >
+                  </li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="body overflow-auto">
+              <div class="responsive_table">
+                
+
+
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Demand ID</th>
+                      <th>Description</th>
+                      <th>Demand Type</th>
+                      <th>Status</th>
+                      <th>Creation Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let demande of dataSource">
+                      <tr>
+                        <td>{{ demande.demandId }}</td>
+                        <td>{{ demande.description }}</td>
+                        <td>{{ demande.demandType }}</td>
+                        <td>
+                         
+                          <button [ngClass]="{'red-button': !demande.status, 'green-button': demande.status}">
+                            {{ demande.status ? 'seen' : 'unseen' }}
+                          </button>
+                        </td>
+                        <td>{{ demande.creationDate }}</td>
+                          <!-- Boutons d'action ici -->
+                          <!-- <button type="button" class="btn btn-outline-danger"(click)="deleteDemand(demande.demandId)">Delete</button>
+                        </td> 
+                        <td>
+                           Boutons d'action ici 
+                          <button type="button" class="btn btn-outline-secondary"(click)="deleteDemand(demande.demandId)">Détails</button>
+                        </td> 
+                        </tr> -->
+                        <td>
+                          <!-- Boutons d'action ici -->
+                          <button type="button" class="btn btn-outline-danger"(click)="deleteDemand(demande.demandId)">Delete</button>
+                        </td> 
+                    </ng-container>
+                  </tbody>
+                </table>
+                
+
+                <div class="no-results" [style.display]="dataLength === 0 ? '' : 'none'">
+                  No results
+                </div>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+

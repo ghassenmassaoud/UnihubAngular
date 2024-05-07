@@ -14,7 +14,6 @@ import {
   RightSidebarService,
   InConfiguration,
   Role,
-
 } from '@core';
 import { FeatherIconsComponent } from '@shared/components/feather-icons/feather-icons.component';
 import { NgScrollbar } from 'ngx-scrollbar';

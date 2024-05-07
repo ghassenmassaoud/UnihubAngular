@@ -7,6 +7,13 @@ import { TimetableComponent } from './timetable/timetable.component';
 import { SettingsComponent } from './settings/settings.component';
 import {  ListClassrromStudentComponent } from './list-classrrom-student/list-classrrom-student.component';
 import { AboutClassroomStudentComponent } from './about-classroom-student/about-classroom-student.component';
+//import { HomeworkComponent } from './homework/homework.component';
+import { DemandeListeComponent } from './demande-liste/demande-liste.component';
+import { AddDemandeComponent } from './add-demande/add-demande.component';
+import { SeenDemandsComponent } from './seen-demands/seen-demands.component';
+import { UnSeenDemandsComponent } from './un-seen-demands/un-seen-demands.component';
+import { AddComplaintComponent } from './Complaints/add-complaint/add-complaint.component';
+import { EditDemandComponent } from './edit-demand/edit-demand.component';
 
 export const STUDENT_ROUTE: Route[] = [
   {
@@ -25,6 +32,33 @@ export const STUDENT_ROUTE: Route[] = [
     path: 'homework',
     component: HomeworkComponent,
   },
+  // {
+  //   path: 'EditDemand',
+  //   component: EditDemandComponent,
+  // },
+
+
+  {
+  path: 'SeenDemands',
+  component: SeenDemandsComponent,
+},
+{
+  path: 'Demands',
+  component: DemandeListeComponent,
+},
+{
+  path: 'Complaints',
+  component: AddComplaintComponent,
+},
+{
+  path: 'UnSeenDemands',
+  component: UnSeenDemandsComponent,
+},
+  {
+    path: 'AddDemand',
+    component: AddDemandeComponent,
+  },
+
   {
     path: 'leave-request',
     component: LeaveRequestComponent,

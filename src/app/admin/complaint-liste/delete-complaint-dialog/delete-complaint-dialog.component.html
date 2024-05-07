@@ -1,0 +1,9 @@
+<h2>Confirm Deletion</h2>
+
+<p>Are you sure you want to delete Complaint with ID: {{ data.complaintId }}?</p>
+
+<div class="dialog-buttons">
+    <button mat-button type="button" class="btn btn-outline-danger" (click)="dialogRef.close()">Cancel</button>
+  <button mat-button color="warn" type="button" class="btn btn-outline-success"(click)="deleteComplaint(data.complaintId)" >Confirm</button>
+</div>
+

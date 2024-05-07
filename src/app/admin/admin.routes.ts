@@ -1,5 +1,6 @@
 import { Route } from '@angular/router';
 import { Page404Component } from 'app/authentication/page404/page404.component';
+import { DemandeListeComponent } from 'app/student/demande-liste/demande-liste.component';
 
 export const ADMIN_ROUTE: Route[] = [
   {

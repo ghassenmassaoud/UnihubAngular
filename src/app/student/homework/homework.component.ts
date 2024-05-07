@@ -6,7 +6,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { HomeworkService } from './homework.service';
 import { Homework } from './homework.modal';
 import { UnsubscribeOnDestroyAdapter } from '@shared';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { MatRippleModule } from '@angular/material/core';
 import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.component';
 
@@ -22,6 +22,7 @@ import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.co
     MatRippleModule,
     MatPaginatorModule,
     DatePipe,
+    CommonModule
   ],
 })
 export class HomeworkComponent

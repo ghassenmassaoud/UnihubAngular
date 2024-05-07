@@ -1,0 +1,51 @@
+:host {
+  display: block;
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  max-width: 700px;
+  //text-align: right;
+  // animation: custom-dialog-enter 1s ease;
+}
+
+@keyframes custom-dialog-enter {
+  from {
+    transform: scale(0) rotate(360deg);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+.button-with-margin {
+  margin-right: 10px;
+}
+
+/* demand-dialog.component.css */
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.sendmail-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sendmail-buttons button {
+  margin-bottom: 10px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 16px;
+  text-align: center;
+  display: inline-block;}

@@ -26,6 +26,34 @@ export const ROUTES: RouteInfo[] = [
     badgeClass: '',
     role: ['Admin'],
     submenu: [
+
+      {
+        path: '/admin/attendance/Demands',
+        title: 'Demands',
+        iconType: '',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        role: ['Admin'],
+        submenu: [],
+      },
+
+      {
+        path: '/admin/dashboard/ComplaintListe',
+        title: 'Complaints',
+        iconType: '',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        role: [''],
+        submenu: [],
+      },
+
+
       {
         path: '/admin/dashboard/main',
         title: 'MENUITEMS.DASHBOARD.LIST.DASHBOARD1',
@@ -697,8 +725,8 @@ export const ROUTES: RouteInfo[] = [
   // Student Modules
 
   {
-    path: '/student/dashboard',
-    title: 'MENUITEMS.STUDENT.LIST.DASHBOARD',
+    path: '/student/AddDemand',
+    title: 'DEMANDS',
     iconType: 'material-icons-outlined',
     icon: 'space_dashboard',
     class: '',
@@ -709,8 +737,8 @@ export const ROUTES: RouteInfo[] = [
     submenu: [],
   },
   {
-    path: '/student/homework',
-    title: 'MENUITEMS.STUDENT.LIST.HOMEWORK',
+    path: '/student/Complaints',
+    title: 'COMPLAINT',
     iconType: 'material-icons-outlined',
     icon: 'article',
     class: '',

@@ -232,7 +232,6 @@
 	.react-home3-banner-form .form__wrapper button{
 	    padding: 11px 30px;
 	}
-
 	.react-breadcrumbs.breadcrumbs-courses__single .breadcrumbs-wrap img{
 		height: 420px;
 	}
@@ -299,7 +298,6 @@
         right: 14px;
         opacity: 0.5;
     }
-
     #react-header .react-inner-menus .sub-menu-mega{
     	display: block !important;
     	box-shadow: none;
@@ -309,7 +307,6 @@
         justify-content: space-between;
         padding: 0px 50px 15px 50px;
     }
-
     #react-header .react-menus li.mega-inner ul.mega-menu{
         left: 0;
         right: 0;
@@ -355,7 +352,6 @@
 	.react-inner-menus .react-menus > .has-sub > a::before {
 	    right: 0;
 	}
-
 	.popular__course__area .course__item .course__inner ul,
 	.popular__course__area .course__item .course__card-icon,
 	.popular__course__area .course__item .react-course-title{
