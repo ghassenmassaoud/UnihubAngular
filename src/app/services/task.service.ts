@@ -1,6 +1,7 @@
 import { formatDate } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ReplyTask } from 'app/models/ReplyTask';
 import { Task } from 'app/models/Task';
 import { Observable } from 'rxjs';
 
@@ -100,10 +101,17 @@ export class TaskService {
   }
 
   // Méthode pour évaluer une tâche
-  evaluateTask(taskId: number, mark: number): Observable<Task> {
-    return this.http.post<Task>(`${this.baseUrl}evaluateTask/${taskId}`, { mark });
+  evaluateTask(taskId: number, mark: number): Observable<ReplyTask> {
+    return this.http.post<ReplyTask>(`${this.baseUrl}evaluteTask/${taskId}`, { mark });
   }
+
+  
   getTasksByClassroom(classroomId: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}getTaskByCLassroom/${classroomId}`);
   }
+  getReplyTasksByTaskId(taskId: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}getreplytask/${taskId}`);
+
+  }
+
 }

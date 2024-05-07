@@ -76,7 +76,7 @@ loadEnrolledStudents(): void {
         this.classroomService.getEnrolledStudents(classroom.idClassroom).subscribe({
           next: (students: User[]) => {
             this.enrolledStudents = students;
-            this.dataSource.data = this.enrolledStudents; // Mettre à jour les données du dataSource
+            this.dataSource.data = this.enrolledStudents;
           },
           error: (error) => {
             console.error('Error loading enrolled students:', error);

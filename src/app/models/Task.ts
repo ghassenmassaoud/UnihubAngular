@@ -1,6 +1,6 @@
 import { Lesson } from "./Lesson";
 import { Document } from "./Document";
-
+import {ReplyTask} from "./ReplyTask"
 
 export class Task{
     idTask!: number;
@@ -10,5 +10,6 @@ export class Task{
     taskState!: string;
     lesson!: Lesson[];
     documents!: Document[]; 
+    replyTask!: ReplyTask[];
 
 }

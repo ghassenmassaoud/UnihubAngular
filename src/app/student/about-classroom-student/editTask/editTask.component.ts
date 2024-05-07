@@ -13,6 +13,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { TaskService } from 'app/services/task.service';
+import { Task } from 'app/models/Task';
 
 export interface DialogData {
   id: number;
@@ -22,9 +24,9 @@ export interface DialogData {
 }
 
 @Component({
-  selector: 'app-editLesson:not(h)',
-  templateUrl: './editLesson.component.html',
-  styleUrls: ['./editLesson.component.scss'],
+  selector: 'app-editTask:not(h)',
+  templateUrl: './editTask.component.html',
+  styleUrls: ['./editTask.component.scss'],
   standalone: true,
   imports: [
     CommonModule,
@@ -45,44 +47,47 @@ export interface DialogData {
     ReactiveFormsModule,
   ],
 })
-export class EditLessonDialogComponent {
-  lessonForm: FormGroup;
+export class EditTaskDialogComponent {
+  taskForm: FormGroup;
   fileToUpload: File | null = null;
-  visibility: string[] = ['EVRYONE', 'ONLY_ME'];
+  classroomId: number | null = null;
 
   constructor(
     private formBuilder: FormBuilder,
-    private lessonService: LessonService,
-    @Inject(MAT_DIALOG_DATA) public data: { lesson: Lesson },
-    public dialogRef: MatDialogRef<EditLessonDialogComponent>
+    private taskService: TaskService,
+    @Inject(MAT_DIALOG_DATA) public data: { taskId:Task },
+    public dialogRef: MatDialogRef<EditTaskDialogComponent>
+
   ) {
-    this.lessonForm = this.formBuilder.group({
-      lessonName: [data.lesson.lessonName, Validators.required],
-      visibility: [data.lesson.visibility, Validators.required],
-      file: [data.lesson.documents, Validators.required],
-    });
-  }
-
-  updateLesson(): void {
-    if (this.lessonForm.valid && this.data.lesson) {
-      const lessonId = this.data.lesson.idLesson;
-      const lessonName = this.lessonForm.value.lessonName;
-      const visibility = this.lessonForm.value.visibility;
-      const file = this.fileToUpload;
-
-      this.lessonService.updateLesson( lessonName, visibility,lessonId, file).subscribe({
-        next: (response: any) => {
-          console.log('Lesson updated successfully:', response);
-          this.dialogRef.close('success'); // Ferme la boîte de dialogue après la mise à jour réussie
-        },
-        error: (error) => {
-          console.error('Error updating lesson:', error);
-          // Gérer l'erreur, par exemple, afficher un message à l'utilisateur
-          
-        }
-      });
+ ;
+   this.taskForm = this.formBuilder.group({
+    TaskDescription: [data.taskId.taskDescription ,Validators.required],
+    Deadline: [data.taskId.deadline, Validators.required],
+    ClassroomId: [null],
+    file: [data.taskId.documents]
+  });
+}
+   
+updateTask(): void {
+  if(this.taskForm.valid && this.data.taskId){
+const taskId =this.data.taskId.idTask
+const taskDescription =this.taskForm.value.TaskDescription
+const deadline= this.taskForm.value.Deadline
+const file =this.taskForm.value.fileToUpload
+  this.taskService.updateTask(taskId, taskDescription, deadline, file).subscribe({
+    next: (response: any) => {
+      console.log('Task updated successfully:', response);
+      this.dialogRef.close('success');    },
+    error: (error) => {
+      console.error('Error updating task:', error);
+      // Gérez les erreurs ici, par exemple, affichez un message d'erreur à l'utilisateur
     }
-  }
+  });
+}
+}
+
+
+ 
   onFileChange(event: any) {
     const fileInput = event.target;
     if (fileInput.files.length > 0) {

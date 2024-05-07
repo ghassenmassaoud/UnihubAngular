@@ -1,0 +1,75 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <app-breadcrumb [title]="'All Classroom'" [items]="['Classroom']" [active_item]="'All Classroom'">
+            </app-breadcrumb>
+        </div>
+        <div class="mt-5">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="materialTableHeader">
+                        <div class="left">
+                            <ul class="header-buttons-left ms-0">
+                                <li class="tbl-title">
+                                    <h2>Tasks</h2>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div *ngIf="noTaskSelected">
+                        <p>No Task selected.</p>
+                    </div>
+
+                    <div *ngIf="!noTaskSelected">
+                        <mat-table [dataSource]="dataSource" matSort>
+                            <ng-container matColumnDef="student">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Student</mat-header-cell>
+                                <mat-cell *matCellDef="let element">{{ element.student }}</mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="taskState">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Task State</mat-header-cell>
+                                <mat-cell *matCellDef="let element">{{ element.taskState }}</mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="documents">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Documents</mat-header-cell>
+                                <mat-cell *matCellDef="let element">
+                                    <button mat-button (click)="downloadDocument(element.documents)">Download</button>
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="mark">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Mark</mat-header-cell>
+                                <mat-cell *matCellDef="let element">{{ element.mark }}</mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="action">
+                                <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+                                <mat-cell *matCellDef="let element">
+                                  <button mat-button (click)="editMark(element)">Evaluate</button>
+                                </mat-cell>
+                            </ng-container>
+
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                        </mat-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Formulaire d'édition de la salle de classe -->
+        <div *ngIf="editMode">
+            <h3>Edit ReplyTask</h3>
+            <form (ngSubmit)="evaluateTask()" #editForm="ngForm">
+                <div class="form-group">
+                    <label for="mark">Mark:</label>
+                    <input type="number" class="form-control" id="mark" name="mark" [(ngModel)]="editedRepTask.mark" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Evaluate Task</button>
+                <button type="button" class="btn btn-default" (click)="cancelEdit()">Cancel</button>
+            </form>
+        </div>
+        
+    </div>
+</section>

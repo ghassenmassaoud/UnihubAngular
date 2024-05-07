@@ -1,0 +1,246 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header" *ngFor="let breadscrum of breadscrums">
+        <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+        </app-breadcrumb>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <mat-tab-group>
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <i class="material-icons-outlined psr-3">list_alt</i>
+                List Student
+              </ng-template>
+              <div class="mt-5">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="card">
+                    <div class="materialTableHeader">
+                      <div class="left">
+                        <ul class="header-buttons-left ms-0">
+                          <li class="tbl-title">
+                            <h2>Students</h2>
+                          </li>
+                        </ul>
+                      </div>
+                     
+                    </div>
+                    <div *ngIf="enrolledStudents.length > 0">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let student of enrolledStudents">
+                            <td>{{ student.firstName }}</td>
+                            <td>{{ student.lastName }}</td>
+                            <td>{{ student.email }}</td>
+                        
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div *ngIf="enrolledStudents.length === 0">
+                      <p>No enrolled students found.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+            <!-- Lesson Part -->
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <i class="material-icons-outlined psr-3">list_alt</i>
+                Lesson
+              </ng-template>
+              <div class="mt-5">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="card">
+                    <div class="materialTableHeader">
+                      <div class="left">
+                        <ul class="header-buttons-left ms-0">
+                          <li class="tbl-title">
+                            <h2>Lessons</h2>
+                          </li>
+                        </ul>
+                      </div>
+                      
+  
+                    <div class="row">
+                      <div class="col-md-3 col-sm-6" *ngFor="let lesson of enrolledLessons">
+                        <div class="pricingTable">
+                          <h3 class="heading">{{ lesson.lessonName }}</h3>
+                          <div class="pricingTable">
+                            <ul>
+                              <li *ngFor="let document of lesson.documents">
+                                <a href="javascript:void(0)" (click)="downloadDocument(document)">{{ document.name }}</a>
+                              </li>
+                            </ul>
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="enrolledLessons.length === 0">
+                      <p>No lessons found.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </mat-tab>
+            <!--TaskPart!-->
+  
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <i class="material-icons-outlined psr-3">list_alt</i>
+                Task
+              </ng-template>
+              <div class="mt-5">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="card">
+                    <div class="materialTableHeader">
+                      <div class="left">
+                        <ul class="header-buttons-left ms-0">
+                          <li class="tbl-title">
+                            <h2>Tasks</h2>
+                          </li>
+                          <ul>
+                            <div>
+                              <label for="searchDate">Search Tasks :</label>
+                              <input type="datetime-local" id="searchDate" [(ngModel)]="searchDate">
+                              <button (click)="searchTasks(searchDate)">Search</button>
+                            </div>
+  
+                          </ul>
+  
+                        </ul>
+                      </div>
+                      <!-- <div class="right">
+                        <ul class="tbl-export-btn">
+                          <li class="tbl-header-btn">
+                            <div class="m-l-10" matTooltip="ADD">
+                              <button mat-mini-fab color="primary" (click)="addNewTask()">
+                                <mat-icon class="col-white">add</mat-icon>
+                              </button>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div> -->
+  
+                    <div class="row">
+                      <div class="col-md-3 col-sm-6" *ngFor="let task of enrolledTasks">
+                        <div class="pricingTable">
+                          <h3 class="heading">{{ task.taskDescription }}</h3>
+                          <h1 class="heading">{{task.deadline}}</h1>
+  
+                          <div class="pricingTable">
+                            <ul>
+                              <li *ngFor="let document of task.documents">
+                                <a href="javascript:void(0)" (click)="downloadDocument(document)">{{ document.name }}</a>
+                              </li>
+                            </ul>
+  
+  
+                            <!-- <div>
+                              <button mat-icon-button color="primary" (click)="editTask(task.idTask)">
+                                <mat-icon>edit</mat-icon>
+                              </button>
+                              <button mat-icon-button color="warn" (click)="deleteTask(task.idTask)">
+                                <mat-icon>delete</mat-icon>
+                              </button>
+  
+                            </div> -->
+                          <!-- </div>
+                          <a mat-flat-button color="primary" (click)="openTask(task.idTask)" *ngIf="task.idTask">Show Response</a>
+  
+                        </div> -->
+                      </div>
+                    </div>
+                    <div *ngIf="enrolledLessons.length === 0">
+                      <p>No Tasks found.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+              </div>
+              </div>
+            </mat-tab>
+  
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <i class="material-icons-outlined psr-3">list_alt</i>
+                Absence
+              </ng-template>
+              <div class="mt-5">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="card">
+                    <div class="materialTableHeader">
+                      <div class="left">
+                        <ul class="header-buttons-left ms-0">
+                          <li class="tbl-title">
+                            <h2>Absences</h2>
+                          </li>
+                          <div>
+                            <label for="searchDate">Absence By Date :</label>
+                            <input type="date" id="searchDate" [(ngModel)]="searchDate">
+                            <button (click)="searchAbsenceDate(searchDate)">Search</button>
+                          </div>
+                          <div>
+                            <mat-form-field>
+                              <mat-label>Search Absence by Status</mat-label>
+                              <input matInput type="text" [(ngModel)]="statusFilter">
+                            </mat-form-field>
+                            <button mat-button (click)="searchAbsence(statusFilter)">Search</button>
+                          </div>
+  
+                        </ul>
+                      </div>
+                      
+                    </div>
+                    <div *ngIf="enrolledAbsence.length > 0">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Student Name</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Action</th>
+  
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <ng-container *ngFor="let absence of user">
+                                
+                            <tr *ngFor="let abs of absence['absences']">
+                              <!-- <ng-container > -->
+                              <td>{{ absence['firstName'] }}</td>
+                              <td>{{abs['statusAbsence']}}</td>
+                              <td>{{ abs['dateAbsence'] }}</td>
+  
+                              
+                            </tr>
+                          </ng-container>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div *ngIf="enrolledAbsence.length === 0">
+                      <p>No enrolled absences found.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+  
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+  </section>

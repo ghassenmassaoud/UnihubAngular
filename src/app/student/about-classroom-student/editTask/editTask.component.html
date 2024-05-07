@@ -1,0 +1,15 @@
+<form [formGroup]="taskForm" (ngSubmit)="updateTask()">
+  <mat-form-field appearance="fill">
+    <mat-label>Task Description</mat-label>
+    <input matInput formControlName="taskDescription" required>
+  </mat-form-field>
+  <div class="time-input">
+    <label for="Deadline">Deadline</label>
+    <input type="datetime-local" id="Deadline" formControlName="Deadline" />
+  </div>
+  <div>
+    <label for="file">File:</label>
+    <input type="file" id="file" (change)="onFileChange($event)">
+  </div>
+  <button type="submit" [disabled]="taskForm.invalid">Submit</button>
+</form>

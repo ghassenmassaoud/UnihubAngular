@@ -14,7 +14,7 @@ import { Classroom } from 'app/models/Classroom';
 import { User } from 'app/models/User';
 import { ClassroomService } from 'app/services/classroom.service';
 import { Observable, catchError, tap } from 'rxjs';
-import { FormDialogComponent } from './form-dialog/form-dialog.component';
+//import { FormDialogComponent } from './form-dialog/form-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FeatherIconsComponent } from '@shared/components/feather-icons/feather-icons.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -28,19 +28,14 @@ import { TaskService } from 'app/services/task.service';
 import { AbsenceService } from 'app/services/absence.service';
 import { Lesson } from 'app/models/Lesson';
 import { Document } from 'app/models/Document';
-import { FormDialogLessonComponent } from './form-dialog-Lesson/form-dialog-Lesson.component';
 import { Absence } from 'app/models/Absence';
-import { FormDialogAbsenceComponent } from './form-dialog-Absence/form-dialog-Absence.component';
 import { Task } from 'app/models/Task';
-import { FormDialogTaskComponent } from './form-dialog-task/form-dialog-Task.component';
+//import { FormDialogTaskComponent } from './form-dialog-task/form-dialog-Task.component';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import { EditLessonDialogComponent } from './editLesson/editLesson.component';
-import { EditTaskDialogComponent } from './editTask/editTask.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { EditAbsenceDialogComponent } from './editAbsence/editAbsence.component';
 
 @Component({
-  selector: 'app-about-classroom',
+  selector: 'app-about-classroom-student',
   standalone: true,
   imports: [ 
     CommonModule,
@@ -69,10 +64,10 @@ import { EditAbsenceDialogComponent } from './editAbsence/editAbsence.component'
    MatPaginatorModule,
    DatePipe,
   ],
-  templateUrl: './about-classroom.component.html',
-  styleUrl: './about-classroom.component.scss'
+  templateUrl: './about-classroom-student.component.html',
+  styleUrl: './about-classroom-student.component.scss'
 })
-export class AboutClassroomComponent  implements OnInit {
+export class AboutClassroomStudentComponent  implements OnInit {
   breadscrums = [
     {
       title: 'About Classroom',
@@ -165,47 +160,6 @@ export class AboutClassroomComponent  implements OnInit {
   private refreshTable() {
     this.paginator._changePageSize(this.paginator.pageSize);
   }
-  addNew(): void {
-    const dialogRef = this.dialog.open(FormDialogComponent, {
-      data: { classroomId: this.selectedClassroomId }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this. loadEnrolledStudents();
-    });
-  }
-  deleteStudent(studentId: number) {
-    if (this.selectedClassroomId !== null) {
-      this.classroomService.removeStudentFromClassroom(this.selectedClassroomId, studentId).subscribe({
-        next: (response) => {
-          console.log('Student deleted:', response);
-          const index = this.enrolledStudents.findIndex((student) => student.idUser === studentId);
-          if (index !== -1) {
-            this.enrolledStudents.splice(index, 1);
-            this.showNotification('Student deleted successfully.');
-          }
-        },
-        error: (error) => {
-          console.error('Error deleting student:', error);
-          if (error.status === 404) {
-            console.error('Student not found or invalid URL:', error.error);
-          } else {
-            console.error('Other error:', error.error);
-          }
-        }
-      });
-    }
-  }
-  
-  showNotification(message: string) {
-    this.snackBar.open(message, '', {
-      duration: 2000,
-      verticalPosition: 'bottom',
-      horizontalPosition: 'center',
-      panelClass: 'snackbar-success',
-    });
-  }
-
 
 
   //////Lesson Parttt
@@ -251,54 +205,6 @@ downloadDocument(selectedDocument: Document): void {
     window.document.body.removeChild(link); // Utilisez window.document.body
   });
 }
-addNewLess(): void {
-  const dialogRef = this.dialog.open(FormDialogLessonComponent, {
-    data: { classroomId: this.selectedClassroomId }
-  })
-
-  dialogRef.afterClosed().subscribe(result => {
-    // Rafraîchir la liste des enseignants après la fermeture du dialogue
-    this. loadLessons();
-  });
-}
-
-
-// Définissez une fonction pour ouvrir le dialogue d'édition de leçon
-editLesson(lessonId: number): void {
-  // Chargez les détails de la leçon à partir de son ID
-  this.lesson.getLesson(lessonId).subscribe({
-    next: (lesson: Lesson) => {
-      const dialogRef = this.dialog.open(EditLessonDialogComponent, {
-        data: { lesson: lesson }
-      });
-
-      dialogRef.afterClosed().subscribe(result => {
-        if (result === 'success') {
-          this.loadLessons(); // Rechargez les leçons après l'édition réussie
-        }
-      });
-    },
-    error: (error) => {
-      console.error('Error loading lesson details:', error);
-    }
-  });
-}
-
-
-// Définissez une fonction pour supprimer une leçon
-deleteLesson(lessonId: number): void {
-  if (confirm('Do you really want to Delete this Lesson ?')) {
-    this.lesson.deleteLesson(lessonId).subscribe({
-      next: () => {
-        this.loadLessons(); // Rechargez les leçons après la suppression réussie
-        console.log('Lesson deleted successfully.');
-      },
-      error: (error) => {
-        console.error('Error deleting lesson:', error);
-      }
-    });
-  }
-}
 
 
 ///////////////////////Absenceeee///////////////////////////
@@ -319,54 +225,7 @@ loadAbsence(): void {
     console.error('No classroom selected.');
   }
 }
-addNewAbsence(): void {
-  if (this.selectedClassroomId !== null) {
-    const dialogRef = this.dialog.open(FormDialogAbsenceComponent, {
-      data: { classroomId: this.selectedClassroomId }
-    });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 'success') {
-        this.loadAbsence(); // Rechargez les absences après l'ajout réussi
-      }
-    });
-  } else {
-    console.error('No classroom selected.');
-  }
-}
-editAbsence(absenceId: number): void {
-  // Chargez les détails de la leçon à partir de son ID
-  this.abs.getAbsence(absenceId).subscribe({
-    next: (absence: Absence) => {
-      const dialogRef = this.dialog.open(EditAbsenceDialogComponent, {
-        data: { absenceId:  absence.idAbsence } // Utilisez taskId au lieu de task
-      });
-
-      dialogRef.afterClosed().subscribe(result => {
-        if (result === 'success') {
-          this.loadLessons(); // Rechargez les leçons après l'édition réussie
-        }
-      });
-    },
-    error: (error) => {
-      console.error('Error loading absence details:', error);
-    }
-  });
-}
-
-deleteAbcence(absenceId: number): void {
-  if (confirm('Do you really want to Delete this Absence ? ')) {
-    this.abs.deleteAbsence(absenceId).subscribe({
-      next: () => {
-        this.loadAbsence(); // Rechargez les leçons après la suppression réussie
-        console.log('Absence deleted successfully.');
-      },
-      error: (error) => {
-        console.error('Error deleting Absence:', error);
-      }
-    });
-  }
-}
 searchAbsence(status: string): void {
   this.abs.searchByStatus(status).subscribe({
     next: (absence: Absence[]) => {
@@ -416,42 +275,42 @@ loadTask(): void {
       console.error('No classroom selected.');
     }
 }
-addNewTask(): void {
-  if (this.selectedClassroomId !== null) {
-    const dialogRef = this.dialog.open(FormDialogTaskComponent, {
-      data: { classroomId: this.selectedClassroomId }
-    });
+// addNewTask(): void {
+//   if (this.selectedClassroomId !== null) {
+//     const dialogRef = this.dialog.open(FormDialogTaskComponent, {
+//       data: { classroomId: this.selectedClassroomId }
+//     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 'success') {
-        this.loadTask(); 
-      }
-    });
-  } else {
-    console.error('No classroom selected.');
-  }
-}
+//     dialogRef.afterClosed().subscribe(result => {
+//       if (result === 'success') {
+//         this.loadTask(); 
+//       }
+//     });
+//   } else {
+//     console.error('No classroom selected.');
+//   }
+// }
 
 // Définissez une fonction pour ouvrir le dialogue d'édition de leçon
-editTask(taskId: number): void {
-  // Chargez les détails de la leçon à partir de son ID
-  this.task.getTask(taskId).subscribe({
-    next: (task: Task) => {
-      const dialogRef = this.dialog.open(EditTaskDialogComponent, {
-        data: { taskId: task } // Utilisez taskId au lieu de task
-      });
+// editTask(taskId: number): void {
+//   // Chargez les détails de la leçon à partir de son ID
+//   this.task.getTask(taskId).subscribe({
+//     next: (task: Task) => {
+//       const dialogRef = this.dialog.open(EditTaskDialogComponent, {
+//         data: { taskId: task } // Utilisez taskId au lieu de task
+//       });
 
-      dialogRef.afterClosed().subscribe(result => {
-        if (result === 'success') {
-          this.loadLessons(); // Rechargez les leçons après l'édition réussie
-        }
-      });
-    },
-    error: (error) => {
-      console.error('Error loading task details:', error);
-    }
-  });
-}
+//       dialogRef.afterClosed().subscribe(result => {
+//         if (result === 'success') {
+//           this.loadLessons(); // Rechargez les leçons après l'édition réussie
+//         }
+//       });
+//     },
+//     error: (error) => {
+//       console.error('Error loading task details:', error);
+//     }
+//   });
+// }
 
 deleteTask(taskId: number): void {
   if (confirm('Do you really want to Delete this Task ? ')) {

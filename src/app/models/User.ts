@@ -1,5 +1,6 @@
 import { Absence } from "./Absence";
 import { Classroom } from "./Classroom";
+import { ReplyTask } from "./ReplyTask";
 import { Role } from "./Role";
 
 export class User{
@@ -25,4 +26,5 @@ export class User{
         //demands!: Demand[];
         //ressourceSpaces!: RessourceSpace[];
         classroomStudent!: Classroom[];
+        replyTask!: ReplyTask[];
       }

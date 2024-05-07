@@ -189,11 +189,13 @@
 
                           </div>
                         </div>
+                        <a mat-flat-button color="primary" (click)="openTask(task.idTask)" *ngIf="task.idTask">Show Response</a>
+
                       </div>
                     </div>
                   </div>
                   <div *ngIf="enrolledLessons.length === 0">
-                    <p>No lessons found.</p>
+                    <p>No Tasks found.</p>
                   </div>
                 </div>
               </div>
@@ -254,6 +256,7 @@
                       </thead>
                       <tbody>
                         <ng-container *ngFor="let absence of user">
+                              
                           <tr *ngFor="let abs of absence['absences']">
                             <!-- <ng-container > -->
                             <td>{{ absence['firstName'] }}</td>

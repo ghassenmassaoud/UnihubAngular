@@ -721,6 +721,18 @@ export const ROUTES: RouteInfo[] = [
     submenu: [],
   },
   {
+    path: '/student/Listclassroom',
+    title: 'classroom',
+    iconType: 'material-icons-outlined',
+    icon: 'menu_book',
+    class: '',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    role: ['Student'],
+    submenu: [],
+  },
+  {
     path: '/student/leave-request',
     title: 'MENUITEMS.STUDENT.LIST.LEAVE-REQUEST',
     iconType: 'material-icons-outlined',
