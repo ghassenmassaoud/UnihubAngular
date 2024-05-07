@@ -139,15 +139,15 @@ export const APP_ROUTE: Route[] = [
     children: [
       { path: '', redirectTo: '/main/home', pathMatch: 'full' },
 
-      // {
-      //   path: 'admin',
-      //   canActivate: [AuthGuard],
-      //   data: {
-      //     role: Role.Admin,
-      //   },
-      //   loadChildren: () =>
-      //     import('./admin/admin.routes').then((m) => m.ADMIN_ROUTE),
-      // },
+      {
+        path: 'admin',
+        canActivate: [AuthGuard],
+        data: {
+          role: Role.Admin,
+        },
+        loadChildren: () =>
+          import('./admin/admin.routes').then((m) => m.ADMIN_ROUTE),
+      },
       {
         path: 'teacher',
         canActivate: [AuthGuard],

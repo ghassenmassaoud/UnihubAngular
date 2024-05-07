@@ -15,13 +15,14 @@ import { Observable } from 'rxjs';
 import { DeleteConfirmationDialogComponent } from './delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DemandDetailComponent } from 'app/student/demand-detail/demand-detail.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-demande-liste',
   standalone: true,
   templateUrl: './demande-liste.component.html',
   styleUrl: './demande-liste.component.scss',
-  
+
 
     imports: [
       BreadcrumbComponent,
@@ -38,15 +39,15 @@ import { DemandDetailComponent } from 'app/student/demand-detail/demand-detail.c
   export class DemandeListeComponent extends UnsubscribeOnDestroyAdapter
     implements OnInit {
       //dataSource
-      
+
       dataSource : Demand[]=[];
 
     dataLength?: number;
-    
+
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
-    
+
 
     displayedColumns = [
       'Demand ID',
@@ -67,17 +68,18 @@ import { DemandDetailComponent } from 'app/student/demand-detail/demand-detail.c
 
 
     constructor(
-      
+
       public HttpClient: HttpClient,
       private DemandService: DemandsService,
-      public dialog: MatDialog
+      public dialog: MatDialog,
+
     ) {
       super();
     }
 
-   
-    
-    
+
+
+
 
     deleteDemand(demandId: number) {
       const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent, {
@@ -87,17 +89,17 @@ import { DemandDetailComponent } from 'app/student/demand-detail/demand-detail.c
       dialogRef.afterClosed().subscribe(
 
         ()=>this.ngOnInit()
-        
-        
-        
+
+
+
         // result => {
         // // Handle the result after the dialog is closed
         // if (result === 'confirm') {
         //   // Perform the delete operation
         //   console.log('Deleting demand with ID:', demandId);
-          
+
         // }
-        
+
       // }
     );
     }
@@ -111,26 +113,26 @@ import { DemandDetailComponent } from 'app/student/demand-detail/demand-detail.c
       dialogRef.afterClosed().subscribe(
 
         ()=>this.ngOnInit()
-        
-        
-        
+
+
+
         // result => {
         // // Handle the result after the dialog is closed
         // if (result === 'confirm') {
         //   // Perform the delete operation
         //   console.log('Deleting demand with ID:', demandId);
-          
+
         // }
-        
+
       // }
     );
     }
 
     setDemandAsSeen(demandId : number){
       this.DemandService.setDemandAsSeen(demandId)
-      
+
       //this.dialogRef.close();
-  
+
     }
 
     openDemandDialog(demande: any): void {
@@ -148,15 +150,15 @@ import { DemandDetailComponent } from 'app/student/demand-detail/demand-detail.c
     // ngOnInit() {
     //   this.loadData();
     // }
-    
+
 
     public loadData() {
-      
+
       this.DemandService = new DemandsService(this.HttpClient);
       this.subs.sink = this.DemandService.getAllDemands().subscribe((data) => {
         this.dataSource = (data);
-        
- 
+
+
       });
 
 
@@ -170,7 +172,7 @@ import { DemandDetailComponent } from 'app/student/demand-detail/demand-detail.c
       this.countDailyDemands();
       this.countMonthlyDemands();
     }
-  
+
     Numberofdemands() {
       this.DemandService.getNumberOfDemands().subscribe(
         (count) => {
@@ -230,9 +232,9 @@ import { DemandDetailComponent } from 'app/student/demand-detail/demand-detail.c
 
   }
 
-  
-    
-  
+
+
+
 
 
 

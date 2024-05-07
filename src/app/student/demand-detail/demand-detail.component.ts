@@ -8,6 +8,7 @@ import { Dialog, DialogModule, DialogRef } from '@angular/cdk/dialog';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { UnsubscribeOnDestroyAdapter } from '@shared';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-demand-detail',
@@ -34,6 +35,7 @@ test:any;
     public dialogRef: MatDialogRef<DemandDetailComponent>,
     public Matdialog: MatDialog,
     public dialog: Dialog,
+    private route: Router,
     private demandService: DemandsService,
     @Inject(MAT_DIALOG_DATA) public demande: any
   ) { super();
@@ -57,18 +59,18 @@ test:any;
     this.demandService = new DemandsService(this.httpclient);
     this.subs.sink = this.demandService.getAllDemands().subscribe((data) => {
       this.dataSource = (data);
-    
+
   }
 );
 
 
 
 }
-  
-  
 
 
-  
+
+
+
 
 
 
@@ -77,7 +79,7 @@ test:any;
 
   ////////////////////getDemandById//////////////////
 
-  
+
 /*
   getDemandById(demandId: number) {
     this.demandService.getDemandById(demandId).subscribe(
@@ -115,7 +117,7 @@ recommend(text: string): any {
   for (const wordRegex of words) {
     if (wordRegex.test(text)) {
       if (wordRegex.toString() === '/urgent/') {
-        list.push('Thank you for your message. We have received it and will proceed with your request immediately.'); 
+        list.push('Thank you for your message. We have received it and will proceed with your request immediately.');
         list.push('Well received, please provide more details about your urgent request.');
         list.push('Thank you for reaching out. We will prioritize and address your urgent matter promptly.');
       }
@@ -146,7 +148,7 @@ recommend(text: string): any {
     console.log(msg)
     this.demandService.send(msg).subscribe();
 
-  
+
   }
 
 ////////////////////// setDemandAsSeen/////////////////////
@@ -157,21 +159,24 @@ recommend(text: string): any {
 
   setDemandAsSeen(demandId: number) {
     this.demandService.setDemandAsSeen(demandId).subscribe(
-      // () => { 
-      //   console.log('Demand seen');  
+      // () => {
+      //   console.log('Demand seen');
       // },
       // (error) => {
       //   console.error('An error occurred while changing status of the demand:', error);
       // },
-      ()=>this.ngOnInit()
-      
+
+
     );
     this.dialogRef.close();
+    console.log("abddouuu")
+    // this.route.navigate(['/admin/attendance/Demands']);
+this.ngOnInit()
   }
 
-  
 
 
-  
+
+
 
 }

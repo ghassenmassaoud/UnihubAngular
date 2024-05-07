@@ -15,7 +15,7 @@ import { DemandsService } from '../demande-liste/DemandService';
 @Component({
   selector: 'app-add-demande',
   standalone: true,
-  
+
   templateUrl: './add-demande.component.html',
   styleUrl: './add-demande.component.scss',
   imports: [
@@ -31,7 +31,7 @@ import { DemandsService } from '../demande-liste/DemandService';
   ],
 })
 export class AddDemandeComponent implements OnInit {
-  
+
   demandsForm: FormGroup;
   demandType: string[] = ['REGISTRATION_CERTIFICATE', 'ENROLLMENT_CERTIFICATE'];
 
@@ -47,7 +47,7 @@ export class AddDemandeComponent implements OnInit {
   constructor(private demandService: DemandsService, private fb: FormBuilder) {
     this.demandsForm = this.fb.group({
       description: ['', [Validators.required]],
-      demandType: [demandType, [Validators.required]]    
+      demandType: [demandType, [Validators.required]]
     });
   }
 
@@ -58,24 +58,24 @@ export class AddDemandeComponent implements OnInit {
 
 
   redirectToSeenDemands() {
-    window.location.href = 'http://localhost:4200/#/student/SeenDemands';
+    window.location.href = 'http://localhost:4200/#/main/SeenDemands';
   }
 
   redirectToUnSeenDemands() {
-    window.location.href = 'http://localhost:4200/#/student/UnSeenDemands';
+    window.location.href = 'http://localhost:4200/#/main/UnSeenDemands';
   }
-  
+
   onSubmit(): void {
     if (this.demandsForm.valid) {
       const formValue = this.demandsForm.value;
       const demand: Demand = {
-        demandId: 0, 
+        demandId: 0,
         description: formValue.description,
-        demandType: formValue.demandType as demandType, 
+        demandType: formValue.demandType as demandType,
         creationDate: new Date(),
-        status: false 
+        status: false
       };
-  
+
       this.demandService.addDemand(demand).subscribe({
         next: (response) => {
           console.log('Demand added successfully:', response);
