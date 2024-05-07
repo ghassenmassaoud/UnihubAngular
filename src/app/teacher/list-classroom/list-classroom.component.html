@@ -1,0 +1,61 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <app-breadcrumb [title]="'All Classroom'" [items]="['Classroom']" [active_item]="'All Classroom'">
+            </app-breadcrumb>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Search Classroom</mat-label>
+                    <input matInput placeholder="Enter classroom name or teacher name" [(ngModel)]="name" (keyup)="searchClassroom()">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <!-- Affichage des salles de classe -->
+        <div class="row mt-5 ml-0 mr-0">
+            <div class="col-md-4" *ngFor="let classroom of classrooms">
+                <div class="card border-apply">
+                    <div class="m-b-20">
+                        <div class="contact-grid">
+                            <div class="profile-header l-bg-blue" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                                <h6 class="mb-xs mt-xs">{{ classroom.classroomName }}</h6>
+                            </div>
+                            <div class="profile-userbuttons">
+                                <a mat-flat-button color="primary" (click)="openClassroom(classroom.idClassroom)">Open a classroom</a>
+                              </div>
+                            <!-- <div class="profile-userbuttons">
+                                <a mat-flat-button color="primary" [routerLink]="'/teacher/aboutClassroom'">Open a classroom</a>
+                            </div> -->
+                            
+                                <button mat-mini-fab color="primary" (click)="editClassroom(classroom)">
+                                    <mat-icon class="col-white mat-icon-sm">edit</mat-icon>
+                                </button>
+                                <button mat-mini-fab color="warn" (click)="deleteClassroom(classroom.idClassroom)">
+                                    <mat-icon class="col-white mat-icon-sm">delete</mat-icon>
+                                </button>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulaire d'édition de la salle de classe -->
+        <div *ngIf="editMode">
+            <h3>Edit Classroom</h3>
+            <form (ngSubmit)="updateClassroom()" #editForm="ngForm">
+                <div class="form-group">
+                    <label for="classroomName">Classroom Name:</label>
+                    <input type="text" class="form-control" id="classroomName" name="classroomName"
+                        [(ngModel)]="editedClassroom.classroomName" required>
+                </div>
+                <!-- D'autres champs de formulaire peuvent être ajoutés ici -->
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <button type="button" class="btn btn-default" (click)="cancelEdit()">Cancel</button>
+            </form>
+        </div>
+
+    </div>
+</section>

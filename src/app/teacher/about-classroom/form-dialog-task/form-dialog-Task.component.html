@@ -1,0 +1,27 @@
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Task Description</mat-label>
+    <input matInput formControlName="TaskDescription" required>
+  </mat-form-field>
+  <div id="calendar">
+    <div class="time-range-input">
+      <div class="time-input">
+        <label for="Deadline">Deadline</label>
+        <input type="datetime-local" id="Deadline" formControlName="Deadline" />
+        
+      </div>
+      </div>
+      </div>
+
+  <!-- <mat-form-field appearance="fill">
+    <mat-label>Deadline</mat-label>
+    <input matInput [matDatepicker]="deadlinePicker" formControlName="Deadline" required>
+    <mat-datepicker-toggle matSuffix [for]="deadlinePicker"></mat-datepicker-toggle>
+    <mat-datepicker #deadlinePicker></mat-datepicker>
+  </mat-form-field> -->
+  <div>
+    <label for="file">File:</label>
+    <input type="file" id="file" (change)="onFileChange($event)">
+  </div>
+  <button type="submit" [disabled]="taskForm.invalid">Submit</button>
+</form>

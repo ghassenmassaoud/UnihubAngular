@@ -1,0 +1,23 @@
+<div class="addContainer">
+  <div mat-dialog-content>
+    <form [formGroup]="lessonForm" (ngSubmit)="updateLesson()">
+      <div>
+        <label for="lessonName">Nom de la leçon:</label>
+        <input type="text" id="lessonName" formControlName="lessonName">
+        <div *ngIf="lessonForm.get('lessonName')?.hasError('required')">Le nom de la leçon est requis</div>
+      </div>
+      <div>
+        <label for="visibility">Visibilité:</label>
+        <select id="visibility" formControlName="visibility">
+          <option *ngFor="let option of visibility" [value]="option">{{ option }}</option>
+        </select>
+        <div *ngIf="lessonForm.get('visibility')?.hasError('required')">La visibilité est requise</div>
+      </div>
+      <div>
+        <label for="file">Fichier:</label>
+        <input type="file" id="file" (change)="onFileChange($event)">
+      </div>
+      <button type="submit" [disabled]="lessonForm.invalid">Soumettre</button>
+    </form>
+  </div>
+</div>

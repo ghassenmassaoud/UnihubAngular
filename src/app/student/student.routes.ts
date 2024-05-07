@@ -5,11 +5,21 @@ import { HomeworkComponent } from './homework/homework.component';
 import { LeaveRequestComponent } from './leave-request/leave-request.component';
 import { TimetableComponent } from './timetable/timetable.component';
 import { SettingsComponent } from './settings/settings.component';
+import {  ListClassrromStudentComponent } from './list-classrrom-student/list-classrrom-student.component';
+import { AboutClassroomStudentComponent } from './about-classroom-student/about-classroom-student.component';
 
 export const STUDENT_ROUTE: Route[] = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+  },
+  {
+    path:'Listclassroom',
+    component:ListClassrromStudentComponent,
+  },
+
+  {path:'aboutClassroomstudent/:classroomId',
+  component:AboutClassroomStudentComponent,
   },
   {
     path: 'homework',

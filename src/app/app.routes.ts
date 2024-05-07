@@ -22,6 +22,7 @@ import { InsructorsComponent } from './insructors/insructors.component';
 import { HomeSecondeComponent } from './home-seconde/home-seconde.component';
 import { HomeComponent } from './Pi-User/home/home.component';
 import { FrontofficeComponent } from './frontoffice/frontoffice.component';
+import { ClassroomComponent } from './teacher/classroom/classroom.component';
 
 export const APP_ROUTE: Route[] = [
   {path:'main', component:FrontofficeComponent , loadChildren: ()=> import('./frontoffice/frontoffice.module').then(m=>m.FrontofficeModule)},
@@ -105,6 +106,8 @@ export const APP_ROUTE: Route[] = [
     loadChildren: () =>
       import('./coureses/coureses.routes').then((m) => m.COURESES_ROUTE),
   },
+
+
   {
     path: 'coureses-list',
     component: CouresesListComponent,

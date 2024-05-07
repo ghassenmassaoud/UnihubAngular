@@ -1,0 +1,9 @@
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+ 
+ 
+  <div>
+    <label for="file">File:</label>
+    <input type="file" id="file" (change)="onFileChange($event)">
+  </div>
+  <button type="submit" [disabled]="taskForm.invalid">Submit</button>
+</form>
