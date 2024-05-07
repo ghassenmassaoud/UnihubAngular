@@ -21,6 +21,8 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { InsructorsComponent } from './insructors/insructors.component';
 import { HomeSecondeComponent } from './home-seconde/home-seconde.component';
+import { ResourcesComponent } from './resources/resources.component';
+import { ResourceSpaceComponent } from './resource-space/resource-space.component';
 
 export const APP_ROUTE: Route[] = [
   {
@@ -217,6 +219,18 @@ export const APP_ROUTE: Route[] = [
         path: 'icons',
         loadChildren: () =>
           import('./icons/icons.routes').then((m) => m.ICONS_ROUTE),
+      },
+      {
+        path:'resources',
+        component:ResourcesComponent,
+        loadChildren:()=>
+          import('./resources/resources.routes').then((m) => m.Ressource_Route)
+      },
+      {
+        path:'spaces',
+        component:ResourceSpaceComponent,
+        loadChildren:()=>
+          import('./resource-space/resource-space.routes').then((m) => m.Space_Route)
       },
       {
         path: 'extra-pages',

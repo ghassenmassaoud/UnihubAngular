@@ -1,0 +1,131 @@
+<section class="content">
+
+
+
+  <!-- Affichage des salles de classe -->
+
+
+
+
+
+
+
+
+
+
+  <!--================= Meta tag =================-->
+
+
+  <body class="event-page">
+    <!--================= Preloader Section Start Here =================-->
+    
+    <!--================= Preloader Section End Here =================-->
+
+    <!--================= Header Section Start Here =================-->
+
+    <!--================= Header Section End Here =================-->
+
+    <!--================= Wrapper Start Here =================-->
+    <div class="react-wrapper">
+      <div class="react-wrapper-inner">
+        <!--================= Breadcrumbs Section Start Here =================-->
+        <div class="react-breadcrumbs">
+          <div class="breadcrumbs-wrap">
+            <img class="desktop" src="assets/images/breadcrumbs/1.jpg" alt="Breadcrumbs">
+            <img class="mobile" src="assets/images/breadcrumbs/1.jpg" alt="Breadcrumbs">
+            <div class="breadcrumbs-inner">
+              <div class="container">
+                <div class="breadcrumbs-text">
+                  <h1 class="breadcrumbs-title">Events</h1>
+                  <div class="back-nav">
+                    <ul>
+                      <li><a href="index.html">Home</a></li>
+                      <li>Events</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--================= Breadcrumbs Section End Here =================-->
+        <div class="react-upcoming__event react-upcoming__event_page blog__area pt---100 pb---112">
+          <div class="container">
+            <div class="row align-items-center back-vertical-middle shorting__course3 mb-50">
+              <div class="col-md-6">
+                <button class="button1" mat-raised-button color="primary" (click)="addNewResource() ">Add
+                  Ressource</button>
+              </div>
+              <div class="col-md-6 text-right">
+                <select class="from-control">
+                  <option>Event Type: All</option>
+                  <option>Sort by popularity</option>
+                  <option>Sort by average rating</option>
+                  <option>Sort by lates</option>
+                  <option>Sort by price: low to high</option>
+                  <option>Sort by price: high to low</option>
+                </select>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="row">
+                  <div class="col-lg-3" *ngFor="let resource of ressources">
+                    <div class="resource__card" (click)="showdetails(resource)">
+                      <div class="resource__card--content">
+                        <div class="resource__card--header">
+                          <div class="resource__card--title">{{ resource.ressourceName }}</div>
+
+                        </div>
+                        <div class="resource__card--body">
+                          <div class="resource__card--info">{{ resource.ressourceType }}</div>
+                          <!-- Add additional information here if needed -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                </div>
+                <!--================= Pagination Section Start Here =================-->
+                <ul class="back-pagination pt---20">
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li class="back-next"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="feather feather-arrow-right">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                      </svg></a></li>
+                </ul>
+              </div>
+              <div class="col-lg-4">
+                <div class="react-sidebar react-sidebar-event ml----30">
+
+                  <div class="widget back-post">
+                    <h3 class="widget-title">Popular Resources</h3>
+                    <ul class="related-courses" *ngFor="let resourcee of respop">
+
+                      <li (click)="showdetails(resourcee)">
+                        <span class="post-images"><img src="assets/images/related-course/1.jpg" alt="POULAIRE"></span>
+                        <div class="titles">
+                          <h4 style="font-family: 'Times New Roman', Times, serif; size: 25px ;">
+                            <label>{{resourcee.ressourceName}} <br> {{resourcee.ressourceType}}</label></h4>
+                          <span>{{resourcee.ressourceSpace.spaceType}}</span>
+                        </div>
+                      </li>
+
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</section>

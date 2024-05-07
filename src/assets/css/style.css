@@ -8110,6 +8110,19 @@ ul {
   padding-top: 98px;
   padding-bottom: 106px;
 }
+.react-upcoming__event .button1 {
+  background-color: #4CAF50; 
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+}
 .react-upcoming__event .event__card {
   background: #fff;
   padding: 25px 32px 42px;
@@ -11570,3 +11583,39 @@ body.event-page .react-upcoming__event .event__card .event_time {
 .react-login-page .row.align-center {
   align-items: center;
 }
+.resource__card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.resource__card--header {
+  margin-bottom: 10px;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.resource__card--title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.resource__card--subtitle {
+  font-size: 16px;
+  color: #555;
+}
+
+.resource__card--body {
+  font-size: 14px;
+}
+
+.resource__card--info {
+  color: #777;
+}
+
+/* Adjust other styles as needed */
+

@@ -1,0 +1,53 @@
+<div class="addContainer">
+  <div mat-dialog-content>
+    <form [formGroup]="ressourceForm" (ngSubmit)="onSubmit()" class="register-form m-4">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 ">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Resource Name</mat-label>
+            <input matInput type="text" id="ressourceName" formControlName="ressourceName">
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Ressource Type</mat-label>
+            <mat-select formControlName="ressourceType" required>
+              <mat-option [value]="'EXAMS'">
+                Exams
+              </mat-option>
+              <mat-option [value]="'PROJECT'">
+                Projects
+              </mat-option>
+              <mat-option [value]="'SUBJECT'">
+                Subjects
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 ">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput  type="text" id="description" formControlName="description"></textarea>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>
+        <mat-label>File</mat-label>
+        <div class="file-upload">
+          {{filname || "No file uploaded yet."}}
+          <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
+            <mat-icon>attach_file</mat-icon>
+          </button>
+        </div>
+        <input type="file" id="file-input" (change)="onFileSelected($event)"
+          accept=".txt, .doc, .docx, .pdf, .jpg, .jpeg, .png, .xlsx, .ppt, .pptx, .html, .htm, .zip, .gif, .svg, .css"
+          formControlName="fileData" class="file-input" #fileUpload>
+        <div class="example-button-row">
+          <button mat-raised-button color="primary" [type]="onSubmit" [disabled]="!ressourceForm.valid"
+            (click)="onSubmit()">Save</button>
+          <button mat-raised-button color="warn" (click)="dialogRef.close()" tabindex="-1">Cancel</button>
+        </div>
+      </div>
+  </form>
+</div>
+</div>

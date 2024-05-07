@@ -1,0 +1,74 @@
+<section class="content">
+
+
+
+    <!-- Affichage des salles de classe -->
+
+
+
+
+
+
+
+
+
+
+    <!--================= Meta tag =================-->
+
+
+    <body class="event-page">
+        <!--================= Preloader Section Start Here =================-->
+        <div id="react__preloader">
+            <div id="react__circle_loader"></div>
+            <div class="react__loader_logo"><img src="assets/images/preload.png" alt="Preload"></div>
+        </div>
+        <!--================= Preloader Section End Here =================-->
+
+        <!--================= Header Section Start Here =================-->
+
+        <!--================= Header Section End Here =================-->
+
+        <!--================= Wrapper Start Here =================-->
+        <div class="react-wrapper">
+            <div class="react-wrapper-inner">
+                <!--================= Breadcrumbs Section Start Here =================-->
+                <div class="react-breadcrumbs">
+                    <div class="breadcrumbs-wrap">
+                        <img class="desktop" src="assets/images/breadcrumbs/1.jpg" alt="Breadcrumbs">
+                        <img class="mobile" src="assets/images/breadcrumbs/1.jpg" alt="Breadcrumbs">
+                        <div class="breadcrumbs-inner">
+                            <div class="container">
+                                <div class="breadcrumbs-text">
+                                    <h1 class="breadcrumbs-title">Spaces</h1>
+                                    <div class="back-nav">
+                                        <ul>
+                                            <li><a href="index.html">Home</a></li>
+                                            <li>Spaces</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--================= Breadcrumbs Section End Here =================-->
+                <div class="react-upcoming__event react-upcoming__event_page blog__area pt---100 pb---112">
+                    <div class="container">
+
+
+
+                       <div class="row"> 
+                                <div class="col-lg-3" *ngFor="let space of spaces">
+                                        <mat-card class="example-card" (click)="onCardClick(space.spaceId)">
+                                          <img mat-card-image src="assets/images/1.png" alt="Image">
+                                          <div class="titre">{{ space.spaceType }}</div>
+                                        </mat-card>
+                                      </div>
+                                   
+                                </div>
+                           
+                        
+                    </div>
+
+                </div>
+            </div>

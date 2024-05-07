@@ -10,7 +10,7 @@ export const STUDENT_ROUTE: Route[] = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-  },
+  },  
   {
     path: 'homework',
     component: HomeworkComponent,
