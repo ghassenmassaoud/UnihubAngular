@@ -1,17 +1,21 @@
-import { Classroom } from './Classroom';
-import { ReplyTask } from './ReplyTask';
-import { Role } from './Role';
+import { Absence } from "./Absence";
+import { Classroom } from "./Classroom";
+import { ReplyTask } from "./ReplyTask";
+import { Role } from "./Role";
 
-export class User {
-  id!: number;
-  img!: string;
-  username!: string;
-  password!: string;
-  firstName!: string;
-  lastName!: string;
-  role!: Role;
-  token!: string;
-    //state!: State;
+export class User{
+        idUser!: number;
+        firstName!: string;
+        lastName!: string;
+        birthDate!: Date;
+        email!: string;
+        number!: number;
+        password!: string;
+        firstAuth!: boolean;
+        code!: number;
+        absences!: Absence[];
+        roles!: Role[];
+        //state!: State;
         //profiles!: Profile[];
         speciality!: string;
         classrooms!: Classroom[];
@@ -23,4 +27,4 @@ export class User {
         //ressourceSpaces!: RessourceSpace[];
         classroomStudent!: Classroom[];
         replyTask!: ReplyTask[];
-}
+      }
