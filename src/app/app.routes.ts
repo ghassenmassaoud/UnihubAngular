@@ -21,11 +21,17 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { InsructorsComponent } from './insructors/insructors.component';
 import { HomeSecondeComponent } from './home-seconde/home-seconde.component';
+import { EventJoinedComponent } from './event-joined/event-joined.component';
+import { MyprofileComponent } from './myprofile/myprofile.component';
+import { MyclubComponent } from './myclub/myclub.component';
+import { ClubDetailComponent } from './club-detail/club-detail.component';
+import { ClubJoinedComponent } from './club-joined/club-joined.component';
+import { EventListComponent } from './event-list/event-list.component';
 
 export const APP_ROUTE: Route[] = [
   {
-    path: 'home',
-    component: HomeComponent,
+    path: 'home/:idUtilisateur',
+    component: EventJoinedComponent,
     loadChildren: () =>
       import('./home/home.routes').then((m) => m.HOME_ROUTE),
   },
@@ -49,25 +55,25 @@ export const APP_ROUTE: Route[] = [
   },
   {
     path: 'home-seconde',
-    component: HomeSecondeComponent,
+    component: MyclubComponent,
     loadChildren: () =>
       import('./home-seconde/HomeSeconde.routes').then((m) => m.HOMESECONDE_ROUTE),
   },
   {
-    path: 'profile',
-    component: ProfileComponent,
+    path: 'profile/:idUser/:idClub',
+    component: MyprofileComponent,
     loadChildren: () =>
       import('./profile/profile.routes').then((m) => m.PROFILE_ROUTE),
   },
   {
     path: 'event',
-    component: EventComponent,
+    component: EventComponent ,
     loadChildren: () =>
       import('./event/event.routes').then((m) => m.EVENT_ROUTE),
   },
   {
     path: 'event-side-bar',
-    component: EventSideBarComponent,
+    component: EventListComponent,
     loadChildren: () =>
       import('./event-side-bar/event-side-bar.routes').then((m) => m.EVENTSIDEBAR_ROUTE),
   },
@@ -102,8 +108,8 @@ export const APP_ROUTE: Route[] = [
       import('./coureses/coureses.routes').then((m) => m.COURESES_ROUTE),
   },
   {
-    path: 'coureses-list',
-    component: CouresesListComponent,
+    path: 'coureses-list/:id',
+    component: ClubJoinedComponent,
     loadChildren: () =>
       import('./coureses-list/coureses-list.routes').then((m) => m.COURESESLIST_ROUTE),
   },
@@ -114,8 +120,8 @@ export const APP_ROUTE: Route[] = [
       import('./coureses-right-side-bar/coureses-right-side-bar.routes').then((m) => m.COURESESRIGHTSIDE_ROUTE),
   },
   {
-    path: 'coureses-single',
-    component: CouresesSingleComponent,
+    path: 'coureses-single/:id',
+    component: ClubDetailComponent,
     loadChildren: () =>
       import('./coureses-single/coureses-single.routes').then((m) => m.COURESESSINGLE_ROUTE),
   },
