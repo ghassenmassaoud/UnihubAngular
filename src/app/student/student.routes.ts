@@ -19,7 +19,7 @@ export const STUDENT_ROUTE: Route[] = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-  },
+  },  
   {
     path:'Listclassroom',
     component:ListClassrromStudentComponent,

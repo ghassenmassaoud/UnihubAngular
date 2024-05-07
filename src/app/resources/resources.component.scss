@@ -1,0 +1,13 @@
+.resource__card{
+    transition: transform 0.3s ease;
+}
+.resource__card:hover {
+    transform: scale(1.05);
+    
+  }
+  .related-courses{
+    transition: transform 0.3s ease;
+  }
+ .related-courses:hover{
+    transform: scale(1.05);
+ }

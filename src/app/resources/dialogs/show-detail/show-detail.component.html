@@ -1,0 +1,19 @@
+
+<div class="slide-in-container" [ngClass]="{'slide-in': showCard}">
+<mat-card class="resource-card">
+    <mat-card-header>
+      <div mat-card-avatar class="resource-avatar"></div>
+      <mat-card-title>{{ data.resource.ressourceName }}</mat-card-title>
+      <mat-card-subtitle>{{ data.resource.ressourceType }}</mat-card-subtitle>
+
+    </mat-card-header>
+    <mat-card-content>
+      <p>Description: {{ data.resource.description }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+       
+        <div class="custom-button" (click)="downloadFile(data.resource.fileName)">{{data.fileName}}</div>
+    </mat-card-actions>
+    
+  </mat-card>
+</div>

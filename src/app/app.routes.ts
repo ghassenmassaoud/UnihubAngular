@@ -34,6 +34,9 @@ import { EditCommentComponent } from './comment/edit-comment/edit-comment.compon
 import { UserpostsComponent } from './posts/userposts/userposts.component';
 import { UserDetailsPostsComponent } from './posts/user-details-posts/user-details-posts.component';
 import { UserAddPostsComponent } from './posts/user-add-posts/user-add-posts.component';
+import { ResourcesComponent } from './resources/resources.component';
+import { ResourceSpaceComponent } from './resource-space/resource-space.component';
+
 export const APP_ROUTE: Route[] = [
   {path:'main', component:FrontofficeComponent , loadChildren: ()=> import('./frontoffice/frontoffice.module').then(m=>m.FrontofficeModule)},
 
@@ -208,6 +211,18 @@ export const APP_ROUTE: Route[] = [
         path: 'icons',
         loadChildren: () =>
           import('./icons/icons.routes').then((m) => m.ICONS_ROUTE),
+      },
+      {
+        path:'resources',
+        component:ResourcesComponent,
+        loadChildren:()=>
+          import('./resources/resources.routes').then((m) => m.Ressource_Route)
+      },
+      {
+        path:'spaces',
+        component:ResourceSpaceComponent,
+        loadChildren:()=>
+          import('./resource-space/resource-space.routes').then((m) => m.Space_Route)
       },
       {
         path: 'extra-pages',
