@@ -10,6 +10,7 @@ import { MatCell, MatCellDef } from '@angular/material/table';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.component';
 import { FeatherIconsComponent } from '@shared/components/feather-icons/feather-icons.component';
+import { AuthService } from 'app/Pi-User/Service/auth.service';
 import { Classroom } from 'app/models/Classroom';
 import { ClassroomService } from 'app/services/classroom.service';
 
@@ -32,7 +33,7 @@ import { ClassroomService } from 'app/services/classroom.service';
                   FeatherIconsComponent,
                   FormsModule,
                 ],
-  
+
   templateUrl: './list-classrrom-student.component.html',
   styleUrl: './list-classrrom-student.component.scss'
 })
@@ -50,25 +51,29 @@ export class ListClassrromStudentComponent implements OnInit {
     editMode: boolean = false;
     name: string = '';
    constructor(private router: Router,
+    private serv:AuthService,
     private route: ActivatedRoute,
      private classroomService: ClassroomService,
       public dialog: MatDialog,) { }
 
   ngOnInit(): void {
-
-    this.classroomService.getClassroomsForStudent(1).subscribe(
-      (data: Classroom[]) => {
-        this.classrooms = data;
-      },
-      (error) => {
-        console.error('Error fetching classrooms:', error);
-      }
-    );
+    let IdUser= localStorage.getItem('IdUser');
+    this.serv.GetOneUser().subscribe(res=> {
+      console.log(res)
+      this.classrooms = (res as any).classroomStudent })
+    // this.classroomService.getClassroomsForStudent(IdUser as any).subscribe(
+    //   (data: Classroom[]) => {
+    //     this.classrooms = data;},
+      // },
+      // (error) => {
+      //   console.error('Error fetching classrooms:', error);
+      // }
+    //);
   }
   openClassroom(classroomId: number) {
 
     // Rediriger vers la page de la salle de classe avec l'ID ajouté à l'URL
-    this.router.navigate(['/student/aboutClassroomstudent', classroomId]);
+    this.router.navigate(['/main/aboutClassroom', classroomId]);
   }
 
 }

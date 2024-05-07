@@ -613,7 +613,7 @@ export const ROUTES: RouteInfo[] = [
     groupTitle: false,
     badge: '5',
     badgeClass: 'badge bg-orange sidebar-badge float-end',
-    role: ['Teacher'],
+    role: ['ROLE_TEACHER'],
     submenu: [
       {
         path: '/teacher/classroom',
@@ -639,12 +639,12 @@ export const ROUTES: RouteInfo[] = [
         role: [''],
         submenu: [],
       },
-      
-      
+
+
     ],
   },
-  
- 
+
+
   {
     path: '/teacher/lectures',
     title: 'MENUITEMS.TEACHER.LIST.LECTURES',

@@ -22,9 +22,10 @@
                             <li> <a routerLink="/home">Events</a>
 
                             </li>
-                            <li> <a routerLink="/home" >Courses</a>
+                            <li *ngIf="logged" > <a routerLink="/main/Listclassroom" >Classrooms</a>
 
                             </li>
+
                             <li *ngIf="logged"> <a routerLink="/main/profile" >Profile</a>
 
                             </li>

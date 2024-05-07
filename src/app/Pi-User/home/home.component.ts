@@ -26,9 +26,13 @@ export class HomeComponent {
 
     //   this.listUsers = res
     //   console.log(this.listUsers);}})
-    // let access_token= localStorage.getItem('access_token');
-    // if (access_token) {
+     let access_token= localStorage.getItem('access_token');
+     if (access_token) {
 
+      this.serv.GetOneUser().subscribe(res=> {
+        console.log(res)
+        localStorage.setItem('IdUser', (res as any).idUser);
+        })
     //   let decodedAccessToken = jwtDecode(access_token);
     //   const userRole = (decodedAccessToken as any).role[0].authority;
     //   if ( userRole === "ROLE_ADMIN") {
@@ -39,7 +43,7 @@ export class HomeComponent {
     //     this.route.navigate(['/student/dashboard']);
     //   }
 
-    // }
+     }
     this.loadJsFiles();
 }
 loadJsFiles(): void {

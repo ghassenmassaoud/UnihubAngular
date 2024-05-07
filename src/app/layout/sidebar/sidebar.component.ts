@@ -16,6 +16,7 @@ import { RouteInfo } from './sidebar.metadata';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgScrollbar } from 'ngx-scrollbar';
 import { UnsubscribeOnDestroyAdapter } from '@shared';
+import { jwtDecode } from 'jwt-decode';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -81,7 +82,10 @@ export class SidebarComponent extends UnsubscribeOnDestroyAdapter implements OnI
   }
   ngOnInit() {
     if (this.authService.currentUserValue) {
-      const userRole = this.authService.currentUserValue.role;
+      let access_token= localStorage.getItem('access_token');
+      let decodedAccessToken = jwtDecode(access_token as any);
+      const role = (decodedAccessToken as any).role[0].authority;
+      const userRole = role;
       this.userFullName =
         this.authService.currentUserValue.firstName +
         ' ' +

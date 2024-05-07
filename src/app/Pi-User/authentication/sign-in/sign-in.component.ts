@@ -77,6 +77,7 @@ export class SignInComponent extends UnsubscribeOnDestroyAdapter implements OnIn
                     const role = (decodedAccessToken as any).role[0].authority;
                     localStorage.setItem('access_token', res.access_token);
                     localStorage.setItem('refresh_token', res.refresh_token);
+                    console.log(role)
                     if ( role === "ROLE_STAFF") {
                       this.router.navigate(['/admin/dashboard/main']);
                     } else if (role === "ROLE_TEACHER") {

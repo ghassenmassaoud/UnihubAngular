@@ -42,26 +42,27 @@ export class ClassroomComponent {
     },
   ];
   classroom: Classroom = new Classroom();
-  teacher: User = new User(); 
-  
+  teacher: User = new User();
+
   constructor(private classroomService: ClassroomService, private fb: FormBuilder) {
+    let IdUser = localStorage.getItem('IdUser');
     this.courseForm = this.fb.group({
       ClassroomName: ['', [Validators.required]],
-      teacher: [{ idUser: '2' }, [Validators.required]]    
+      teacher: [{ idUser: IdUser }, [Validators.required]]
     });
   }
-  
+
   onSubmit() {
     const classroomName = this.courseForm.get('ClassroomName')?.value;
     const teacherId = this.courseForm.get('teacher')?.value.idUser;
-  
+
     if (!classroomName || !teacherId) {
       console.error('Classroom name and teacher ID are required.');
       return;
     }
-  
+
     this.classroom.classroomName = classroomName;
-  
+
     this.classroomService.addClassroom(this.classroom, teacherId)
       .subscribe({
         next: (response) => {
