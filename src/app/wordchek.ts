@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +19,7 @@ export class WordCheckService {
 
   containsBadWords(text: string): boolean {
     if (text == null) {
-      return false; // Ou traiter le cas où le texte est null selon votre logique
+      return false; 
   }
     text = text.toLowerCase();
     for (const badWord of this.badWords) {

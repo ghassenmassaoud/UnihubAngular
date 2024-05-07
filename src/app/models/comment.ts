@@ -7,10 +7,9 @@ export class Comment {
     replies: Comment[] = [];
     parentComment: Comment | null = null;
     content!: string;
-    commentDate!: string; // Si commentDate est de type LocalDate en Java, vous devrez le convertir en string en TypeScript
+    commentDate!: string; 
     likes!: number;
     commentLikes: CommentLike[] = [];
     post!: MyPosts;
     report!: boolean;
-   // attachment: AttachComment[] = [];
 }

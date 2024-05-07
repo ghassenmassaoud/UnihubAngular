@@ -10,7 +10,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FileUploadComponent } from '@shared/components/file-upload/file-upload.component';
 import { Status } from 'app/models/my-posts';
 import { PostsService } from 'app/posts.service';
-import { tagValidators } from 'app/tagValidator';
 import { WordCheckService } from 'app/wordchek';
 
 @Component({
@@ -50,7 +49,6 @@ export class EditPostsComponent {
       views: [0],
       status: ['', Validators.required],
       report: [false],
-    //  attachment: ['']
     });
   }
   
@@ -59,7 +57,7 @@ export class EditPostsComponent {
     this.route.params.subscribe(params => {
       this.postId = +params['postId'];
       console.log('Post ID:', this.postId);
-      this.getPostDetails(this.postId);  // Récupération de l'ID du post depuis l'URL
+      this.getPostDetails(this.postId);  
     });
   }
   getPostDetails(postId: number): void {
@@ -67,7 +65,7 @@ export class EditPostsComponent {
     this.ps.getPostById(postId).subscribe(
       (post) => {
         this.postForm.patchValue({
-          user: [{ idUser: '1' }], // Supposons que user soit un objet avec un attribut idUser
+          user: [{ idUser: '1' }], 
           title: post.title,
           content: post.content,
           tags: post.tags,
@@ -76,7 +74,6 @@ export class EditPostsComponent {
           views: post.views,
           status: post.status,
           report: post.report,
-          // Ne pas pré-remplir l'attachment car c'est un champ de fichier
         });
       },
       (error) => {
@@ -98,17 +95,14 @@ export class EditPostsComponent {
     formData.append('views', this.postForm.get('views')?.value);
     formData.append('status', this.postForm.get('status')?.value);
     formData.append('report', this.postForm.get('report')?.value);
-  //  formData.append('attachment', this.selectedFile || '');
 
     return this.ps.editPost(userId, postId, formData).subscribe(
       (response) => {
         console.log('Post edited successfully:', response);
         this.router.navigate(['/blog']);
-        // You can handle the response here, such as showing a success message or navigating to another page.
       },
       (error) => {
         console.error('Error editing post:', error);
-        // Handle the error, such as displaying an error message to the user.
       }
     );
   }
@@ -126,12 +120,10 @@ export class EditPostsComponent {
     }
 
     if (this.postForm.valid  && this.postId) {
-      // Le formulaire est valide, vous pouvez traiter les données ici
-      const userId = 1; // Supposons que vous avez un ID utilisateur à utiliser
-      const postId = this.postId; // Utilisez l'ID du post que vous avez récupéré
-      this.editPost(userId, postId); // Appelez la méthode editPost pour traiter la soumission
+      const userId = 1; 
+      const postId = this.postId; 
+      this.editPost(userId, postId); 
     } else {
-      // Le formulaire n'est pas valide, affichez des messages d'erreur ou effectuez d'autres actions nécessaires
       console.error('Form is invalid');
     }
   }

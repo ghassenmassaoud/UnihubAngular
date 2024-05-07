@@ -7,15 +7,13 @@ import { MyPosts } from 'app/models/my-posts';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDatepickerInputEvent, MatDatepickerModule } from '@angular/material/datepicker';
+import {  MatDatepickerModule } from '@angular/material/datepicker';
 import { MatOptionModule } from '@angular/material/core';
 import { FileUploadComponent } from '@shared/components/file-upload/file-upload.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
-import { LikeAction } from 'app/models/post-like';
 import { RecommService } from 'app/recomm.service';
-import { use } from 'echarts';
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
@@ -68,7 +66,7 @@ userId= 1;
   Recomm(): void {
     this.rc.getRecomm(this.userId).subscribe({
       next: (data: MyPosts[]) => {
-        console.log('Données de recommandation reçues :', data); // Vérifiez les données reçues
+        console.log('Données de recommandation reçues :', data); 
         this.recommendations = data;
       },
       error: (error) => {
@@ -116,27 +114,6 @@ userId= 1;
     });
   }
 
-  // filterPosts() {
-  //   this.filteredPosts = this.posts.filter(post =>
-  //     post.tags.some(tag => tag.toLowerCase().includes(this.searchInput.toLowerCase()))
-  //   );
-  // }
-
-
-  // filterPosts() {
-  //   this.filteredPosts = this.posts.filter(post => {
-  //     const searchLower = this.searchInput.toLowerCase().trim();
-  
-  //     const matchesTag = post.tags.some(tag => tag.toLowerCase() === searchLower);
-  //     const matchesTitle = post.title.toLowerCase().includes(searchLower); // Utilisation de includes pour le titre
-  //     const matchesStatus = post.status?.toLowerCase().includes(searchLower); // Utilisation de includes pour le statut
-  //     const matchesReported = searchLower === 'reported' && post.report;
-  //     const matchesNotReported = searchLower === 'not reported' && !post.report;
-  
-  //     return matchesTag || matchesTitle || matchesStatus || matchesReported || matchesNotReported;
-  //   });
-  // }
-
 
   
   filterPosts() {
@@ -148,12 +125,10 @@ userId= 1;
       const matchesReported = searchLower === 'reported' && post.report;
       const matchesNotReported = searchLower === 'not reported' && !post.report;
   
-      // Ajoutez une condition pour vérifier si searchInput est vide pour afficher tous les posts
       if (!searchLower) {
         return true;
       }
   
-      // Ajoutez une condition pour filtrer par titre et par statut
       return matchesTag || matchesTitle || matchesReported || matchesNotReported;
     });
   }
@@ -214,11 +189,6 @@ userId= 1;
     }
   }
   
-  // getAverageLikesPerPost(posts: MyPosts[]): number {
-  //   const totalLikes = this.getTotalLikesCount(posts);
-  //   const totalPosts = this.getTotalPostCount(posts);
-  //   return totalPosts > 0 ? totalLikes / totalPosts : 0;
-  // }
   getReportedPostsPercentage(posts: MyPosts[]): number {
     if (!posts || !Array.isArray(posts)) {
       return 0; 

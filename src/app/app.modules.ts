@@ -11,10 +11,10 @@ import { AddPostsComponent } from './posts/add-posts/add-posts.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    PostsComponent,
-    AboutPostsComponent,
-    AddPostsComponent
+    // AppComponent,
+    // PostsComponent,
+    // AboutPostsComponent,
+    // AddPostsComponent
   ],
   imports: [
     BrowserModule,

@@ -46,12 +46,7 @@
                                                                     {{ post.status }}
                                                                 </li>
                                                             </ul>
-                                                            <!-- <button *ngIf="!post.reported" mat-raised-button class="minimized-button" style="background-color: rgb(147, 4, 4); color: white; cursor: not-allowed;" (click)="reportPost()">
-                                                                <mat-icon aria-hidden="false" aria-label="Reported">report_problem</mat-icon> Report!
-                                                            </button>
-                                                            <button  mat-raised-button class="minimized-button" style="background-color: rgb(4, 147, 4); color: white;" (click)="unreportPost()">
-                                                                <mat-icon aria-hidden="false" aria-label="Unreported">check_circle</mat-icon> Unreport!
-                                                            </button> -->
+                                                      
                                                           
                                                         </div>
                                                     </div>
@@ -103,7 +98,6 @@
                                                                     <div class="chat-header clearfix">
                                                                         <img src="assets/images/user/user2.jpg" alt="avatar">
                                                                         <div class="chat-about">
-                                                                            <!-- <div class="chat-with">Comments</div> -->
                                                                             <button class="btn btn-primary" (click)="navigateToComments()">Comments</button>
 
                                                                             <div class="chat-num-messages">comments</div>
@@ -141,14 +135,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </ng-scrollbar>
-                                                                     <!-- <div class="chat-message clearfix">
-                                                                        <textarea class="form-control" rows="3" placeholder="Add a comment..." ></textarea>
-                                                                        <button class="btn btn-primary">Add Comment</button> -->
-                                                                        <!-- <div class="chat-upload">
-                                                                            <button mat-mini-fab class="bg-deep-orange msr-2"><i class="material-icons">attach_file</i></button>
-                                                                            <button mat-mini-fab class="bg-deep-orange"><i class="material-icons">insert_emoticon</i></button>
-                                                                        </div> -->
-                                                                    <!-- </div> -->
+                                
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -162,8 +149,8 @@
                                                         <h3 class="widget-title">Popular Posts</h3>
                                                         <ul class="related-courses">
                                                             <li *ngFor="let post of topThreePosts">
-                                                                <div class="titles">
-                                                                    <h4><a href="coureses-single.html">{{ post.title }}</a></h4>
+                                                                <div class="titles" (click)="onPopularPostClick(post.postId)">
+                                                                    <h6 class="post-title">{{ post.title }}</h6>
                                                                     <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> {{ post.datePost }}</span>
                                                                 </div>
                                                             </li>

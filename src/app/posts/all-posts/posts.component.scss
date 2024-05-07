@@ -2,8 +2,8 @@
     float: right;
   }
   .edit-button {
-    background-color: #007bff; /* Bleu */
-    color: #fff; /* Texte blanc */
+    background-color: #007bff; 
+    color: #fff; 
     border: none;
     padding: 2px 4px;
     border-radius: 4px;
@@ -12,8 +12,8 @@
   }
   
   .delete-button {
-    background-color: #dc3545; /* Rouge */
-    color: #fff; /* Texte blanc */
+    background-color: #dc3545; 
+    color: #fff; 
     border: none;
     padding: 2px 4px;
     border-radius: 4px;
@@ -21,7 +21,6 @@
     transition: background-color 0.3s ease;
   }
   
-  /* Style pour les icônes à l'intérieur des boutons */
   .edit-button mat-icon,
   .delete-button mat-icon {
     margin-right: 8px;
@@ -29,40 +28,38 @@
   .action-buttons {
     display: flex;
     justify-content: flex-end;
-    gap: 8px; /* Espacement entre les boutons */
+    gap: 8px;
   }
-  /* Effet de survol */
   .edit-button:hover,
   .delete-button:hover {
-    background-color: #0056b3; /* Bleu plus sombre */
+    background-color: #0056b3; 
   }
 
   
-  /* Effet de focus */
   .edit-button:focus,
   .delete-button:focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Bordure bleue */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); 
   }
   .reported {
-    color: red; /* Couleur rouge pour indiquer "Reported" */
-    font-weight: bold; /* Texte en gras */
+    color: red; 
+    font-weight: bold; 
   }
   
   .not-reported {
-    color: green; /* Couleur verte pour indiquer "Not Reported" */
-    font-weight: normal; /* Texte normal */
+    color: green; 
+    font-weight: normal; 
   }
   .search-field {
     .mat-form-field-wrapper {
-      border: none; /* Supprime la bordure du champ de formulaire */
-      background-color: transparent; /* Rend le fond transparent */
+      border: none; 
+      background-color: transparent; 
     }
   }
   
   .search-icon {
-    color: rgba(0, 0, 0, 0.54); /* Couleur de l'icône (noir semi-transparent) */
-    margin-right: 8px; /* Espacement à droite de l'icône */
+    color: rgba(0, 0, 0, 0.54); 
+    margin-right: 8px; 
   }
 
 
@@ -214,12 +211,12 @@
 
   .emoji-container {
     display: flex;
-    list-style-type: none; /* Supprimer les puces de la liste */
+    list-style-type: none; 
   padding: 0;
   border: none;
   }
   .dashboard-title {
-    text-align: center; /* Centrer le texte horizontalement */
+    text-align: center; 
   }
   .minimized-button {
     width: fit-content;
@@ -229,19 +226,19 @@
   .emoji-item {
     display: flex;
     align-items: center;
-    margin-right: 200px; /* Espacement entre chaque paire emoji-nombre */
+    margin-right: 200px; 
   }
   
   .emoji-item:last-child {
-    margin-right: 0; /* Aucun espacement après le dernier élément */
+    margin-right: 0;
   }
   
   .emoji-item .emoji {
-    font-size: 24px; /* Taille de la police pour les emojis */
-    margin-right: 5px; /* Espacement entre l'emoji et le nombre */
+    font-size: 24px;
+    margin-right: 5px; 
   }
   
   .emoji-item .count {
-    font-size: 18px; /* Taille de la police pour les nombres */
+    font-size: 18px; 
   }
   

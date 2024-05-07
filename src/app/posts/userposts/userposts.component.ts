@@ -12,7 +12,6 @@ import { SortService } from 'app/PopularPost';
 import { MyPosts } from 'app/models/my-posts';
 import { PostsService } from 'app/posts.service';
 import { RecommService } from 'app/recomm.service';
-import { UserDetailsPostsComponent } from '../user-details-posts/user-details-posts.component';
 
 @Component({
   selector: 'app-userposts',
@@ -52,7 +51,6 @@ export class UserpostsComponent {
     this.ps.getPosts().subscribe(posts => {
       this.allTags = this.extractTagsFromPosts(posts);
       this.Recomm();
-     // this.loadRecommendations(); // Charger les recommandations initiales
 
 
     });
@@ -60,15 +58,17 @@ export class UserpostsComponent {
   Recomm(): void {
     this.rc.getRecomm(this.userId).subscribe({
       next: (data: MyPosts[]) => {
-        console.log('Données de recommandation reçues :', data); // Vérifiez les données reçues
+        console.log('Données de recommandation reçues :', data); 
         this.recommendations = data;
-      //  this.us.loadFavoritePosts();
       },
       error: (error) => {
         console.error('Erreur lors de la récupération des recommandations :', error);
       }
     });
   
+  }
+  onPopularPostClick(postId: number) {
+    this.router.navigate(['/home-seconde', postId]); 
   }
   navigateToShare() {
     this.router.navigate(['/event']);
@@ -99,19 +99,11 @@ export class UserpostsComponent {
     }
   }
 
-  // loadComments(): void {
-  //   if (this.post && this.post.comments) {
-  //     this.comments = this.post.comments;
-  //     console.log(this.post.comments);
-  //   } else {
-  //     console.warn('No comments found for this post.');
-  //   }
-  // }
   loadAllPosts(): void {
     this.ps.getPosts().subscribe({
       next: (data) => {
         this.allPosts = data;
-        this.posts = data; // Assuming data from getPosts() is the same as posts array
+        this.posts = data; 
         this.getTopThreePosts();
         this.extractTagsFromPosts(data);
       },

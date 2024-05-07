@@ -8,6 +8,6 @@ import { sortBy } from 'lodash';
 })
 export class SortService {
     getTopThreeByLikes(posts: MyPosts[]): MyPosts[] {
-        return sortBy(posts, 'likes').reverse().slice(0, 3); // Triez par likes et inversez pour obtenir l'ordre décroissant
+        return sortBy(posts, 'likes').reverse().slice(0, 3); 
       }
 }

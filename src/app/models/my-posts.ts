@@ -12,18 +12,13 @@ export class MyPosts {
     content!: string;
     tags!: string[];
     datePost!: string; 
-
-  //  attachment!: Attachement[]; 
     likes!: number;
     views!: number;
     status?: string; 
     student!: User; 
     comments!: Comment[]; 
     report!: boolean;
-
- //   subscriptions!: Subscription[]; 
     postLikes!: PostLike[]; 
-
     sentimentScore!: number;
     emoji!: string;
 }

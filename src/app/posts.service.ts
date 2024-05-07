@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MyPosts } from './models/my-posts';
 import { LikeAction } from './models/post-like';
-import { map } from 'rxjs/operators'; // Import de l'opérateur map depuis rxjs/operators
+import { map } from 'rxjs/operators'; 
 
 
 @Injectable({
@@ -22,16 +22,13 @@ export class PostsService {
     getPostById(postId: number): Observable<MyPosts> {
       return this.httpClient.get<MyPosts>(`${this.baseURL}getpost/${postId}`);
     }
-    // addPostAction(postId: number, userId: number, action: string): Observable<any> {
-    //   const url = `${this.baseURL}${postId}/${userId}?action=${action}`;
-    //   return this.httpClient.post(url, {});
-    // }
+   
     addPostAction(postId: number, userId: number, action: string): Observable<any> {
       const url = `${this.baseURL}${postId}/${userId}?action=${action}`;
       return this.httpClient.post(url, {}).pipe(
         map((response: any) => {
           if (action === LikeAction.dislike) {
-            response.likes--; // Décrémenter le nombre de likes si l'action est un dislike
+            response.likes--;
           }
           return response;
         })
@@ -80,8 +77,7 @@ export class PostsService {
     }
 
     addPost(postData: FormData, userId:number): Observable<any> {
-      // const headers = new HttpHeaders();
-      // headers.append('Content-Type', 'multipart/form-data');
+    
       
       return this.httpClient.post<any>(`${this.baseURL}addpost?userId=${userId}`, postData);
     }

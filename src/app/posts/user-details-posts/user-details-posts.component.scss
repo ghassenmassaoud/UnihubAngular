@@ -4,11 +4,11 @@
 }
 
 .breadcrumbs-title {
-    margin-right: 500px; /* Ajustez la marge selon votre préférence */
+    margin-right: 500px; 
 }
 
 .emoji {
-    font-size: 1.5em; /* Ajustez la taille de la police selon votre préférence */
+    font-size: 1.5em; 
 }
 .like-action, .love-action, .instructive-action, .solution-action, .dislike-action {
     cursor: pointer;
@@ -18,7 +18,7 @@
 
 .emoji-container {
     display: flex;
-    list-style-type: none; /* Supprimer les puces de la liste */
+    list-style-type: none;
     padding: 0;
     border: none;
   }
@@ -26,14 +26,17 @@
   .emoji-item {
     display: flex;
     align-items: center;
-    margin-right: 100px; /* Espacement entre chaque paire emoji-nombre */
+    margin-right: 100px; 
   }
   .emoji-item span {
-    font-size: 20px; /* Taille de police du texte */
-    font-family: 'VotrePolicePersonnalisee', sans-serif; /* Remplacez 'VotrePolicePersonnalisee' par le nom de votre police */
+    font-size: 20px;
+    font-family: 'VotrePolicePersonnalisee', sans-serif; 
   }
   .element-with-line {
-    border-bottom: 1px solid black; /* Adds a black line below the element */
+    border-bottom: 1px solid black;
+  }
+  .post-title {
+    color: blue; 
   }
   
   .emoji-item button {
@@ -41,40 +44,40 @@
     background: none;
     cursor: pointer;
     padding: 10px;
-    font-size: 150px; /* Taille de police des emojis */
-    margin-right: 5px; /* Espacement entre l'emoji et le texte */
+    font-size: 150px;
+    margin-right: 5px; 
   }
   
   .emoji-item:last-child {
-    margin-right: 0; /* Aucun espacement après le dernier élément */
+    margin-right: 0; 
   }
   
 .breadcrumbs-header {
     display: flex;
-    justify-content: space-between; /* Align items horizontally with space between */
+    justify-content: space-between; 
     align-items: center;
 }
 
 .title-emoji-wrapper {
     display: flex;
     align-items: center;
-    flex-grow: 1; /* Allow the title-emoji wrapper to grow and occupy available space */
+    flex-grow: 1; 
 }
 
 .breadcrumbs-title {
-    margin-right: 0px; /* Adjust spacing between title and emoji */
+    margin-right: 0px; 
 }
 
 .emoji {
-    font-size: 24px; /* Adjust emoji size */
+    font-size: 24px; 
 }
 
 .report-button {
-    margin-left: 10px; /* Adjust spacing between title-emoji and button */
+    margin-left: 10px;
 }
 .meta-tags .tags {
     font-weight: bold;
-    font-size: 25px; /* Taille de la police ajustée à 18px */
+    font-size: 25px;
 }
 
 .widget.back-post .related-courses li {
@@ -96,21 +99,21 @@
     align-items: center;
 }
 .favorite {
-    background-color: rgb(245, 160, 81); /* Couleur de fond pour un bouton favori */
-    color: white; /* Couleur du texte */
+    background-color: rgb(245, 160, 81); 
+    color: white; 
   }
   
   .not-favorite {
-    background-color: rgb(190, 42, 64); /* Couleur de fond pour un bouton non favori */
-    color: white; /* Couleur du texte */
+    background-color: rgb(190, 42, 64);
+    color: white; 
   }
 .breadcrumbs-title-wrapper .btn {
-    margin-left: 10px; /* Ajoutez un espace entre le titre/emoji et le bouton */
+    margin-left: 10px; 
 }
 
   .button-clicked {
-    transform: scale(1.1); /* Agrandir le bouton de 10% */
+    transform: scale(1.1); 
   }
   .button-bold {
-    font-weight: bold; /* Mettre en gras le texte du bouton */
+    font-weight: bold; 
   }

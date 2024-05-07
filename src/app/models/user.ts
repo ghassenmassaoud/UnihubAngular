@@ -14,5 +14,4 @@ export class User {
   posts: MyPosts[] = [];
   comments: Comment[] = [];
   postLikes: PostLike[] = [];
-//  subscriptions: Subscription[] = [];
 }

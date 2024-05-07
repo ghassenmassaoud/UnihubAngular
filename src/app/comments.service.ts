@@ -19,7 +19,7 @@ export class CommentsService {
     }
 
     getCommentsForPost(postId: number): Observable<any> {
-      const url = `${this.baseURL}comments?postId=${postId}`; // URL de l'API pour récupérer les commentaires d'un post spécifique
+      const url = `${this.baseURL}comments?postId=${postId}`; 
       return this.httpClient.get<any>(url);
     }
 
@@ -45,10 +45,7 @@ export class CommentsService {
     addComment(comment: Comment, postId: number, userId: number): Observable<any> {
       return this.httpClient.post<any>(`${this.baseURL}addcomment?userId=${userId}&postId=${postId}`, comment );
     }
-    // addComment(comment:any,userId: number, postId: number ): Observable<any> {
-    //   const url = `${this.baseURL}addcomment?userId=${userId}&postId=${postId}&${comment}`;
-    //   return this.httpClient.post<any>(url, {});
-    // }
+  
 
     replyComment(parentId:number,userId:number,postId: number): Observable<any> {
       const url = `${this.baseURL}addreply?parentId=${parentId}?postId=${postId}?userId=${userId}`;

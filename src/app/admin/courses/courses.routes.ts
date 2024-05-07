@@ -4,23 +4,17 @@ import { EditCourseComponent } from './edit-course/edit-course.component';
 import { AboutCourseComponent } from './about-course/about-course.component';
 import { Route } from '@angular/router';
 import { Page404Component } from 'app/authentication/page404/page404.component';
-import { PostsComponent } from 'app/posts/all-posts/posts.component';
-import { AboutPostsComponent } from 'app/posts/about-posts/about-posts.component';
-import { AddPostsComponent } from 'app/posts/add-posts/add-posts.component';
-import { CouresesComponent } from 'app/coureses/coureses.component';
+
 
 export const COURSE_ROUTE: Route[] = [
-  // {
-  //   path: 'all-courses',
-  //   component: AllCourseComponent,
-  // },
+ 
   {
     path: 'all-courses',
-    component: PostsComponent,
+    component: AllCourseComponent,
   },
   {
     path: 'add-course',
-    component: AddPostsComponent,
+    component: AddCourseComponent,
   },
   {
     path: 'edit-course',
@@ -28,7 +22,7 @@ export const COURSE_ROUTE: Route[] = [
   },
   {
     path: 'about-course',
-    component: AboutPostsComponent,
+    component: AboutCourseComponent,
   },
   { path: '**', component: Page404Component },
 ];

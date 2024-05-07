@@ -68,7 +68,7 @@ export class AboutPostsComponent {
     this.loadAllPosts();
     this.ps.getPosts().subscribe(posts => {
       this.allTags = this.extractTagsFromPosts(posts);
-      this.loadLikeStatus(); // Charger l'état de like au chargement de la page
+      this.loadLikeStatus();
 
     });
   }
@@ -130,9 +130,7 @@ export class AboutPostsComponent {
 
 
 navigateToComments() {
-  // Charger les commentaires du post spécifique
   this.cs.getCommentsForPost(this.postId).subscribe(comments => {
-    // Naviguer vers la page de commentaires avec les commentaires chargés
     this.router.navigate(['/contact', { postId: this.postId, comments: comments }]);
   });
 }
@@ -140,7 +138,7 @@ navigateToComments() {
       this.ps.ReportPost(this.postId).subscribe({
           next: () => {
               this.post.reported = true;
-              this.reportDisplayed = true; // Afficher le bouton Report
+              this.reportDisplayed = true; 
               console.log('Post marked as reported.', this.post.reported);
           },
           error: (error) => {
@@ -153,7 +151,7 @@ navigateToComments() {
       this.ps.UnReportPost(this.postId).subscribe({
           next: () => {
               this.post.reported = false;
-              this.unreportDisplayed = false; // Cacher le bouton Unreport
+              this.unreportDisplayed = false; 
               console.log('Post unmarked as reported.', this.post.reported);
           },
           error: (error) => {
@@ -242,10 +240,10 @@ navigateToComments() {
     localStorage.setItem('userLikes', JSON.stringify(userLikes));
   }
   likePost(): void {
-    this.isLikeClicked = true; // Activer l'effet visuel
+    this.isLikeClicked = true; 
     setTimeout(() => {
-      this.isLikeClicked = false; // Réinitialiser l'état après un court délai
-    }, 200); // Délai en millisecondes
+      this.isLikeClicked = false; 
+    }, 200); 
 
   
     this.ps.addPostAction(this.postId, 1, LikeAction.like).subscribe({
@@ -262,15 +260,16 @@ navigateToComments() {
     });
     this.updateLikeStatus(LikeAction.like);
 
-   // this.stateService.addAction({ action: 'like', postId: this.postId });
 
   }
-  
+  onPopularPostClick(postId: number) {
+    this.router.navigate(['/home-seconde', postId]); 
+  }
   lovePost(): void {
-    this.isLikeClicked = true; // Activer l'effet visuel
+    this.isLikeClicked = true; 
     setTimeout(() => {
-      this.isLikeClicked = false; // Réinitialiser l'état après un court délai
-    }, 200); // Délai en millisecondes
+      this.isLikeClicked = false; 
+    }, 200); 
     this.ps.addPostAction(this.postId, 1, LikeAction.love).subscribe({
       next: (data) => {
         this.post = data;
@@ -288,10 +287,10 @@ navigateToComments() {
   }
 
   solutionPost(): void {
-    this.isLikeClicked = true; // Activer l'effet visuel
+    this.isLikeClicked = true; 
     setTimeout(() => {
-      this.isLikeClicked = false; // Réinitialiser l'état après un court délai
-    }, 200); // Délai en millisecondes
+      this.isLikeClicked = false; 
+    }, 200); 
     this.ps.addPostAction(this.postId, 1, LikeAction.solution).subscribe({
       next: (data) => {
         this.post = data;
@@ -309,10 +308,10 @@ navigateToComments() {
   }
 
   instructivePost(): void {
-    this.isLikeClicked = true; // Activer l'effet visuel
+    this.isLikeClicked = true; 
     setTimeout(() => {
-      this.isLikeClicked = false; // Réinitialiser l'état après un court délai
-    }, 200); // Délai en millisecondes
+      this.isLikeClicked = false;
+    }, 200); 
     this.ps.addPostAction(this.postId, 1, LikeAction.instructive).subscribe({
       next: (data) => {
         this.post = data;
@@ -330,10 +329,10 @@ navigateToComments() {
   }
 
   dislikePost(): void {
-    this.isLikeClicked = true; // Activer l'effet visuel
+    this.isLikeClicked = true;
     setTimeout(() => {
-      this.isLikeClicked = false; // Réinitialiser l'état après un court délai
-    }, 200); // Délai en millisecondes
+      this.isLikeClicked = false;
+    }, 200); 
     this.ps.addPostAction(this.postId, 1, LikeAction.dislike).subscribe({
       next: (data) => {
         this.post = data;

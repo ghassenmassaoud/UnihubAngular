@@ -23,7 +23,7 @@
         </mat-error>
       </mat-form-field>
     </div>
-    <ckeditor [editor]="Editor" formControlName="content" data="<p>Hello, world!</p>" required></ckeditor>
+    <ckeditor [editor]="Editor" formControlName="content" data="Hello, world!" required></ckeditor>
     <mat-error *ngIf="postForm.get('content')?.invalid && postForm.get('content')?.touched">
       Content is required
     </mat-error>
@@ -38,7 +38,7 @@
     </div>
     <div class="col-lg-12">
       <div class="m-l-25 m-b-20">
-        <button mat-flat-button color="primary" class="msr-2" type="submit"(click)="navigateToPosts()">Send</button>
+        <button mat-flat-button color="primary" class="msr-2" type="submit">Send</button>
         <button mat-flat-button color="warn" type="button" (click)="navigateToPosts()">Discard</button>
       </div>
     </div>

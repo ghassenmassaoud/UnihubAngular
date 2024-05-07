@@ -63,10 +63,11 @@ export class UserDetailsPostsComponent {
   dislikeBold: boolean = false;
   unreportDisplayed = false;
   reportDisplayed = false;
-  //newCommentContent: string[] = [];
   favoritePosts: number[] = [];
+  filteredPosts: any[] = [];
 
-  commentContent: string = ''; // Ajoutez la propriété commentContent
+
+  commentContent: string = ''; 
 
 
 
@@ -84,8 +85,8 @@ export class UserDetailsPostsComponent {
     this.loadAllPosts();
     this.ps.getPosts().subscribe(posts => {
       this.allTags = this.extractTagsFromPosts(posts);
-      this.loadFavoritePosts(); // Charger les posts favoris au chargement de la page
-      this.loadLikeStatus(); // Charger l'état de like au chargement de la page
+      this.loadFavoritePosts(); 
+      this.loadLikeStatus();
 
 
     });
@@ -98,7 +99,7 @@ export class UserDetailsPostsComponent {
       this.cs.addComment(newComment, this.postId,this.userId).subscribe({
         next: () => {
           alert('Le commentaire a été ajouté avec succès.');
-          this.commentContent = ''; // Efface le contenu du commentaire après l'ajout
+          this.commentContent = ''; 
         },
         error: (error) => {
           console.error('Une erreur s\'est produite lors de l\'ajout du commentaire : ', error);
@@ -112,16 +113,12 @@ export class UserDetailsPostsComponent {
 
 
   replyToComment(parentId: number): void {
-    // parentId: ID of the comment being replied to
-    // Assuming userId and postId are already set in your component
+ 
     this.cs.replyComment(parentId, this.userId, this.postId)
       .subscribe(response => {
-        // Handle successful reply
         console.log('Reply added successfully:', response);
-        // Reload comments after adding a reply
         this.loadComments();
       }, error => {
-        // Handle error if reply fails
         console.error('Error adding reply:', error);
       });
   }
@@ -158,7 +155,6 @@ export class UserDetailsPostsComponent {
     const storedFavorites = localStorage.getItem('userFavorites');
     if (storedFavorites) {
       this.favoritePosts = JSON.parse(storedFavorites);
-      // Vérifier pour chaque post s'il est en favori ou non
       this.favoritePosts.forEach(postId => {
         if (postId === this.postId) {
           this.isFavorite = true;
@@ -170,10 +166,8 @@ export class UserDetailsPostsComponent {
     const isPostFavorite = this.favoritePosts.includes(postId);
   
     if (isPostFavorite) {
-      // Le post est déjà dans les favoris, donc on le retire
       this.ps.unfavoritePost(userId, postId).subscribe({
         next: () => {
-          // Mettre à jour l'état de l'icône favori
           this.favoritePosts = this.favoritePosts.filter(id => id !== postId);
           this.isFavorite = false;
           this.updateFavoritesInLocalStorage();
@@ -184,15 +178,12 @@ export class UserDetailsPostsComponent {
         }
       });
     } else {
-      // Le post n'est pas dans les favoris, donc on l'ajoute
       this.ps.favoriteList(userId, postId).subscribe({
         next: (response: any) => {
-          // Afficher la réponse textuelle (exemple)
           console.log(response);
           this.isFavorite = true;
 
   
-          // Mettre à jour l'état de l'icône favori
           this.favoritePosts.push(postId);
           this.updateFavoritesInLocalStorage();
         },
@@ -239,7 +230,7 @@ export class UserDetailsPostsComponent {
       this.ps.ReportPost(this.postId).subscribe({
           next: () => {
               this.post.reported = true;
-              this.reportDisplayed = true; // Afficher le bouton Report
+              this.reportDisplayed = true; 
               console.log('Post marked as reported.', this.post.reported);
           },
           error: (error) => {
@@ -252,7 +243,7 @@ export class UserDetailsPostsComponent {
       this.ps.UnReportPost(this.postId).subscribe({
           next: () => {
               this.post.reported = false;
-              this.unreportDisplayed = false; // Cacher le bouton Unreport
+              this.unreportDisplayed = false; 
               console.log('Post unmarked as reported.', this.post.reported);
           },
           error: (error) => {
@@ -303,10 +294,10 @@ export class UserDetailsPostsComponent {
   }
 
   likePost(): void {
-    this.isLikeClicked = true; // Activer l'effet visuel
+    this.isLikeClicked = true; 
     setTimeout(() => {
-      this.isLikeClicked = false; // Réinitialiser l'état après un court délai
-    }, 200); // Délai en millisecondes
+      this.isLikeClicked = false; 
+    }, 200); 
 
   
     this.ps.addPostAction(this.postId, 1, LikeAction.like).subscribe({
@@ -325,10 +316,10 @@ export class UserDetailsPostsComponent {
   }
   
   lovePost(): void {
-    this.isLikeClicked = true; // Activer l'effet visuel
+    this.isLikeClicked = true; 
     setTimeout(() => {
-      this.isLikeClicked = false; // Réinitialiser l'état après un court délai
-    }, 200); // Délai en millisecondes
+      this.isLikeClicked = false; 
+    }, 200);
     this.ps.addPostAction(this.postId, 1, LikeAction.love).subscribe({
       next: (data) => {
         this.post = data;
@@ -346,10 +337,10 @@ export class UserDetailsPostsComponent {
   }
 
   solutionPost(): void {
-    this.isLikeClicked = true; // Activer l'effet visuel
+    this.isLikeClicked = true; 
     setTimeout(() => {
-      this.isLikeClicked = false; // Réinitialiser l'état après un court délai
-    }, 200); // Délai en millisecondes
+      this.isLikeClicked = false; 
+    }, 200); 
     this.ps.addPostAction(this.postId, 1, LikeAction.solution).subscribe({
       next: (data) => {
         this.post = data;
@@ -367,10 +358,10 @@ export class UserDetailsPostsComponent {
   }
 
   instructivePost(): void {
-    this.isLikeClicked = true; // Activer l'effet visuel
+    this.isLikeClicked = true; 
     setTimeout(() => {
-      this.isLikeClicked = false; // Réinitialiser l'état après un court délai
-    }, 200); // Délai en millisecondes
+      this.isLikeClicked = false; 
+    }, 200); 
     this.ps.addPostAction(this.postId, 1, LikeAction.instructive).subscribe({
       next: (data) => {
         this.post = data;
@@ -388,10 +379,10 @@ export class UserDetailsPostsComponent {
   }
 
   dislikePost(): void {
-    this.isLikeClicked = true; // Activer l'effet visuel
+    this.isLikeClicked = true; 
     setTimeout(() => {
-      this.isLikeClicked = false; // Réinitialiser l'état après un court délai
-    }, 200); // Délai en millisecondes
+      this.isLikeClicked = false; 
+    }, 200); 
     this.ps.addPostAction(this.postId, 1, LikeAction.dislike).subscribe({
       next: (data) => {
         this.post = data;
@@ -464,7 +455,11 @@ export class UserDetailsPostsComponent {
 
   getTopThreePosts(): void {
     this.topThreePosts = this.sortService.getTopThreeByLikes(this.allPosts);
-  }
+    
   }
 
+  onPopularPostClick(postId: number) {
+    this.router.navigate(['/home-seconde', postId]); 
+  }
 
+}

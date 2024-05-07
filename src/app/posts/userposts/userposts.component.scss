@@ -1,4 +1,3 @@
-/* Style pour la mise en page générale */
 .react-blog-page {
     padding-bottom: 40px;
     padding-top: 110px;
@@ -8,7 +7,6 @@
     padding-bottom: 70px;
   }
   
-  /* Style pour chaque post individuel */
   .single-blog {
     margin-bottom: 40px;
     border-bottom: 1px solid #eaeaea;
@@ -21,35 +19,42 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   .views-text {
-    color: #999999; /* Couleur gris pour le texte */
-    font-size: 14px; /* Taille de police */
+    color: #999999; 
+    font-size: 14px;
 }
   
   .blog-content {
     margin-top: 20px;
   }
   .large-title {
-    font-size: 32px; /* Adjust the font size as needed */
-    font-weight: bold; /* Optional: Add bold font weight */
-    color: #333333; /* Optional: Set the color */
-    text-decoration: none; /* Optional: Remove underline from links */
-    transition: color 0.3s ease; /* Optional: Add smooth color transition on hover */
+    font-size: 32px; 
+    font-weight: bold; 
+    color: #333333; 
+    text-decoration: none; 
+    transition: color 0.3s ease; 
 }
 .breadcrumbs-title-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
+  .post-title {
+    color: blue;
+  }
   
+  .button__sec {
+    display: flex;
+    justify-content: center;
+  }
   .breadcrumbs-title {
-    margin-right: 250px; /* Ajustez la marge selon vos besoins */
+    margin-right: 250px;
   }
   .btn {
-    background-color: rgb(190, 42, 64); /* Couleur de fond pour un bouton non favori */
-    color: white; /* Couleur du texte */
+    background-color: rgb(190, 42, 64); 
+    color: white;
   }
 .large-title:hover {
-    color: #007bff; /* Optional: Change color on hover */
+    color: #007bff; 
 }
   .blog-title a {
     color: #333333;
@@ -60,7 +65,7 @@
   }
   
   .blog-title a:hover {
-    color: #007bff; /* Couleur de lien au survol */
+    color: #007bff;
   }
 
 
@@ -90,7 +95,7 @@
   }
   
   .blog-btn:hover {
-    background-color: #0056b3; /* Couleur de fond au survol */
+    background-color: #0056b3; 
   }
   
   .share-course {
@@ -120,6 +125,6 @@
   }
   
   .tags a:hover {
-    background-color: #e5e5e5; /* Couleur de fond au survol */
+    background-color: #e5e5e5; 
   }
   

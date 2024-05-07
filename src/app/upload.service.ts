@@ -24,7 +24,7 @@ export class UploadService {
     }
   }
   initForm() {
-    this.form.reset(); // Réinitialise le formulaire
+    this.form.reset(); 
   }
 
   uploadFile() {
@@ -40,11 +40,9 @@ export class UploadService {
     this.http.post<any>('http://localhost:4200/upload', formData).subscribe(
       (response) => {
         console.log('File uploaded successfully:', response);
-        // Ajoutez ici la logique pour traiter la réponse du serveur après le téléchargement
       },
       (error) => {
         console.error('Error uploading file:', error);
-        // Ajoutez ici la gestion des erreurs lors du téléchargement du fichier
       }
     );
   }
