@@ -46,25 +46,25 @@ export class DialogsComponent implements OnInit {
   fileToUpload!: File ;
   ressources!: ressource;
   filname='';
-  
+
   constructor(public dialogRef: MatDialogRef<DialogsComponent>,private fb: FormBuilder,private resourceService: RessourceServiceService) {}
   ngOnInit(): void {
     this.initForm() ;
   }
   initForm(): void {
      this .ressourceForm=this.fb.group({
-      ressourceId: [null], 
+      ressourceId: [null],
       ressourceName: ['', Validators.required],
-      fileData: [null, Validators.required], 
-      ressourceType: [RessourceType, Validators.required], 
+      fileData: [null, Validators.required],
+      ressourceType: [RessourceType, Validators.required],
       description:['',Validators.required]
-      
+
     });
   }
-  
+
   onFileSelected(event: any): void {
     if (event.target.files.length > 0) {
-      
+
       const file = event.target.files[0];
       this.fileToUpload=file;
       this.filname = file.name;
@@ -78,18 +78,18 @@ export class DialogsComponent implements OnInit {
       let rType=this.ressourceForm.value.ressourceType;
       let desc=this.ressourceForm.value.description;
       let spaceId=1;
-      let userid=1;   //ADD User
-      this.resourceService.addNewRessource(rName,rType,spaceId,this.fileToUpload,desc,userid).subscribe({
+      let IdUser = localStorage.getItem('IdUser');   //ADD User
+      this.resourceService.addNewRessource(rName,rType,spaceId,this.fileToUpload,desc,IdUser as any).subscribe({
         next: (response: any) => {
-          console.log('Resource added successfully:', response);        
+          console.log('Resource added successfully:', response);
         },
         error: (error) => {
-          console.error('Error :', error);          
-        }   
+          console.error('Error :', error);
+        }
       });
       this.dialogRef.close();
       window.location.reload();
-    } 
-  }  
+    }
+  }
 }
 

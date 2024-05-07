@@ -23,7 +23,7 @@ import { RessourceServiceService } from '@core/service/ressource-service.service
     './resource-space.component.scss'
   ],
   imports :[ MatCardModule, CommonModule]
-  
+
 })
 export class ResourceSpaceComponent implements OnInit {
   constructor(
@@ -36,22 +36,22 @@ export class ResourceSpaceComponent implements OnInit {
 
 
   ngOnInit() {
-    
+
     this.loadSpaces();
   }
 
   loadSpaces() {
     this.spaceService.getspaces().subscribe(
       spaces => {this.spaces = spaces;
-  
+
   });
   }
   onCardClick(spaceId: number) {
     // Navigate to the other interface and pass the spaceId as a query parameter
-    this.router.navigate(['/resources'], { queryParams: { spaceId } });
+    this.router.navigate(['/main/resources'], { queryParams: { spaceId } });
   }
 
-  
 
-  
+
+
 }

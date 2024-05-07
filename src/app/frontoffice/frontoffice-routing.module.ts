@@ -5,6 +5,8 @@ import { ProfileComponent } from 'app/Pi-User/profile/profile.component';
 import { UserAddPostsComponent } from 'app/posts/user-add-posts/user-add-posts.component';
 import { UserDetailsPostsComponent } from 'app/posts/user-details-posts/user-details-posts.component';
 import { UserpostsComponent } from 'app/posts/userposts/userposts.component';
+import { ResourceSpaceComponent } from 'app/resource-space/resource-space.component';
+import { ResourcesComponent } from 'app/resources/resources.component';
 import { AddComplaintComponent } from 'app/student/Complaints/add-complaint/add-complaint.component';
 import { AboutClassroomStudentComponent } from 'app/student/about-classroom-student/about-classroom-student.component';
 import { AddDemandeComponent } from 'app/student/add-demande/add-demande.component';
@@ -75,6 +77,18 @@ const routes: Routes = [
         component: UserAddPostsComponent,
         loadChildren: () =>
           import('../event/event.routes').then((m) => m.EVENT_ROUTE),
+      },
+      {
+        path:'resources',
+        component:ResourcesComponent,
+        loadChildren:()=>
+          import('../resources/resources.routes').then((m) => m.Ressource_Route)
+      },
+      {
+        path:'spaces',
+        component:ResourceSpaceComponent,
+        loadChildren:()=>
+          import('../resource-space/resource-space.routes').then((m) => m.Space_Route)
       },
 
 ];

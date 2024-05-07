@@ -212,18 +212,7 @@ export const APP_ROUTE: Route[] = [
         loadChildren: () =>
           import('./icons/icons.routes').then((m) => m.ICONS_ROUTE),
       },
-      {
-        path:'resources',
-        component:ResourcesComponent,
-        loadChildren:()=>
-          import('./resources/resources.routes').then((m) => m.Ressource_Route)
-      },
-      {
-        path:'spaces',
-        component:ResourceSpaceComponent,
-        loadChildren:()=>
-          import('./resource-space/resource-space.routes').then((m) => m.Space_Route)
-      },
+
       {
         path: 'extra-pages',
         loadChildren: () =>

@@ -16,7 +16,7 @@
                     <!--================= Menu Structure =================-->
                     <div class="react-inner-menus">
                         <ul id="backmenu" class="react-menus react-sub-shadow">
-                            <li> <a routerLink="/main/home" routerLinkActive="active">Home</a>
+                            <li *ngIf="!logged"> <a routerLink="/main/home" routerLinkActive="active">Home</a>
 
                             </li>
                             <li> <a routerLink="/home">Events</a>
@@ -35,7 +35,8 @@
                             <li *ngIf="logged"> <a routerLink="/main/profile" >Profile</a>
 
                             </li>
-                            <li> <a routerLink="/main/posts">Posts</a></li>
+                            <li *ngIf="logged"> <a routerLink="/main/posts">Posts</a></li>
+                            <li *ngIf="logged"> <a routerLink="/main/resources">Ressource</a></li>
                         </ul>
 
                         <div class="searchbar-part">
