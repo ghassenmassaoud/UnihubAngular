@@ -232,7 +232,7 @@
 	.react-home3-banner-form .form__wrapper button{
 	    padding: 11px 30px;
 	}
-	
+
 	.react-breadcrumbs.breadcrumbs-courses__single .breadcrumbs-wrap img{
 		height: 420px;
 	}
@@ -287,7 +287,7 @@
         display: block;
         top: 36%;
         right: 14px;
-        opacity: 0.5;       
+        opacity: 0.5;
     }
 
     .react-inner-menus .react-menus > .has-sub.menu-active > a:before{
@@ -299,7 +299,7 @@
         right: 14px;
         opacity: 0.5;
     }
-    
+
     #react-header .react-inner-menus .sub-menu-mega{
     	display: block !important;
     	box-shadow: none;
@@ -309,7 +309,7 @@
         justify-content: space-between;
         padding: 0px 50px 15px 50px;
     }
-   
+
     #react-header .react-menus li.mega-inner ul.mega-menu{
         left: 0;
         right: 0;
@@ -355,7 +355,7 @@
 	.react-inner-menus .react-menus > .has-sub > a::before {
 	    right: 0;
 	}
-	
+
 	.popular__course__area .course__item .course__inner ul,
 	.popular__course__area .course__item .course__card-icon,
 	.popular__course__area .course__item .react-course-title{
@@ -475,9 +475,9 @@
 		background: #2a6df5;
 		border-color: #2a6df5;
 	}
-	.react-header.react-inner-header .react-menus > li > a, 
-	.react-header.react-inner-header .react-login svg, 
-	.react-header.react-inner-header .react-btn:hover, 
+	.react-header.react-inner-header .react-menus > li > a,
+	.react-header.react-inner-header .react-login svg,
+	.react-header.react-inner-header .react-btn:hover,
 	.react-header.react-inner-header .react-login a {
 	    color: #0a0a0a;
 	}
@@ -653,7 +653,7 @@
 	    line-height: 40px;
 	    text-align: center;
 	    margin-bottom: 25px;
-	}	
+	}
 	.react-course-filter .react__title__section h2{
 	    font-size: 35px;
 	    line-height: 40px;

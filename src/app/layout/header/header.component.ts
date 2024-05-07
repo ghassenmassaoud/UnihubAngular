@@ -14,12 +14,13 @@ import {
   RightSidebarService,
   InConfiguration,
   Role,
-  AuthService,
+
 } from '@core';
 import { FeatherIconsComponent } from '@shared/components/feather-icons/feather-icons.component';
 import { NgScrollbar } from 'ngx-scrollbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from 'app/Pi-User/Service/auth.service';
 
 interface Notifications {
   message: string;
@@ -129,20 +130,20 @@ export class HeaderComponent
   ngOnInit() {
     this.config = this.configService.configData;
 
-    const userRole = this.authService.currentUserValue.role;
-    this.userImg = this.authService.currentUserValue.img;
+    // const userRole = this.authService.currentUserValue.role;
+    // this.userImg = this.authService.currentUserValue.img;
     this.docElement = document.documentElement;
 
-    if (userRole === Role.Admin) {
-      this.homePage = 'admin/dashboard/main';
-    } else if (userRole === Role.Teacher) {
-      this.homePage = 'teacher/dashboard';
-    } else if (userRole === Role.Student) {
-      this.homePage = 'student/dashboard';
-    } else {
-      this.homePage = 'admin/dashboard/main';
-    }
-
+    // if (userRole === Role.Admin) {
+    //   this.homePage = 'admin/dashboard/main';
+    // } else if (userRole === Role.Teacher) {
+    //   this.homePage = 'teacher/dashboard';
+    // } else if (userRole === Role.Student) {
+    //   this.homePage = 'student/dashboard';
+    // } else {
+    //   this.homePage = 'admin/dashboard/main';
+    // }
+    this.homePage = 'admin/dashboard/main';
     this.langStoreValue = localStorage.getItem('lang') as string;
     const val = this.listLang.filter((x) => x.lang === this.langStoreValue);
     this.countryName = val.map((element) => element.text);
