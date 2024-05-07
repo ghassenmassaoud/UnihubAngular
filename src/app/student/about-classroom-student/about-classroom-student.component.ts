@@ -33,6 +33,7 @@ import { Task } from 'app/models/Task';
 //import { FormDialogTaskComponent } from './form-dialog-task/form-dialog-Task.component';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormDialogTaskComponent } from './form-dialog-task/form-dialog-Task.component';
 
 @Component({
   selector: 'app-about-classroom-student',
@@ -84,6 +85,7 @@ export class AboutClassroomStudentComponent  implements OnInit {
   selectedClassroomId: number | null = null
   selectedStudentId: number | null = null
   selectedLessonId: number | null = null
+  selectedTaskId :number | null = null
   noClassroomSelected = false
   lessons: Lesson[] = []
   searchDate: string = '';
@@ -275,42 +277,25 @@ loadTask(): void {
       console.error('No classroom selected.');
     }
 }
-// addNewTask(): void {
-//   if (this.selectedClassroomId !== null) {
-//     const dialogRef = this.dialog.open(FormDialogTaskComponent, {
-//       data: { classroomId: this.selectedClassroomId }
-//     });
+addNewTask(): void {
+  // Vérifiez d'abord si une tâche est sélectionnée
+  if (this.selectedTaskId !== null) {
+    // Ouvrez le dialogue pour ajouter une nouvelle tâche en passant l'ID de la tâche sélectionnée
+    const dialogRef = this.dialog.open(FormDialogTaskComponent, {
+      data: { taskId: this.selectedTaskId }
+    });
 
-//     dialogRef.afterClosed().subscribe(result => {
-//       if (result === 'success') {
-//         this.loadTask(); 
-//       }
-//     });
-//   } else {
-//     console.error('No classroom selected.');
-//   }
-// }
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'success') {
+        // Rechargez les tâches après l'ajout réussi
+        this.loadTask();
+      }
+    });
+  } else {
+    console.error('No Task selected.');
+  }
+}
 
-// Définissez une fonction pour ouvrir le dialogue d'édition de leçon
-// editTask(taskId: number): void {
-//   // Chargez les détails de la leçon à partir de son ID
-//   this.task.getTask(taskId).subscribe({
-//     next: (task: Task) => {
-//       const dialogRef = this.dialog.open(EditTaskDialogComponent, {
-//         data: { taskId: task } // Utilisez taskId au lieu de task
-//       });
-
-//       dialogRef.afterClosed().subscribe(result => {
-//         if (result === 'success') {
-//           this.loadLessons(); // Rechargez les leçons après l'édition réussie
-//         }
-//       });
-//     },
-//     error: (error) => {
-//       console.error('Error loading task details:', error);
-//     }
-//   });
-// }
 
 deleteTask(taskId: number): void {
   if (confirm('Do you really want to Delete this Task ? ')) {

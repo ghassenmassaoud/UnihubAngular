@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { TaskService } from 'app/services/task.service';
+import { ReplyTask } from 'app/models/ReplyTask';
 
 @Component({
   selector: 'app-form-dialog-Task:not(h)',
@@ -34,18 +35,16 @@ import { TaskService } from 'app/services/task.service';
 export class FormDialogTaskComponent {
   taskForm: FormGroup;
   fileToUpload: File | null = null;
-  classroomId: number | null = null;
-  //visibility:string[]=['EVERYONE','ONLY ME']
+  replyTaskId: number | null = null;
+ 
   constructor(
     private formBuilder: FormBuilder,
     private taskService: TaskService,
-    @Inject(MAT_DIALOG_DATA) public data: { classroomId: number }
+    @Inject(MAT_DIALOG_DATA) public data: { replyTaskId: ReplyTask }
   ) {
-   console.log(this.classroomId = data.classroomId);
+   console.log(this.replyTaskId = data.replyTaskId.idTaskrep);
    this.taskForm = this.formBuilder.group({
-    TaskDescription: ['', Validators.required],
-    Deadline: [null, Validators.required],
-    ClassroomId: [null],
+    //replyTaskId: [''],
     file: [null]
   });
 }
@@ -58,12 +57,13 @@ onFileChange(event: any) {
 }
 
 onSubmit() {
-  if (this.taskForm.valid&& this.classroomId !== null)  {
-    const taskDescription = this.taskForm.value.TaskDescription;
-    const deadline = this.taskForm.value.Deadline;
-    const classroomId = this.taskForm.value.ClassroomId;
-    
-    this.taskService.addTask(taskDescription, deadline, this.classroomId, this.fileToUpload!).subscribe({
+  if (this.taskForm.valid && this.data.replyTaskId.idTaskrep)  {
+    const formValue = this.taskForm.value;
+   console.log( this.data.replyTaskId.idTaskrep)
+   
+    const replyTaskId =this.data.replyTaskId.idTaskrep
+
+    this.taskService.replyTask( replyTaskId, this.fileToUpload!).subscribe({
       next: (response: any) => {
         console.log('Task added successfully:', response);
         // Réinitialiser le formulaire ou rediriger vers une autre page, etc.

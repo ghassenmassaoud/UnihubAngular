@@ -68,7 +68,7 @@ export class ListClassrromStudentComponent implements OnInit {
   openClassroom(classroomId: number) {
 
     // Rediriger vers la page de la salle de classe avec l'ID ajouté à l'URL
-    this.router.navigate(['/student/aboutClassroom', classroomId]);
+    this.router.navigate(['/student/aboutClassroomstudent', classroomId]);
   }
 
 }
