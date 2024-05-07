@@ -7,7 +7,7 @@ import { Role } from '@core';
 import { AboutComponent } from './about/about.component';
 import { BlogComponent } from './blog/blog.component';
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from './Pi-User/profile/profile.component';
 import { EventComponent } from './event/event.component';
 import { EventSideBarComponent } from './event-side-bar/event-side-bar.component';
 import { EventSingleComponent } from './event-single/event-single.component';
@@ -16,19 +16,23 @@ import { CouresesComponent } from './coureses/coureses.component';
 import { CouresesListComponent } from './coureses-list/coureses-list.component';
 import { CouresesRightSideBarComponent } from './coureses-right-side-bar/coureses-right-side-bar.component';
 import { CouresesSingleComponent } from './coureses-single/coureses-single.component';
-import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { InsructorsComponent } from './insructors/insructors.component';
 import { HomeSecondeComponent } from './home-seconde/home-seconde.component';
+import { HomeComponent } from './Pi-User/home/home.component';
+import { FrontofficeComponent } from './frontoffice/frontoffice.component';
 
 export const APP_ROUTE: Route[] = [
-  {
-    path: 'home',
-    component: HomeComponent,
-    loadChildren: () =>
-      import('./home/home.routes').then((m) => m.HOME_ROUTE),
-  },
+  {path:'main', component:FrontofficeComponent , loadChildren: ()=> import('./frontoffice/frontoffice.module').then(m=>m.FrontofficeModule)},
+  // {
+  //   path: 'home',
+  //    component: HomeComponent,
+  //   // canActivate: [AuthGuard],
+
+  //   loadChildren: () =>
+  //     import('./Pi-User/home/home.routes').then((m) => m.HOME_ROUTE),
+  // },
   {
     path: 'login',
     component: LoginComponent,
@@ -53,12 +57,12 @@ export const APP_ROUTE: Route[] = [
     loadChildren: () =>
       import('./home-seconde/HomeSeconde.routes').then((m) => m.HOMESECONDE_ROUTE),
   },
-  {
-    path: 'profile',
-    component: ProfileComponent,
-    loadChildren: () =>
-      import('./profile/profile.routes').then((m) => m.PROFILE_ROUTE),
-  },
+  // {
+  //   path: 'profile',
+  //   component: ProfileComponent,
+  //   loadChildren: () =>
+  //     import('./Pi-User/profile/profile.routes').then((m) => m.PROFILE_ROUTE),
+  // },
   {
     path: 'event',
     component: EventComponent,
@@ -128,9 +132,9 @@ export const APP_ROUTE: Route[] = [
   {
     path: '',
     component: MainLayoutComponent,
-    canActivate: [AuthGuard],
+     canActivate: [AuthGuard],
     children: [
-      { path: '', redirectTo: '/authentication/signin', pathMatch: 'full' },
+      { path: '', redirectTo: '/main/home', pathMatch: 'full' },
 
       {
         path: 'admin',
@@ -243,7 +247,7 @@ export const APP_ROUTE: Route[] = [
     path: 'authentication',
     component: AuthLayoutComponent,
     loadChildren: () =>
-      import('./authentication/auth.routes').then((m) => m.AUTH_ROUTE),
+      import('./Pi-User/authentication/auth.routes').then((m) => m.AUTH_ROUTE),
   },
   { path: '**', component: Page404Component },
 ];

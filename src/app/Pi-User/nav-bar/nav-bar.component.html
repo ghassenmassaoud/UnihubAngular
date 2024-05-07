@@ -1,0 +1,49 @@
+<header id="react-header" class="react-header react-header-two">
+    <div class="menu-part">
+        <div class="container">
+            <!--================= Menu Start Here =================-->
+            <div class="react-main-menu">
+                <nav>
+                    <!--================= Menu Toggle btn =================-->
+                    <div class="menu-toggle">
+                        <div class="logo"><a href="index.html" class="logo-text"> <img src="assets/images/logo2.png" alt="logo"> </a></div>
+                        <button type="button" id="menu-btn">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <!--================= Menu Structure =================-->
+                    <div class="react-inner-menus">
+                        <ul id="backmenu" class="react-menus react-sub-shadow">
+                            <li> <a routerLink="/main/home" routerLinkActive="active">Home</a>
+
+                            </li>
+                            <li> <a routerLink="/home">Events</a>
+
+                            </li>
+                            <li> <a routerLink="/home" >Courses</a>
+
+                            </li>
+                            <li *ngIf="logged"> <a routerLink="/main/profile" >Profile</a>
+
+                            </li>
+                            <li> <a routerLink="/home">Contact</a></li>
+                        </ul>
+
+                        <div class="searchbar-part">
+
+                            <div class="react-logins">
+                                <a *ngIf="!logged"  routerLink="/authentication/signin">
+                                    Login <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                                </a>
+                                <a *ngIf="logged" (click)="logout()" routerLink="/home">Logout <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <!--=================  Menu End Here  =================-->
+        </div>
+    </div>
+</header>
