@@ -1,0 +1,185 @@
+<section class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="header">
+          <h2>All Posts</h2>
+        </div>
+        <h5 class="dashboard-title">Dashboard</h5>
+        <br>
+      
+   <div class="statistics-container">
+    <div class="statistic-box">
+      <div class="statistic-icon">
+        <i class="fa fa-book"></i>
+      </div>
+      <div class="statistic-text">
+        Total Posts: {{ getTotalPostCount(posts) }}
+      </div>
+    </div>
+    <div class="statistic-box">
+      <div class="statistic-icon">
+        <span class="material-icons-outlined">thumb_up</span>
+      </div>
+      <div class="statistic-text">
+        Total Likes: {{ getTotalLikesCount(posts) }}
+      </div>
+    </div>
+    <div class="statistic-box">
+      <div class="statistic-icon">
+        <i class="fa fa-eye"></i>
+      </div>
+      <div class="statistic-text">
+        Total Views: {{ getTotalViewsCount(posts) }}
+      </div>
+    </div>
+    <div class="percentage-circle">
+      <div class="circle" title="Reported Posts">
+        <div class="mask full">
+          <div class="fill" style="background-color: #ed8020;"></div>
+        </div>
+        <div class="mask half">
+          <div class="fill" style="background-color: #ed8020;"></div>
+          <div class="fill fix" style="background-color: #ed8020;"></div>
+        </div>
+        <div class="inside-circle">
+          <span style="color: #f7f7f7;">  {{ getReportedPostsPercentage(posts) }}%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="card">
+   
+    <div class="emoji-container">
+      <div class="emoji-item">
+        <span class="emoji">👏✅</span>
+        <span class="count">{{ getEmojiCount(posts, '😊✅') }}</span>
+      </div>
+      <div class="emoji-item">
+        <span class="emoji">🙂</span>
+        <span class="count">{{ getEmojiCount(posts, '🙂\uD83D\uDCA1') }}</span>
+      </div>
+      <div class="emoji-item">
+        <span class="emoji">😐</span>
+        <span class="count">{{ getEmojiCount(posts, '😐\uD83D\uDC4F') }}</span>
+      </div>
+      <div class="emoji-item">
+        <span class="emoji">😕❌</span>
+        <span class="count">{{ getEmojiCount(posts, '😕❌') }}</span>
+      </div>
+      <div class="emoji-item">
+        <span class="emoji">😢</span>
+        <span class="count">{{ getEmojiCount(posts, '😢') }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="body">
+    <div class="row">
+      <p></p>
+      <div class="col-md-6" *ngFor="let post of recommendations">
+        <div class="card-body">
+          <h5 class="card-title">
+            <span>{{ post.title }}</span>
+            <span class="emoji-container">{{ post.emoji }}</span>
+          </h5>
+          <p class="text-muted"><time>{{ post.datePost }}</time></p>
+          <p class="card-text" *ngIf="post.content.length <= maxLengthToShow">
+            {{ post.content }}
+          </p>
+          <div class="text-center mb-3" *ngIf="post.content.length > maxLengthToShow">
+            <p>
+              {{ post.content | slice:0:maxLengthToShow }}...
+            </p>
+            <button mat-raised-button color="primary" (click)="toggleDetails(post.postId)">
+              Read More
+            </button>
+          </div>
+          <div class="author">
+            <a href="#"><span class="text-danger"><i class="fa fa-heart"></i> {{ post.likes }}</span></a>
+            <div class="stats"> 
+              <a href="#"><i class="far fa-comment-dots"></i>{{ post.comments }}</a> 
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+  
+  
+  <div style="text-align: center;">
+    <button mat-raised-button (click)="navigateToBlog()" class="minimized-button" style="background-color: rgb(64, 117, 64); color: white;">
+      <mat-icon aria-hidden="false" aria-label="Add">add</mat-icon> Add Post
+    </button>
+  </div>
+<br>
+
+        <div class="widget back-search">
+          <form (ngSubmit)="onSubmit()">
+            <div class="search-container">
+              <input type="text" name="search" placeholder="Search..." [(ngModel)]="searchInput" (input)="filterPosts()">
+              <button type="button" class="search-icon" aria-label="Search">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </form>        </div>
+        
+        <br>
+
+        <div class="body">
+          <div class="row">
+            <div class="col-md-6" *ngFor="let post of filteredPosts">
+                  <div class="card">
+                  <div class="card-body">
+                    <div *ngIf="!searchInput || post.tags.includes(searchInput) || post.title.toLowerCase().includes(searchInput) || post.report">
+
+                    <h5 class="card-title">
+                      <span>{{ post.title }}</span>
+                      <span class="emoji-container">{{ post.emoji }}</span>
+                    </h5>
+                    <p class="text-muted"><time>{{ post.datePost }}</time></p>
+                    <p class="card-text" *ngIf="post.content.length <= maxLengthToShow">
+                      {{ post.content }}
+                    </p>
+                    <div class="text-center mb-3" *ngIf="post.content.length > maxLengthToShow">
+                      <p>
+                        {{ post.content | slice:0:maxLengthToShow }}...
+                      </p>
+                      <button mat-raised-button color="primary" (click)="toggleDetails(post.postId)">
+                        Read More
+                      </button>
+                    </div>
+                    <div class="author">
+                      <a href="#"><span class="text-danger"><i class="fa fa-heart"></i> {{ post.likes }}</span></a>
+                      <div class="stats"> 
+                        <a href="#"><i class="far fa-comment-dots"></i>{{ post.comments }}</a> 
+                      </div>
+                      <p class="card-text {{ post.report ? 'reported' : 'not-reported' }}">
+                        {{ post.report ? 'Reported' : 'Not Reported' }}
+                                          </p>
+                      <div class="action-buttons">
+                        <button class="edit-button" aria-label="Edit" (click)="editDetails(post.postId)">
+                          <mat-icon>edit</mat-icon> 
+                        </button>
+                        <button class="delete-button" aria-label="Delete" (click)="deletePost(post.postId)">
+                          <mat-icon>delete</mat-icon> 
+                        </button>
+                        
+                      <button mat-raised-button class="minimized-button"  (click)="toggleReport(post)">
+                        <mat-icon aria-hidden="false" aria-label="Reported">report_problem</mat-icon>
+                        {{ post.report ? 'Unreport!' : 'Report!' }}
+                    </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

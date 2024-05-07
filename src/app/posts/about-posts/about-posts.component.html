@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Details</title>
+     <!--================= Meta tag =================-->
+     <meta charset="utf-8">
+     <title>Blog Details | Echooling - Online Education HTML Template</title>
+     <meta name="description" content="">
+     <!--================= Responsive Tag =================-->
+     <meta http-equiv="x-ua-compatible" content="ie=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <!--================= Favicon =================-->
+     <link rel="apple-touch-icon" href="assets/images/fav.png">
+     <link rel="shortcut icon" type="image/x-icon" href="assets/images/fav.png">
+
+</head>
+<body class="course-single blog-post-page blog-post-single-page">
+                            <br><br>
+                            <div *ngIf="post">
+                                <div class="react-wrapper">
+                                    <div class="react-wrapper-inner">
+                                        <div class="react-breadcrumbs">
+                                            <div class="breadcrumbs-wrap">
+                                                <div class="breadcrumbs-inner">
+                                                    <div class="container">
+                                                        <div class="breadcrumbs-text">
+                                                            <div class="breadcrumbs-title-wrapper">
+                                                                <h1 class="breadcrumbs-title">{{ post.title }}</h1>
+                                                                <span class="emoji">{{ post.emoji }}</span>
+                                                            </div>
+                                                            <ul class="user-section">
+                                                                <li>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+                                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                                        <polyline points="12 6 12 12 16 14"></polyline>
+                                                                    </svg>
+                                                                    {{ post.datePost }}
+                                                                </li>
+                                                                <li>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                                                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                                                        <circle cx="12" cy="12" r="3"></circle>
+                                                                    </svg>
+                                                                    {{ post.status }}
+                                                                </li>
+                                                            </ul>
+                                                      
+                                                          
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br><br>
+                                <br><br>
+                                <br><br>
+                                <br><br><br>
+
+                                <div class="back__course__page_grid react-courses__single-page pb---40 pt---110">
+                                    <div class="container pb---70">
+                                        <div class="row">
+                                            <div class="col-lg-8">
+                                                <div class="blog-single-inner">
+                                                    <div class="blog-content">
+                                                        <p>{{ post.content }}</p>
+                                                        <ul *ngIf="post.attachment && post.attachment.length > 0">
+                                                            <li *ngFor="let attachment of post.attachment">{{ attachment.name }}</li>
+                                                        </ul>
+                                                        <div class="blog-tags">
+                                                            <div class="row align-items-center">
+                                                                <div class="col-md-6">
+                                                                    <ul class="meta-tags">
+                                                                        <li class="tags">Tags:</li>
+                                                                        <li *ngFor="let tag of post.tags">
+                                                                            <a [href]="'/tags/' + tag">{{ tag }}</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="emoji-container">
+                                                                    <div class="emoji-item">
+                                                                        <button (click)="likePost()" [ngClass]="{'button-clicked': isLikeClicked, 'button-bold': likeBold}"><span>👍</span> Like</button>
+                                                                        <button (click)="lovePost()" [ngClass]="{'button-clicked': isLikeClicked, 'button-bold': loveBold}"><span>❤️</span> Love</button>
+                                                                        <button (click)="solutionPost()" [ngClass]="{'button-clicked': isLikeClicked, 'button-bold': solutionBold}"><span>✅</span> Solution</button>
+                                                                        <button (click)="instructivePost()" [ngClass]="{'button-clicked': isLikeClicked, 'button-bold': instructiveBold}"><span>💡</span> Instructive</button>
+                                                                        <button (click)="dislikePost()" [ngClass]="{'button-clicked': isLikeClicked, 'button-bold': dislikeBold}"><span>👎</span> Dislike</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                                            <div class="card">
+                                                                <div class="chat">
+                                                                    <div class="chat-header clearfix">
+                                                                        <img src="assets/images/user/user2.jpg" alt="avatar">
+                                                                        <div class="chat-about">
+                                                                            <button class="btn btn-primary" (click)="navigateToComments()">Comments</button>
+
+                                                                            <div class="chat-num-messages">comments</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <ng-scrollbar style="height: 449px" visibility="hover">
+                                                                        <div class="chat-history" id="chat-conversation">
+                                                                            <div *ngIf="comments.length > 0">
+                                                                                <hr>
+                                                                                <div *ngFor="let comment of comments" class="comment-container" >
+                                                                                    <div class="comment" *ngIf="!comment.report">
+                                                                                        <div class="message-data text-end" style="margin-bottom: 10px;">
+                                                                                            <span class="message-data-time" *ngIf="comment.commentDate">{{ comment.commentDate }}</span>
+                                                                                        </div>
+                                                                                        <div *ngIf="comment.content" class="message other-message float-end">{{ comment.content }}</div>
+                                                                                        <a href="#" ><span class="text-danger"><i class="fa fa-heart"></i> {{ comment.likes }}</span></a>
+                                                                                    </div>
+                                                                                    <div class="comment-reply-space"></div>
+                                                                                    <div class="message-data reply-container">
+                                                                                        <div  class="reply-container">
+                                                                                            <div class="reply" *ngFor="let reply of comment.replies">
+                                                                                                <div class="reply" *ngIf="!comment.report">
+                                                                                                    <div class="reply-info">
+                                                                                                        <div class="message-data " style="margin-bottom: 10px;">
+                                                                                                            <span class="message-data-time" *ngIf="reply.commentDate">{{ reply.commentDate }}</span>
+                                                                                                        </div>
+                                                                                                        <a href="#" class="float-end"><span class="text-danger"><i class="fa fa-heart"></i> {{ reply.likes }}</span></a>
+                                                                                                        <div *ngIf="reply.content" class="message my-message">{{ reply.content }}</div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </ng-scrollbar>
+                                
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br><br>
+                                            <div class="col-lg-4 md-mt-60">
+                                                <div class="react-sidebar ml----90 float-right"> 
+                                                    <div class="widget back-post">
+                                                        <h3 class="widget-title">Popular Posts</h3>
+                                                        <ul class="related-courses">
+                                                            <li *ngFor="let post of topThreePosts">
+                                                                <div class="titles" (click)="onPopularPostClick(post.postId)">
+                                                                    <h6 class="post-title">{{ post.title }}</h6>
+                                                                    <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> {{ post.datePost }}</span>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="widget widget-tags">
+                                                        <h3 class="widget-title">Tags</h3>
+                                                        <ul class="tags">
+                                                            <li *ngFor="let tag of allTags"><a href="#">{{ tag }}</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            
+        <div id="backscrollUp">
+            <span aria-hidden="true" class="arrow_carrot-up"></span>
+        </div> 
+          <!--================= Scroll to Top Start =================-->
+          <div id="backscrollUp">
+            <span aria-hidden="true" class="arrow_carrot-up"></span>
+        </div>
+        <!--================= Scroll to Top End =================-->
+
+        <!--================= Jquery latest version =================-->
+        <script src="assets/js/jquery.min.js"></script>
+        <!--================= Modernizr js =================-->
+        <script src="assets/js/modernizr-2.8.3.min.js"></script>
+        <!--================= Bootstrap js =================-->
+        <script src="assets/js/bootstrap.min.js"></script>
+        <!--================= Owl Carousel js =================-->
+        <script src="assets/js/owl.carousel.min.js"></script>
+        <!--================= Magnific Popup =================-->
+        <script src="assets/js/jquery.magnific-popup.min.js"></script>
+        <!--================= Counter up js =================-->
+        <script src="assets/js/jquery.counterup.min.js"></script>
+        <script src="assets/js/waypoints.min.js"></script>
+        <!--================= Wow js =================-->
+        <script src="assets/js/wow.min.js"></script>
+        <script src="assets/js/isotope.pkgd.min.js"></script>
+        <!--================= Imagesloaded.pkgd.min js =================-->
+        <script src="assets/js/imagesloaded.pkgd.min.js"></script>
+        <!--================= skill.bars.jquery.js =================-->
+        <script src="assets/js/skill.bars.jquery.js"></script>
+        <!--================= menus js =================-->
+        <script src="assets/js/menus.js"></script>
+        <!--================= Plugins js =================-->
+        <script src="assets/js/plugins.js"></script>
+		<!--================= Main js =================-->
+        <script src="assets/js/main.js"></script>
+
+        

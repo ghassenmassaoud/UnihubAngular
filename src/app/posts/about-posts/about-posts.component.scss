@@ -1,0 +1,103 @@
+.breadcrumbs-title-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumbs-title {
+    margin-right: 500px; 
+}
+
+.emoji {
+    font-size: 1.5em; 
+}
+.post-title {
+  color: blue;
+}
+
+.like-action, .love-action, .instructive-action, .solution-action, .dislike-action {
+    cursor: pointer;
+    margin-right: 10px;
+    padding: 5px 10px;
+}
+
+.emoji-container {
+    display: flex;
+    list-style-type: none; 
+    padding: 0;
+    border: none;
+  }
+  
+  .emoji-item {
+    display: flex;
+    align-items: center;
+    margin-right: 100px; 
+  }
+  .emoji-item span {
+    font-size: 20px; 
+    font-family: 'VotrePolicePersonnalisee', sans-serif; 
+  }
+  .element-with-line {
+    border-bottom: 1px solid black; 
+  }
+  
+  .emoji-item button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 150px; 
+    margin-right: 5px;
+  }
+  
+  .emoji-item:last-child {
+    margin-right: 0; 
+  }
+  
+.breadcrumbs-header {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.title-emoji-wrapper {
+    display: flex;
+    align-items: center;
+    flex-grow: 1; 
+}
+
+.breadcrumbs-title {
+    margin-right: 0px; 
+}
+
+.emoji {
+    font-size: 24px;
+}
+
+.report-button {
+    margin-left: 10px; 
+}
+.meta-tags .tags {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.widget.back-post .related-courses li {
+    margin-bottom: 20px;
+  }
+  
+  .widget.back-post .titles h4 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .widget.back-post .titles span {
+    font-size: 16px;
+    color: #888;
+  }
+
+  .button-clicked {
+    transform: scale(1.1); 
+  }
+  .button-bold {
+    font-weight: bold; 
+  }

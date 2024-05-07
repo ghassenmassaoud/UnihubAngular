@@ -23,17 +23,20 @@ import { HomeSecondeComponent } from './home-seconde/home-seconde.component';
 import { HomeComponent } from './Pi-User/home/home.component';
 import { FrontofficeComponent } from './frontoffice/frontoffice.component';
 import { ClassroomComponent } from './teacher/classroom/classroom.component';
-
+import { PostsComponent } from './posts/all-posts/posts.component';
+import { AboutPostsComponent } from './posts/about-posts/about-posts.component';
+import { PostClassComponent } from './post-class/post-class.component';
+import { AddPostsComponent } from './posts/add-posts/add-posts.component';
+import { EditPostsComponent } from './posts/edit-posts/edit-posts.component';
+import { CommentsComponent } from './comment/comments/comments.component';
+import { AboutCommentComponent } from './comment/about-comment/about-comment.component';
+import { EditCommentComponent } from './comment/edit-comment/edit-comment.component';
+import { UserpostsComponent } from './posts/userposts/userposts.component';
+import { UserDetailsPostsComponent } from './posts/user-details-posts/user-details-posts.component';
+import { UserAddPostsComponent } from './posts/user-add-posts/user-add-posts.component';
 export const APP_ROUTE: Route[] = [
   {path:'main', component:FrontofficeComponent , loadChildren: ()=> import('./frontoffice/frontoffice.module').then(m=>m.FrontofficeModule)},
-  // {
-  //   path: 'home',
-  //    component: HomeComponent,
-  //   // canActivate: [AuthGuard],
 
-  //   loadChildren: () =>
-  //     import('./Pi-User/home/home.routes').then((m) => m.HOME_ROUTE),
-  // },
   {
     path: 'login',
     component: LoginComponent,
@@ -48,7 +51,7 @@ export const APP_ROUTE: Route[] = [
   },
   {
     path: 'instructors',
-    component: InsructorsComponent,
+    component: CommentsComponent,
     loadChildren: () =>
       import('./insructors/instuctor.routes').then((m) => m.INSTRUCTORS_ROUTE),
   },
@@ -65,49 +68,60 @@ export const APP_ROUTE: Route[] = [
   //     import('./Pi-User/profile/profile.routes').then((m) => m.PROFILE_ROUTE),
   // },
   {
+
+    path: 'home-seconde/:postId',
+    component: UserDetailsPostsComponent,
+    loadChildren: () =>
+      import('./home-seconde/HomeSeconde.routes').then((m) => m.HOMESECONDE_ROUTE),
+  },
+  {
+    path: 'profile',
+    component: AddPostsComponent,
+    loadChildren: () =>
+      import('./profile/profile.routes').then((m) => m.PROFILE_ROUTE),
+  },
+  {
     path: 'event',
-    component: EventComponent,
+    component: UserAddPostsComponent,
     loadChildren: () =>
       import('./event/event.routes').then((m) => m.EVENT_ROUTE),
   },
   {
     path: 'event-side-bar',
-    component: EventSideBarComponent,
+    component: UserpostsComponent,
     loadChildren: () =>
       import('./event-side-bar/event-side-bar.routes').then((m) => m.EVENTSIDEBAR_ROUTE),
   },
   {
-    path: 'event-single',
-    component: EventSingleComponent,
+    path: 'event-single/:commentId',
+    component: AboutCommentComponent,
     loadChildren: () =>
       import('./event-single/event-single.routes').then((m) => m.EVENTSINGLE_ROUTE),
   },
   {
     path: 'blog',
-    component: BlogComponent,
+    component: PostsComponent,
     loadChildren: () =>
       import('./blog/blog.routes').then((m) => m.BLOG_ROUTE),
   },
   {
-    path: 'blog-details',
-    component: BlogDetailsComponent,
+    path: 'blog-details/:postId',
+    component: AboutPostsComponent,
     loadChildren: () =>
       import('./blog-details/blog-deatils.routes').then((m) => m. BLOGDETAILS_ROUTE),
   },
   {
-    path: 'about',
-    component: AboutComponent,
+    path: 'about/:postId',
+    component: EditPostsComponent,
     loadChildren: () =>
       import('./about/about.routes').then((m) => m.ABOUT_ROUTE),
   },
   {
     path: 'coureses',
-    component: CouresesComponent,
+    component: PostsComponent,
     loadChildren: () =>
       import('./coureses/coureses.routes').then((m) => m.COURESES_ROUTE),
   },
-
-
   {
     path: 'coureses-list',
     component: CouresesListComponent,
@@ -128,7 +142,7 @@ export const APP_ROUTE: Route[] = [
   },
   {
     path: 'contact',
-    component: ContactComponent,
+    component: EditCommentComponent,
     loadChildren: () =>
       import('./contact/contact.routes').then((m) => m.CONTACT_ROUTE),
   },
@@ -166,6 +180,12 @@ export const APP_ROUTE: Route[] = [
         loadChildren: () =>
           import('./student/student.routes').then((m) => m.STUDENT_ROUTE),
       },
+
+      {
+        path: 'admin/posts',
+        component: PostsComponent,
+      },
+
       {
         path: 'calendar',
         loadChildren: () =>
