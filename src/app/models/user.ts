@@ -1,3 +1,5 @@
+import { Classroom } from './Classroom';
+import { ReplyTask } from './ReplyTask';
 import { Role } from './Role';
 
 export class User {
@@ -9,4 +11,16 @@ export class User {
   lastName!: string;
   role!: Role;
   token!: string;
+    //state!: State;
+        //profiles!: Profile[];
+        speciality!: string;
+        classrooms!: Classroom[];
+        // events!: Event[];
+        // posts!: Post[];
+        // comments!: Comment[];
+        // complaints!: Complaint[];
+        //demands!: Demand[];
+        //ressourceSpaces!: RessourceSpace[];
+        classroomStudent!: Classroom[];
+        replyTask!: ReplyTask[];
 }
