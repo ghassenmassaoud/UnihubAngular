@@ -1,0 +1,172 @@
+<section class="content">
+    <div class="content-block">
+      @for (breadscrum of breadscrums; track breadscrum) {
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+        </app-breadcrumb>
+      </div>
+      }
+      
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="card card-statistic-2">
+            <div class="clearfix">
+              <div class="card-icon-only shadow-primary float-start">
+                <img src="assets/images/banner/img1.png" alt="">
+              </div>
+              <div class="card-right">
+                <div>
+                  <h6 class="float-end">Todays Complaints</h6>
+                </div>
+                <div class="col-green">
+                  <h4 class="font-weight-bold float-end mb-0">8</h4>
+                </div>
+              </div>
+            </div>
+            <div class="card-content msl-4 mb-3">
+              <p class="m-b-0 d-flex font-12"><i class="material-icons col-green psr-2">trending_up</i> 10% Higher Then
+                Yesterday
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="card card-statistic-2">
+            <div class="clearfix">
+              <div class="card-icon-only shadow-primary float-start">
+                <img src="assets/images/banner/img2.png" alt="">
+              </div>
+              <div class="card-right">
+                <div>
+                  <h6 class="float-end">Complaints of this week</h6>
+                </div>
+                <div class="col-green">
+                  <h4 class="font-weight-bold float-end mb-0">48</h4>
+                </div>
+              </div>
+            </div>
+            <div class="card-content msl-4 mb-3">
+              <p class="m-b-0 d-flex font-12"><i class="material-icons col-orange psr-2">trending_down</i> 07% Less Then
+                Last
+                Week
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="card card-statistic-2">
+            <div class="clearfix">
+              <div class="card-icon-only shadow-primary float-start">
+                <img src="assets/images/banner/img3.png" alt="">
+              </div>
+              <div class="card-right">
+                <div>
+                  <h6 class="float-end">Complaints of this Month</h6>
+                </div>
+                <div class="col-green">
+                  <h4 class="font-weight-bold float-end mb-0">187</h4>
+                </div>
+              </div>
+            </div>
+            <div class="card-content msl-4 mb-3">
+              <p class="m-b-0 d-flex font-12"><i class="material-icons col-green psr-2">trending_up</i> 12% Higher Then
+                Last Month
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="card card-statistic-2">
+            <div class="clearfix">
+              <div class="card-icon-only shadow-primary float-start">
+                <img src="assets/images/banner/img4.png" alt="">
+              </div>
+              <div class="card-right">
+                <div>
+                  <h6 class="float-end">Total Complaints</h6>
+                </div>
+                <div class="col-green">
+                  <h4 class="font-weight-bold float-end mb-0">17</h4>
+                </div>
+              </div>
+            </div>
+            <div class="card-content msl-4 mb-3">
+             
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="materialTableHeader">
+      
+              <div class="left">
+                <ul class="header-buttons-left ms-0"> 
+                  <li class="tbl-title">
+                    <h2>Complaint List</h2>
+                  </li>
+                  <!-- <li class="tbl-search-box">
+                    <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                    <input placeholder="Search" type="text" #filter class="browser-default search-field"
+                      aria-label="Search box" >
+                  </li> -->
+                </ul> 
+              </div>
+            </div>
+            
+            <div class="body overflow-auto">
+              <div class="responsive_table">
+                
+
+
+                <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Complaint ID</th>
+                        <th>Description</th>
+                        <th>Complaint Type</th>
+                        <th>Title</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let complaint of dataSource">
+                        <tr>
+                          <td>{{ complaint.complaintId }}</td>
+                          <td>{{ complaint.description }}</td>
+                          <td>{{ complaint.complaintType }}</td>
+                          <td>{{ complaint.title }}</td>
+                          <td>
+                            <button [ngClass]="{'red-button': !complaint.status, 'green-button': complaint.status}">
+                              {{ complaint.status ? 'seen' : 'unseen' }}
+                            </button>
+                          </td>
+                          <td>
+                            <!-- Boutons d'action ici -->
+                            <button type="button" class="btn btn-outline-danger" (click)="deleteComplaint(complaint.complaintId)">Delete</button>
+                          </td> 
+                          <td>
+                            <!-- Boutons d'action ici -->
+                            <button type="button" class="btn btn-outline-secondary" (click)="openComplaintDialog(complaint)">Détails</button>
+                          </td> 
+                          <!-- Supprimez les colonnes <td> supplémentaires ici -->
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+
+                <div class="no-results" [style.display]="dataLength === 0 ? '' : 'none'">
+                  No results
+                </div>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+

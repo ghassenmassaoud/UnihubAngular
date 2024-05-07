@@ -1,5 +1,6 @@
 import { Route } from '@angular/router';
 import { Page404Component } from 'app/authentication/page404/page404.component';
+import { DemandeListeComponent } from 'app/student/demande-liste/demande-liste.component';
 
 export const ADMIN_ROUTE: Route[] = [
   {
@@ -26,11 +27,13 @@ export const ADMIN_ROUTE: Route[] = [
     loadChildren: () =>
       import('./courses/courses.routes').then((m) => m.COURSE_ROUTE),
   },
+  
   {
     path: 'library',
     loadChildren: () =>
       import('./library/library.routes').then((m) => m.LIBRARY_ROUTE),
   },
+ 
   {
     path: 'departments',
     loadChildren: () =>

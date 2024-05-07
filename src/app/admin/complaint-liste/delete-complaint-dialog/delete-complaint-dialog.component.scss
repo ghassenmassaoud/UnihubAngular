@@ -1,0 +1,43 @@
+/* Add this CSS to your component's CSS file or styles.scss */
+
+.dialog-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  
+  .dialog-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
+  }
+  
+  .cancel-button {
+    margin-right: 8px;
+  }
+
+  button {
+    margin-right: 8px;
+  }
+
+  :host {
+    display: block;
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px;
+    max-width: 500px;
+    // animation: custom-dialog-enter 1s ease;
+  }
+  
+  @keyframes custom-dialog-enter {
+    from {
+      transform: scale(0) rotate(360deg);
+    }
+  
+    to {
+      transform: none;
+    }
+  }
+  
+  
+  /* Adjust the styles as needed */

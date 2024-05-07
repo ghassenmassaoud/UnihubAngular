@@ -1,0 +1,24 @@
+
+    <!-- <div>
+        <p>Description: ..............................................................</p>
+        <p>Creation Date: ............................................................</p>
+        <p>Demand Type: ..............................................................</p>
+      </div>
+   -->
+   <h1>Demand Type: {{ demande.demandType }}</h1>
+   <p>Demand id: {{ demande.demandId }}</p>
+   <p>Description: {{ demande.description }}</p>
+
+<br>
+<br>
+
+<h2>Response suggestions</h2>
+
+   <div *ngIf="recommend(demande.description).length !== 0">
+     <div class="sendmail-buttons">
+       <button *ngFor="let rec of recommend(demande.description)" (click)="sendmail(rec)">{{ rec }}</button>
+     </div>
+   </div>
+   <hr>
+   <button (click)="setDemandAsSeen(demande.demandId)" style="margin-right: 10px;" type="button" class="btn btn-light">Treated</button>
+   <button (click)="dialogRef.close()" style="margin-right: 10px;" type="button" class="btn btn-light">Close</button>

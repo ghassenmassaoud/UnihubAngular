@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Homework } from './homework.modal';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -33,42 +33,42 @@ export class HomeworkService {
   addHomework(homework: Homework): void {
     this.dialogData = homework;
 
-    // this.httpClient.post(this.API_URL, homework)
-    //   .subscribe({
-    //     next: (data) => {
-    //       this.dialogData = homework;
-    //     },
-    //     error: (error: HttpErrorResponse) => {
-    //        // error code here
-    //     },
-    //   });
+     this.httpClient.post(this.API_URL, homework)
+       .subscribe({
+         next: (data) => {
+           this.dialogData = homework;
+         },
+        error: (error: HttpErrorResponse) => {
+           // error code here
+        },
+       });
   }
 
   updateHomework(homework: Homework): void {
     this.dialogData = homework;
 
-    // this.httpClient.put(this.API_URL + homework.id, homework)
-    //     .subscribe({
-    //       next: (data) => {
-    //         this.dialogData = homework;
-    //       },
-    //       error: (error: HttpErrorResponse) => {
-    //          // error code here
-    //       },
-    //     });
+    this.httpClient.put(this.API_URL + homework.id, homework)
+        .subscribe({
+          next: (data) => {
+            this.dialogData = homework;
+          },
+          error: (error: HttpErrorResponse) => {
+             // error code here
+          },
+        });
   }
 
   deleteHomework(id: number): void {
     console.log(id);
 
-    // this.httpClient.delete(this.API_URL + id)
-    //     .subscribe({
-    //       next: (data) => {
-    //         console.log(id);
-    //       },
-    //       error: (error: HttpErrorResponse) => {
-    //          // error code here
-    //       },
-    //     });
+    this.httpClient.delete(this.API_URL + id)
+        .subscribe({
+          next: (data) => {
+            console.log(id);
+          },
+          error: (error: HttpErrorResponse) => {
+             // error code here
+          },
+        });
   }
 }

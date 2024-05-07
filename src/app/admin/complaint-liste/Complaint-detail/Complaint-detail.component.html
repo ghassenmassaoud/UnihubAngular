@@ -1,0 +1,26 @@
+
+    <!-- <div>
+        <p>Description: ..............................................................</p>
+        <p>Creation Date: ............................................................</p>
+        <p>Demand Type: ..............................................................</p>
+      </div>
+   -->
+   
+   <h1>Complaint : {{ complaint.complaintType }}</h1>
+   <p>- Complaint id : {{ complaint.complaintId }}</p>
+   <p>- Description : {{ complaint.description }}</p>
+
+<br>
+<br>
+
+<h2>Response suggestions</h2>
+
+   <div *ngIf="recommend(complaintt.description).length !== 0">
+     <div class="sendmail-buttons">
+       <button *ngFor="let rec of recommend(complaintt.description)" (click)="sendmail(rec)"  type="button" class="btn btn-outline-primary">{{ rec }} </button>
+     </div>
+   </div>
+   <hr>
+   <button (click)="setComplaintAsSeen(complaintt.complaintId)" style="margin-right: 10px;" type="button" class="btn btn-light">Treated</button>
+   <button (click)="dialogRef.close()" type="button" class="btn btn-light">Close</button>
+   

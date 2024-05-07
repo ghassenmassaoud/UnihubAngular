@@ -1,0 +1,235 @@
+<section class="content">
+    <div class="content-block">
+      @for (breadscrum of breadscrums; track breadscrum) {
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+        </app-breadcrumb>
+      </div>
+      }
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+          <div class="card">
+            <div class="body">
+              <div id="mail-nav">
+                <button type="button" class="btn btn-success waves-effect m-b-15">YOUR COMPLAINTS HERE</button>
+                <ul class="" id="mail-folders">
+                   <li class="active">
+                    
+                    <a href="javascript:;" title="Sent">Sent
+                      <span class="badge bg-orange">8</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:;"  title="Important">Seen<span class="badge bg-orange">5</span></a>
+                  </li>
+                  <li>
+                    <a href="javascript:;"  title="Starred">Unseen<span class="badge bg-orange">3</span></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+          <div class="card">
+            <div class="boxs mail_listing">
+              <div class="inbox-center table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th colspan="1">
+                        <div class="inbox-header">
+                          COMPOSE NEW COMPLAINT
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+             
+              <form class="m-4" [formGroup]="complaintForm" (ngSubmit)="onSubmit()">
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+
+                                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                    <mat-label>Your Complaint Title/Subject</mat-label>
+                                    <input matInput formControlName="title" required>
+                                    <mat-error *ngIf="complaintForm.get('title')?.hasError('required')">Your Complaint Title/Subject</mat-error>
+                                </mat-form-field>
+                            </div>
+                    <div class="row">
+                            <div class="row">
+                              <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+   
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                        <mat-label>Type your reclamation text here</mat-label>
+                                        <input matInput formControlName="description" required>
+                                        <mat-error *ngIf="complaintForm.get('description')?.hasError('required')">insert your information here</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="row">
+                              <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                    <mat-label>Type of Complaint</mat-label>
+                                    <mat-select formControlName="complaintType" required>
+                                      @for (type of complaintType; track type){
+                                      <mat-option [value]="type">{{type}}</mat-option>}
+                                    </mat-select>
+                                    <mat-error *ngIf="complaintForm.get('complaintType')?.hasError('required')">Type of Complaint is required</mat-error>                                  </mat-form-field> 
+                                </div>
+                                  </div> 
+                                </div> 
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                                    <button class="btn-space" [disabled]="!complaintForm.valid" mat-raised-button color="primary">Send</button>                                    <button type="button" mat-raised-button color="warn">Cancel</button>
+                                </div>
+                            </div>
+                        
+                    </div>
+                </div>
+              </form>
+            </div>
+        </div>
+    <!-- </div> -->
+  <!-- </section> -->
+  <!-- <section class="content">
+      <div class="content-block">
+        @for (breadscrum of breadscrums; track breadscrum) {
+        <div class="block-header">
+          <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+          </app-breadcrumb>
+        </div>
+        }
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="card">
+              <div class="body">
+                <div id="mail-nav">
+                  <button type="button" class="btn btn-success waves-effect m-b-15">ADD DEMAND</button>
+                  <ul class="" id="mail-folders">
+                     <li class="active">
+                      <a href="inbox.html" title="Inbox">Inbox
+                        <span class="badge bg-orange">6</span>
+                      </a>
+                    </li> 
+                    <li>
+                      <a href="javascript:;" title="Sent">Sent</a>
+                    </li>
+                    <li>
+                      <a href="javascript:;" title="Important">Seen</a>
+                    </li>
+                    <li>
+                      <a href="javascript:;" title="Starred">Unseen</a>
+                    </li>
+                  </ul>
+                   <h5 class="b-b p-10 text-strong">Labels</h5>
+                  <ul class="" id="mail-labels">
+                    <li>
+                      <a href="javascript:;">
+                        <i class="material-icons col-red">local_offer</i>Family</a>
+                    </li>
+                    <li>
+                      <a href="javascript:;">
+                        <i class="material-icons col-blue">local_offer</i>Work</a>
+                    </li>
+                    <li>
+                      <a href="javascript:;">
+                        <i class="material-icons col-orange">local_offer</i>Shop</a>
+                    </li>
+                    <li>
+                      <a href="javascript:;">
+                        <i class="material-icons col-cyan">local_offer</i>Themeforest</a>
+                    </li>
+                    <li>
+                      <a href="javascript:;">
+                        <i class="material-icons col-blue-grey">local_offer</i>Google</a>
+                    </li>
+                  </ul>
+                  <h5 class="b-b p-10 text-strong">Online</h5>
+                  <ul class="online-user" id="online-offline">
+                    <li>
+                      <a href="javascript:;">
+                        <i class="material-icons col-green" title="Online">brightness_1</i>Sachin</a>
+                    </li>
+                    <li>
+                      <a href="javascript:;">
+                        <i class="material-icons col-indigo" title="Off Line">brightness_1</i>John
+                        Smith
+                      </a>
+                    </li>
+                    <li>
+                      <a href="javascript:;">
+                        <i class="material-icons col-orange" title="Away">brightness_1</i>Askay</a>
+                    </li>
+                    <li>
+                      <a href="javascript:;">
+                        <i class="material-icons col-indigo" title="Off Line">brightness_1</i>Dhavan</a>
+                    </li>
+                    <li>
+                      <a href="javascript:;">
+                        <i class="material-icons col-indigo" title="Off Line">brightness_1</i>Lee</a>
+                    </li> -
+                   </ul> 
+                </div>
+              </div>
+            </div>
+          </div>
+  
+    
+          <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+            <div class="card">
+              <div class="boxs mail_listing">
+                <div class="inbox-center table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th colspan="1">
+                          <div class="inbox-header">
+                            Compose New Demand
+                          </div>
+                        </th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+                <div class="row">
+                  <form>
+                  <div class="col-lg-12">
+                    <form class="composeForm">
+                    
+                    <div class="form-line">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label >Demand Type</mat-label>
+                          <input matInput type="demandType" id="demandType" [(ngModel)]="demand.demandType">
+                        </mat-form-field>
+                      </div>
+                      <div class="form-line">
+                          <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label >Insert Your Personnal Information Here</mat-label>
+                            <input matInput id="description" [(ngModel)]="demand.description">
+                          </mat-form-field>
+                        </div>
+                       <ckeditor [editor]="Editor" data="<p>Insert Your Personnal Information Here</p>"></ckeditor>
+                      <div class="compose-editor m-t-20">
+                        <div id="summernote"></div>
+                        <input type="file" class="default" multiple>
+                      </div> 
+                    </form>
+                  </div>
+                  <div class="col-lg-12">
+                    <div class="m-l-25 m-b-20">
+                      <button mat-flat-button color="primary" (click)="sendDemand(demand)"class="msr-2">Send</button>
+                      <button mat-flat-button color="warn">Discard</button>
+                    </div>
+                  </div>
+                </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->

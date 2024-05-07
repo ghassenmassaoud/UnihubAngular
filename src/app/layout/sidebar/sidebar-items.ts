@@ -26,6 +26,34 @@ export const ROUTES: RouteInfo[] = [
     badgeClass: '',
     role: ['Admin'],
     submenu: [
+
+      {
+        path: '/admin/attendance/Demands',
+        title: 'Demands',
+        iconType: '',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        role: ['Admin'],
+        submenu: [],
+      },
+   
+      {
+        path: '/admin/dashboard/ComplaintListe',
+        title: 'Complaints',
+        iconType: '',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        role: [''],
+        submenu: [],
+      },
+
+
       {
         path: '/admin/dashboard/main',
         title: 'MENUITEMS.DASHBOARD.LIST.DASHBOARD1',
@@ -38,6 +66,7 @@ export const ROUTES: RouteInfo[] = [
         role: [''],
         submenu: [],
       },
+     
       {
         path: '/admin/dashboard/dashboard2',
         title: 'MENUITEMS.DASHBOARD.LIST.DASHBOARD2',
@@ -62,6 +91,18 @@ export const ROUTES: RouteInfo[] = [
         role: [''],
         submenu: [],
       },
+      // {
+      //   path: '/admin/dashboard/student-dashboard',
+      //   title: 'MENUITEMS.DASHBOARD.LIST.STUDENT-DASHBOARD',
+      //   iconType: 'material-icons-outlined',
+      //   icon: '',
+      //   class: '',
+      //   groupTitle: false,
+      //   badge: '',
+      //   badgeClass: '',
+      //   role: [''],
+      //   submenu: [],
+      // },
       {
         path: '/admin/dashboard/student-dashboard',
         title: 'MENUITEMS.DASHBOARD.LIST.STUDENT-DASHBOARD',
@@ -563,6 +604,18 @@ export const ROUTES: RouteInfo[] = [
         role: ['Admin'],
         submenu: [],
       },
+      // {
+      //   path: '/admin/attendance/Demands',
+      //   title: 'Demands',
+      //   iconType: '',
+      //   icon: '',
+      //   class: 'ml-menu',
+      //   groupTitle: false,
+      //   badge: '',
+      //   badgeClass: '',
+      //   role: ['Admin'],
+      //   submenu: [],
+      // },
       {
         path: '/admin/attendance/details',
         title: 'MENUITEMS.ATTENDANCE.LIST.DETAILS',
@@ -656,8 +709,8 @@ export const ROUTES: RouteInfo[] = [
   // Student Modules
 
   {
-    path: '/student/dashboard',
-    title: 'MENUITEMS.STUDENT.LIST.DASHBOARD',
+    path: '/student/AddDemand',
+    title: 'DEMANDS',
     iconType: 'material-icons-outlined',
     icon: 'space_dashboard',
     class: '',
@@ -668,8 +721,8 @@ export const ROUTES: RouteInfo[] = [
     submenu: [],
   },
   {
-    path: '/student/homework',
-    title: 'MENUITEMS.STUDENT.LIST.HOMEWORK',
+    path: '/student/Complaints',
+    title: 'COMPLAINT',
     iconType: 'material-icons-outlined',
     icon: 'article',
     class: '',
@@ -679,6 +732,18 @@ export const ROUTES: RouteInfo[] = [
     role: ['Student'],
     submenu: [],
   },
+  // {
+  //   path: '/student/homework',
+  //   title: 'MENUITEMS.STUDENT.LIST.HOMEWORK',
+  //   iconType: 'material-icons-outlined',
+  //   icon: 'article',
+  //   class: '',
+  //   groupTitle: false,
+  //   badge: '',
+  //   badgeClass: '',
+  //   role: ['Student'],
+  //   submenu: [],
+  // },
   {
     path: '/student/leave-request',
     title: 'MENUITEMS.STUDENT.LIST.LEAVE-REQUEST',

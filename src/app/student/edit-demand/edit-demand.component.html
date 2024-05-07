@@ -1,0 +1,22 @@
+<div class="dialog-container">
+    <h2>Are you sure you want to Update demand with ID: {{ data.demandId }}?</h2>
+    <form [formGroup]="demandsForm" id="editForm">
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea id="description" formControlName="description" rows="4"></textarea>
+        <mat-error *ngIf="demandsForm.get('description')?.hasError('required')">Insert your information here</mat-error>
+      </div>
+      <div>
+        <mat-form-field class="example-full-width mb-3" appearance="outline">
+          <mat-label>Type of Demand</mat-label>
+          <mat-select formControlName="demandType" required>
+            <mat-option *ngFor="let type of demandType" [value]="type">{{ type }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="demandsForm.get('demandType')?.hasError('required')">Type of Demand is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <button mat-button color="warn" type="button" class="btn btn-outline-success"(click)="updateDemand(data.demandId, demandsForm.value)">Edit</button>
+      </div>
+    </form>
+  </div>

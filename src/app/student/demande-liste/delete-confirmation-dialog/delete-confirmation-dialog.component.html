@@ -1,0 +1,8 @@
+<h2>Confirm Deletion</h2>
+
+<p>Are you sure you want to delete demand with ID: {{ data.demandId }}?</p>
+
+<div class="dialog-buttons">
+    <button mat-button type="button" class="btn btn-outline-danger" (click)="dialogRef.close()">Cancel</button>
+  <button mat-button color="warn" type="button" class="btn btn-outline-success"(click)="deleteDemand(data.demandId)" >Confirm</button>
+</div>

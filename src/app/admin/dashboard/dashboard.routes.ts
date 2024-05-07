@@ -4,6 +4,7 @@ import { Dashboard2Component } from './dashboard2/dashboard2.component';
 import { DashboardComponent as StudentDashboard } from 'app/student/dashboard/dashboard.component';
 import { DashboardComponent } from 'app/teacher/dashboard/dashboard.component';
 import { Page404Component } from 'app/authentication/page404/page404.component';
+import { ComplaintListeComponent } from '../complaint-liste/complaint-liste.component';
 export const DASHBOARD_ROUTE: Route[] = [
   {
     path: '',
@@ -13,6 +14,10 @@ export const DASHBOARD_ROUTE: Route[] = [
   {
     path: 'main',
     component: MainComponent,
+  },
+  {
+    path: 'ComplaintListe',
+    component: ComplaintListeComponent,
   },
   {
     path: 'dashboard2',
