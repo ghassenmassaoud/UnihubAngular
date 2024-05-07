@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { Classroom } from 'app/models/Classroom';
-import { User } from 'app/models/User';
+import { User } from '../../Pi-User/Models/User';
 import { ClassroomService } from 'app/services/classroom.service';
 import { Observable, catchError, tap } from 'rxjs';
 import { FormDialogComponent } from './form-dialog/form-dialog.component';
@@ -42,7 +42,7 @@ import { EditAbsenceDialogComponent } from './editAbsence/editAbsence.component'
 @Component({
   selector: 'app-about-classroom',
   standalone: true,
-  imports: [ 
+  imports: [
     CommonModule,
     BreadcrumbComponent,
     MatButtonModule,
@@ -105,9 +105,9 @@ export class AboutClassroomComponent  implements OnInit {
   displayedColumnsStudents: string[] = ['firstName', 'lastName', 'email'];
   displayedColumnsLessons: string[] = ['lessonName', 'documents'];
   displayedColumnsAbsence: string[] = ['studentName', 'dateAbsence', 'statusAbsence'];
-  
-  constructor(private classroomService: ClassroomService,  
-    private route: ActivatedRoute ,  
+
+  constructor(private classroomService: ClassroomService,
+    private route: ActivatedRoute ,
     public dialog: MatDialog,
     private  lesson:LessonService,
     private task:TaskService,
@@ -196,7 +196,7 @@ export class AboutClassroomComponent  implements OnInit {
       });
     }
   }
-  
+
   showNotification(message: string) {
     this.snackBar.open(message, '', {
       duration: 2000,
@@ -216,7 +216,7 @@ export class AboutClassroomComponent  implements OnInit {
           this.lesson.getLessonsByClassroom(classroom.idClassroom).subscribe({
             next: (lessons: Lesson[]) => {
               this.enrolledLessons = lessons;
-              this.dataSource1 = new MatTableDataSource<Lesson>(this.enrolledLessons); 
+              this.dataSource1 = new MatTableDataSource<Lesson>(this.enrolledLessons);
             },
             error: (error) => {
               console.error('Error loading enrolled lesson:', error);
@@ -424,7 +424,7 @@ addNewTask(): void {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'success') {
-        this.loadTask(); 
+        this.loadTask();
       }
     });
   } else {

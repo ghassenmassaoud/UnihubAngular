@@ -14,7 +14,7 @@ import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { Absence } from 'app/models/Absence';
-import { User } from 'app/models/User';
+import { User } from '../../../Pi-User/Models/User';
 import { MatTableDataSource } from '@angular/material/table';
 import { ClassroomService } from 'app/services/classroom.service';
 
@@ -42,7 +42,7 @@ export interface DialogData {
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
-  
+
     MatDialogActions,
     MatButtonModule,
     MatDialogClose,
@@ -53,7 +53,7 @@ export class EditAbsenceDialogComponent  implements OnInit {
   absenceForm!: FormGroup;
   enrolledStudents: User[] = [];
   //absenceId: number;
-  classroomId: number | null = null; 
+  classroomId: number | null = null;
   noClassroomSelected = false;
   dataSource = new MatTableDataSource<User>([]);
   constructor(
@@ -69,7 +69,7 @@ export class EditAbsenceDialogComponent  implements OnInit {
       dateAbsence: [data.absenceId.dateAbsence, Validators.required],
       selectedStudent: [data.absenceId.studentId?.firstName, Validators.required]
     });
-     
+
   }
   ngOnInit() {
     this.loadEnrolledStudents();
@@ -102,7 +102,7 @@ export class EditAbsenceDialogComponent  implements OnInit {
     if (this.absenceForm.valid && this.data.absenceId ) {
       const formValue = this.absenceForm.value;
       const absenceId =this.data.absenceId.idAbsence
-       formValue.selectedStudent; 
+       formValue.selectedStudent;
       formValue.statusAbsence = formValue.statusAbsence.toUpperCase();
       formValue.dateAbsence =formValue.dateAbsence
 

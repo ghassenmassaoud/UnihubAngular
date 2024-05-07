@@ -67,55 +67,24 @@ export const APP_ROUTE: Route[] = [
   //   loadChildren: () =>
   //     import('./Pi-User/profile/profile.routes').then((m) => m.PROFILE_ROUTE),
   // },
-  {
 
-    path: 'home-seconde/:postId',
-    component: UserDetailsPostsComponent,
-    loadChildren: () =>
-      import('./home-seconde/HomeSeconde.routes').then((m) => m.HOMESECONDE_ROUTE),
-  },
-  {
-    path: 'profile',
-    component: AddPostsComponent,
-    loadChildren: () =>
-      import('./profile/profile.routes').then((m) => m.PROFILE_ROUTE),
-  },
-  {
-    path: 'event',
-    component: UserAddPostsComponent,
-    loadChildren: () =>
-      import('./event/event.routes').then((m) => m.EVENT_ROUTE),
-  },
-  {
-    path: 'event-side-bar',
-    component: UserpostsComponent,
-    loadChildren: () =>
-      import('./event-side-bar/event-side-bar.routes').then((m) => m.EVENTSIDEBAR_ROUTE),
-  },
+
+
+
   {
     path: 'event-single/:commentId',
     component: AboutCommentComponent,
     loadChildren: () =>
       import('./event-single/event-single.routes').then((m) => m.EVENTSINGLE_ROUTE),
   },
-  {
-    path: 'blog',
-    component: PostsComponent,
-    loadChildren: () =>
-      import('./blog/blog.routes').then((m) => m.BLOG_ROUTE),
-  },
-  {
-    path: 'blog-details/:postId',
-    component: AboutPostsComponent,
-    loadChildren: () =>
-      import('./blog-details/blog-deatils.routes').then((m) => m. BLOGDETAILS_ROUTE),
-  },
-  {
-    path: 'about/:postId',
-    component: EditPostsComponent,
-    loadChildren: () =>
-      import('./about/about.routes').then((m) => m.ABOUT_ROUTE),
-  },
+
+  // {
+  //   path: 'blog-details/:postId',
+  //   component: AboutPostsComponent,
+  //   loadChildren: () =>
+  //     import('./blog-details/blog-deatils.routes').then((m) => m. BLOGDETAILS_ROUTE),
+  // },
+
   {
     path: 'coureses',
     component: PostsComponent,
@@ -140,12 +109,7 @@ export const APP_ROUTE: Route[] = [
     loadChildren: () =>
       import('./coureses-single/coureses-single.routes').then((m) => m.COURESESSINGLE_ROUTE),
   },
-  {
-    path: 'contact',
-    component: EditCommentComponent,
-    loadChildren: () =>
-      import('./contact/contact.routes').then((m) => m.CONTACT_ROUTE),
-  },
+
   {
     path: '',
     component: MainLayoutComponent,

@@ -43,14 +43,14 @@ export class UserAddPostsComponent {
   postForm: FormGroup;
   postId!: number  | undefined;
   public Editor = ClassicEditor;
-  editorContent: string = '<p>Hello, world!</p>'; 
+  editorContent: string = '<p>Hello, world!</p>';
 
   constructor(private formBuilder: FormBuilder,private route: ActivatedRoute,private wordCheckService: WordCheckService,private stateService: StateService, private cs: CommentsService,private router: Router, private ps: PostsService, private sortService: SortService) {
     this.postForm = this.formBuilder.group({
       user: [{ idUser: '1' }],
       title: ['', Validators.required],
-      content: ['', Validators.required], 
-      tags: [[], [Validators.required, Validators.pattern('#[a-zA-Z0-9]+')]], 
+      content: ['', Validators.required],
+      tags: [[], [Validators.required, Validators.pattern('#[a-zA-Z0-9]+')]],
       datePost: [null, Validators.required],
     });
   }
@@ -70,13 +70,13 @@ export class UserAddPostsComponent {
     formData.append('userId', '1');
     formData.append('title', title);
     formData.append('content', content);
-    formData.append('datePost', new Date().toISOString().split('T')[0]); 
+    formData.append('datePost', new Date().toISOString().split('T')[0]);
     formData.append('tags', this.postForm.get('tags')!.value);
 
     this.ps.addPost(formData, 1).subscribe({
       next: (response) => {
         console.log('Post added successfully:', response);
-        this.router.navigate(['./home-seconde', response.postId]);
+        this.router.navigate(['/main/post', response.postId]);
       },
       error: (error) => {
         console.error('Error adding post:', error);
@@ -84,7 +84,7 @@ export class UserAddPostsComponent {
     });
   }
 
- 
+
   navigateToPosts() {
     if (this.postId) {
       this.router.navigate(['./blog-details', this.postId]);
@@ -92,5 +92,5 @@ export class UserAddPostsComponent {
       console.log('Post ID is undefined.');
     }
   }
- 
+
 }

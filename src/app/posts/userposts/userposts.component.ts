@@ -37,7 +37,7 @@ export class UserpostsComponent {
   topThreePosts: MyPosts[] = [];
   allPosts: MyPosts[] = [];
   allTags: string[] = [];
-  maxLengthToShow = 200; 
+  maxLengthToShow = 200;
   recommendations: MyPosts[] = [];
 
   constructor(private route: ActivatedRoute,private router: Router, private rc:RecommService,private ps: PostsService, private sortService: SortService) {}
@@ -58,26 +58,26 @@ export class UserpostsComponent {
   Recomm(): void {
     this.rc.getRecomm(this.userId).subscribe({
       next: (data: MyPosts[]) => {
-        console.log('Données de recommandation reçues :', data); 
+        console.log('Données de recommandation reçues :', data);
         this.recommendations = data;
       },
       error: (error) => {
         console.error('Erreur lors de la récupération des recommandations :', error);
       }
     });
-  
+
   }
   onPopularPostClick(postId: number) {
-    this.router.navigate(['/home-seconde', postId]); 
+    this.router.navigate(['/main/post', postId]);
   }
   navigateToShare() {
-    this.router.navigate(['/event']);
+    this.router.navigate(['/main/share']);
   }
   toggleDetails(postId: number) {
     if (this.posts && this.posts.length > 0) {
       const post = this.posts.find(post => post.postId === postId);
       if (post) {
-        this.router.navigate(['./home-seconde', postId]);
+        this.router.navigate(['/main/post', postId]);
       } else {
         console.error('Post not found with ID:', postId);
       }
@@ -103,7 +103,7 @@ export class UserpostsComponent {
     this.ps.getPosts().subscribe({
       next: (data) => {
         this.allPosts = data;
-        this.posts = data; 
+        this.posts = data;
         this.getTopThreePosts();
         this.extractTagsFromPosts(data);
       },

@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from 'app/Pi-User/home/home.component';
 import { ProfileComponent } from 'app/Pi-User/profile/profile.component';
+import { UserAddPostsComponent } from 'app/posts/user-add-posts/user-add-posts.component';
+import { UserDetailsPostsComponent } from 'app/posts/user-details-posts/user-details-posts.component';
+import { UserpostsComponent } from 'app/posts/userposts/userposts.component';
 import { AddComplaintComponent } from 'app/student/Complaints/add-complaint/add-complaint.component';
 import { AboutClassroomStudentComponent } from 'app/student/about-classroom-student/about-classroom-student.component';
 import { AddDemandeComponent } from 'app/student/add-demande/add-demande.component';
@@ -54,7 +57,25 @@ const routes: Routes = [
          loadChildren: () =>
            import('../student/student.routes').then((m) => m.STUDENT_ROUTE),
       },
+      {
+        path: 'posts',
+        component: UserpostsComponent,
+        loadChildren: () =>
+          import('../event-side-bar/event-side-bar.routes').then((m) => m.EVENTSIDEBAR_ROUTE),
+      },
+      {
 
+        path: 'post/:postId',
+        component: UserDetailsPostsComponent,
+        loadChildren: () =>
+          import('../home-seconde/HomeSeconde.routes').then((m) => m.HOMESECONDE_ROUTE),
+      },
+      {
+        path: 'share',
+        component: UserAddPostsComponent,
+        loadChildren: () =>
+          import('../event/event.routes').then((m) => m.EVENT_ROUTE),
+      },
 
 ];
 

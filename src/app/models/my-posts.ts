@@ -1,5 +1,5 @@
 import { PostLike } from "./post-like";
-import { User } from "./user";
+import { User } from "../Pi-User/Models/User";
 export enum Status {
     published = 'published',
     pending = 'pending',
@@ -11,14 +11,14 @@ export class MyPosts {
     title!: string;
     content!: string;
     tags!: string[];
-    datePost!: string; 
+    datePost!: string;
     likes!: number;
     views!: number;
-    status?: string; 
-    student!: User; 
-    comments!: Comment[]; 
+    status?: string;
+    student!: User;
+    comments!: Comment[];
     report!: boolean;
-    postLikes!: PostLike[]; 
+    postLikes!: PostLike[];
     sentimentScore!: number;
     emoji!: string;
 }

@@ -36,7 +36,7 @@
                                                                     </button>
                                                                 </div>
 
-                                                            
+
                                                             <ul class="user-section">
                                                                 <li>
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
@@ -53,8 +53,8 @@
                                                                     {{ post.status }}
                                                                 </li>
                                                             </ul>
-                                                       
-                                                          
+
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -73,8 +73,8 @@
                                             <div class="col-lg-8">
                                                 <div class="blog-single-inner">
                                                     <div class="blog-content">
-                                                        <p>{{ post.content }}</p>
-                        
+                                                    {{ post.content }}
+
                                                         <div class="blog-tags">
                                                             <div class="row align-items-center">
                                                                 <div class="col-md-6">
@@ -138,10 +138,10 @@
                                                                         </div>
                                                                     </ng-scrollbar>
                                                                     <div class="chat-message clearfix">
-                                                                       
+
                                                                         <textarea class="form-control" rows="3" placeholder="Add a comment..." [(ngModel)]="commentContent"></textarea>
                                                                         <button class="btn btn-primary" (click)="addNewComment()">Share</button>
-                                                                    
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -151,7 +151,7 @@
                                             </div>
                                             <br><br>
                                             <div class="col-lg-4 md-mt-60">
-                                                <div class="react-sidebar ml----90 float-right"> 
+                                                <div class="react-sidebar ml----90 float-right">
                                                     <div class="widget back-post">
                                                         <h3 class="widget-title">Popular Posts</h3>
                                                         <ul class="related-courses">
@@ -177,10 +177,10 @@
 
                             </div>
 
-                            
+
         <div id="backscrollUp">
             <span aria-hidden="true" class="arrow_carrot-up"></span>
-        </div> 
+        </div>
           <!--================= Scroll to Top Start =================-->
           <div id="backscrollUp">
             <span aria-hidden="true" class="arrow_carrot-up"></span>
@@ -214,4 +214,3 @@
 		<!--================= Main js =================-->
         <script src="assets/js/main.js"></script>
 
-        

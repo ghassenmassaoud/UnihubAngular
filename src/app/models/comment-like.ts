@@ -1,5 +1,5 @@
 import { Comment } from "./comment";
-import { User } from "./user";
+import { User } from "../Pi-User/Models/User";
 
 export enum LikeAction {
     like = 'like',

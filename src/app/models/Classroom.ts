@@ -1,5 +1,5 @@
 import { Absence } from "./Absence";
-import { User } from "./User";
+import { User } from "../Pi-User/Models/User";
 
 export class Classroom {
     idClassroom!: number;
@@ -8,4 +8,3 @@ export class Classroom {
     absences!: Absence[];
     students!: User[];
   }
-  

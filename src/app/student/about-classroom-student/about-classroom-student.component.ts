@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { Classroom } from 'app/models/Classroom';
-import { User } from 'app/models/User';
+import { User } from '../../Pi-User/Models/User';
 import { ClassroomService } from 'app/services/classroom.service';
 import { Observable, catchError, tap } from 'rxjs';
 //import { FormDialogComponent } from './form-dialog/form-dialog.component';
@@ -38,7 +38,7 @@ import { FormDialogTaskComponent } from './form-dialog-task/form-dialog-Task.com
 @Component({
   selector: 'app-about-classroom-student',
   standalone: true,
-  imports: [ 
+  imports: [
     CommonModule,
     BreadcrumbComponent,
     MatButtonModule,
@@ -102,9 +102,9 @@ export class AboutClassroomStudentComponent  implements OnInit {
   displayedColumnsStudents: string[] = ['firstName', 'lastName', 'email'];
   displayedColumnsLessons: string[] = ['lessonName', 'documents'];
   displayedColumnsAbsence: string[] = ['studentName', 'dateAbsence', 'statusAbsence'];
-  
-  constructor(private classroomService: ClassroomService,  
-    private route: ActivatedRoute ,  
+
+  constructor(private classroomService: ClassroomService,
+    private route: ActivatedRoute ,
     public dialog: MatDialog,
     private  lesson:LessonService,
     private task:TaskService,
@@ -172,7 +172,7 @@ export class AboutClassroomStudentComponent  implements OnInit {
           this.lesson.getLessonsByClassroom(classroom.idClassroom).subscribe({
             next: (lessons: Lesson[]) => {
               this.enrolledLessons = lessons;
-              this.dataSource1 = new MatTableDataSource<Lesson>(this.enrolledLessons); 
+              this.dataSource1 = new MatTableDataSource<Lesson>(this.enrolledLessons);
             },
             error: (error) => {
               console.error('Error loading enrolled lesson:', error);

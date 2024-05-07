@@ -1,17 +1,12 @@
-import { MyPosts } from "./my-posts";
-import { PostLike } from "./post-like";
+import { Role } from './Role';
 
 export class User {
-    idUser!: number;
+  id!: number;
+  img!: string;
+  username!: string;
+  password!: string;
   firstName!: string;
   lastName!: string;
-  birthDate!: string; 
-  email!: string;
-  number!: number;
-  password!: string;
-  firstAuth!: boolean;
-  code!: number;
-  posts: MyPosts[] = [];
-  comments: Comment[] = [];
-  postLikes: PostLike[] = [];
+  role!: Role;
+  token!: string;
 }

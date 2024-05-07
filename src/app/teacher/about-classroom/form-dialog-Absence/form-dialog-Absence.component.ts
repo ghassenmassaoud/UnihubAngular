@@ -13,7 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
-import { User } from 'app/models/User';
+import { User } from '../../../Pi-User/Models/User';
 import { AbsenceService } from 'app/services/absence.service';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
@@ -45,7 +45,7 @@ export class FormDialogAbsenceComponent implements OnInit {
   //selectedClassroomId: number | null = null;
   noClassroomSelected = false;
   dataSource = new MatTableDataSource<User>([]);
-  classroomId: number | null = null; 
+  classroomId: number | null = null;
   constructor(
     private dialogRef: MatDialogRef<FormDialogAbsenceComponent>,
     private formBuilder: FormBuilder,
@@ -66,7 +66,7 @@ ngOnInit(): void {
   if (this.classroomId !== null) {
     console.log(this.classroomId);
     console.log(this.loadEnrolledStudents());
-   } 
+   }
 }
 loadEnrolledStudents(): void {
   if (this.classroomId !== null) {
@@ -96,7 +96,7 @@ onSubmit(): void {
   if (this.absenceForm.valid && this.classroomId !== null) {
     const formValue = this.absenceForm.value;
     formValue.statusAbsence = formValue.statusAbsence.toUpperCase();
-    const selectedStudentId = formValue.selectedStudent; 
+    const selectedStudentId = formValue.selectedStudent;
     // Extract the selected student's ID
     this.abs.addAbsence(this.classroomId, selectedStudentId, formValue).subscribe({
       next: (response: any) => {

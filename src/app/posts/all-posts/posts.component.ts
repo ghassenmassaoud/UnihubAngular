@@ -32,20 +32,20 @@ import { RecommService } from 'app/recomm.service';
   providers: [PostsService]
 })
 export class PostsComponent implements OnInit {
-  
+
   title= 'posts-app';
   posts!: MyPosts[];
   postId!: number  | undefined;
-  showTagsAndAttachments: boolean = false; 
+  showTagsAndAttachments: boolean = false;
   filteredPosts!: MyPosts[] ;
   searchInput: string = '';
-  maxLengthToShow = 200; 
+  maxLengthToShow = 200;
   recommendations: MyPosts[] = [];
 
 
 
 userId= 1;
-  
+
   constructor(private ps: PostsService, private router: Router, private rc:RecommService){
 
   }
@@ -56,7 +56,7 @@ userId= 1;
     console.log('On init ..')
     this.ps.getPosts().subscribe(
       data => {
-        this.filteredPosts = data 
+        this.filteredPosts = data
        return this.posts = data     }
     )
     this.Recomm();
@@ -66,7 +66,7 @@ userId= 1;
   Recomm(): void {
     this.rc.getRecomm(this.userId).subscribe({
       next: (data: MyPosts[]) => {
-        console.log('Données de recommandation reçues :', data); 
+        console.log('Données de recommandation reçues :', data);
         this.recommendations = data;
       },
       error: (error) => {
@@ -74,14 +74,14 @@ userId= 1;
       }
     });
   }
-  
- 
+
+
   toggleDetails(postId: number) {
     const post = this.posts.find(post => post.postId === postId);
     if (post) {
- 
-        this.router.navigate(['./blog-details', postId]);
-     
+
+        this.router.navigate(['admin/post-details', postId]);
+
 
     } else {
       console.error('Post not found with ID:', postId);
@@ -89,20 +89,20 @@ userId= 1;
 
   }
 
-  
+
   editDetails(postId: number) {
     const post = this.posts.find(post => post.postId === postId);
     if (post) {
-      this.router.navigate(['./about', postId]);
+      this.router.navigate(['admin/about/:postId', postId]);
     } else {
       console.error('Post not found with ID:', postId);
     }
 
   }
   navigateToBlog() {
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/admin/profile']);
   }
-  
+
   onSubmit(): void {
     this.ps.filterPostsByTags(this.searchInput).subscribe({
       next: (data) => {
@@ -115,20 +115,20 @@ userId= 1;
   }
 
 
-  
+
   filterPosts() {
     this.filteredPosts = this.posts.filter(post => {
       const searchLower = this.searchInput.toLowerCase().trim();
-  
+
       const matchesTag = post.tags.some(tag => tag.toLowerCase() === searchLower);
       const matchesTitle = post.title.toLowerCase().includes(searchLower);
       const matchesReported = searchLower === 'reported' && post.report;
       const matchesNotReported = searchLower === 'not reported' && !post.report;
-  
+
       if (!searchLower) {
         return true;
       }
-  
+
       return matchesTag || matchesTitle || matchesReported || matchesNotReported;
     });
   }
@@ -148,7 +148,7 @@ userId= 1;
     this.ps.deletePost(postId).subscribe({
       next: (response) => {
         console.log('Post deleted successfully:', response);
-        this.fetchPosts(); 
+        this.fetchPosts();
       },
       error: (error) => {
         console.error('Error deleting post:', error);
@@ -160,10 +160,10 @@ userId= 1;
     if (posts && Array.isArray(posts)) {
       return posts.length;
     } else {
-      return 0; 
+      return 0;
     }
   }
-  
+
   getTotalLikesCount(posts: MyPosts[]): number {
     if (posts && Array.isArray(posts)) {
       let totalLikes = 0;
@@ -172,7 +172,7 @@ userId= 1;
       });
       return totalLikes;
     } else {
-      return 0; 
+      return 0;
     }
   }
   getTotalViewsCount(posts: MyPosts[]): number {
@@ -185,27 +185,27 @@ userId= 1;
       });
       return totalViews;
     } else {
-      return 0; 
+      return 0;
     }
   }
-  
+
   getReportedPostsPercentage(posts: MyPosts[]): number {
     if (!posts || !Array.isArray(posts)) {
-      return 0; 
+      return 0;
     }
-  
+
     const reportedPosts = posts.filter(post => post && post.report);
     const totalPosts = this.getTotalPostCount(posts);
     const percentage = totalPosts > 0 ? (reportedPosts.length / totalPosts) * 100 : 0;
-    return parseFloat(percentage.toFixed(1)); 
+    return parseFloat(percentage.toFixed(1));
   }
-  
- 
+
+
   getEmojiCount(posts: MyPosts[], emoji: string): number {
     if (!posts || !Array.isArray(posts)) {
-      return 0; 
+      return 0;
     }
-  
+
     let count = 0;
     posts.forEach(post => {
       if (post && post.emoji === emoji) {
@@ -238,4 +238,4 @@ userId= 1;
     }
 }
 
-}  
+}

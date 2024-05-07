@@ -20,7 +20,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 @Component({
   selector: 'app-about-posts',
   standalone: true,
-  imports: [  
+  imports: [
       CommonModule,
       MatInputModule,
     MatDatepickerModule,
@@ -131,14 +131,14 @@ export class AboutPostsComponent {
 
 navigateToComments() {
   this.cs.getCommentsForPost(this.postId).subscribe(comments => {
-    this.router.navigate(['/contact', { postId: this.postId, comments: comments }]);
+    this.router.navigate(['/admin/contact', { postId: this.postId, comments: comments }]);
   });
 }
   reportPost(): void {
       this.ps.ReportPost(this.postId).subscribe({
           next: () => {
               this.post.reported = true;
-              this.reportDisplayed = true; 
+              this.reportDisplayed = true;
               console.log('Post marked as reported.', this.post.reported);
           },
           error: (error) => {
@@ -146,12 +146,12 @@ navigateToComments() {
           },
       });
   }
-  
+
   unreportPost(): void {
       this.ps.UnReportPost(this.postId).subscribe({
           next: () => {
               this.post.reported = false;
-              this.unreportDisplayed = false; 
+              this.unreportDisplayed = false;
               console.log('Post unmarked as reported.', this.post.reported);
           },
           error: (error) => {
@@ -192,7 +192,7 @@ navigateToComments() {
       console.warn('No comments found for this post.');
     }
   }
- 
+
   resetBoldState(): void {
     this.likeBold = false;
     this.loveBold = false;
@@ -240,12 +240,12 @@ navigateToComments() {
     localStorage.setItem('userLikes', JSON.stringify(userLikes));
   }
   likePost(): void {
-    this.isLikeClicked = true; 
+    this.isLikeClicked = true;
     setTimeout(() => {
-      this.isLikeClicked = false; 
-    }, 200); 
+      this.isLikeClicked = false;
+    }, 200);
 
-  
+
     this.ps.addPostAction(this.postId, 1, LikeAction.like).subscribe({
       next: (data) => {
         this.post = data;
@@ -263,13 +263,13 @@ navigateToComments() {
 
   }
   onPopularPostClick(postId: number) {
-    this.router.navigate(['/home-seconde', postId]); 
+    this.router.navigate(['/home-seconde', postId]);
   }
   lovePost(): void {
-    this.isLikeClicked = true; 
+    this.isLikeClicked = true;
     setTimeout(() => {
-      this.isLikeClicked = false; 
-    }, 200); 
+      this.isLikeClicked = false;
+    }, 200);
     this.ps.addPostAction(this.postId, 1, LikeAction.love).subscribe({
       next: (data) => {
         this.post = data;
@@ -287,10 +287,10 @@ navigateToComments() {
   }
 
   solutionPost(): void {
-    this.isLikeClicked = true; 
+    this.isLikeClicked = true;
     setTimeout(() => {
-      this.isLikeClicked = false; 
-    }, 200); 
+      this.isLikeClicked = false;
+    }, 200);
     this.ps.addPostAction(this.postId, 1, LikeAction.solution).subscribe({
       next: (data) => {
         this.post = data;
@@ -308,10 +308,10 @@ navigateToComments() {
   }
 
   instructivePost(): void {
-    this.isLikeClicked = true; 
+    this.isLikeClicked = true;
     setTimeout(() => {
       this.isLikeClicked = false;
-    }, 200); 
+    }, 200);
     this.ps.addPostAction(this.postId, 1, LikeAction.instructive).subscribe({
       next: (data) => {
         this.post = data;
@@ -332,7 +332,7 @@ navigateToComments() {
     this.isLikeClicked = true;
     setTimeout(() => {
       this.isLikeClicked = false;
-    }, 200); 
+    }, 200);
     this.ps.addPostAction(this.postId, 1, LikeAction.dislike).subscribe({
       next: (data) => {
         this.post = data;

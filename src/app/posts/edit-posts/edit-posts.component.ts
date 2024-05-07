@@ -33,7 +33,7 @@ import { WordCheckService } from 'app/wordchek';
 })
 export class EditPostsComponent {
   postForm: FormGroup;
-  status!: Status[]; 
+  status!: Status[];
   postId!: number;
   selectedFile: File | null = null;
 
@@ -51,13 +51,13 @@ export class EditPostsComponent {
       report: [false],
     });
   }
-  
+
   ngOnInit(): void {
     this.status = Object.values(Status);
     this.route.params.subscribe(params => {
       this.postId = +params['postId'];
       console.log('Post ID:', this.postId);
-      this.getPostDetails(this.postId);  
+      this.getPostDetails(this.postId);
     });
   }
   getPostDetails(postId: number): void {
@@ -65,7 +65,7 @@ export class EditPostsComponent {
     this.ps.getPostById(postId).subscribe(
       (post) => {
         this.postForm.patchValue({
-          user: [{ idUser: '1' }], 
+          user: [{ idUser: '1' }],
           title: post.title,
           content: post.content,
           tags: post.tags,
@@ -82,7 +82,7 @@ export class EditPostsComponent {
     );
   }
   navigateToBlog() {
-    this.router.navigate(['/blog']);
+    this.router.navigate(['/admin/postAdmin']);
   }
 
   editPost(userId: number, postId: number) {
@@ -99,7 +99,7 @@ export class EditPostsComponent {
     return this.ps.editPost(userId, postId, formData).subscribe(
       (response) => {
         console.log('Post edited successfully:', response);
-        this.router.navigate(['/blog']);
+        this.router.navigate(['/admin/postAdmin']);
       },
       (error) => {
         console.error('Error editing post:', error);
@@ -120,9 +120,9 @@ export class EditPostsComponent {
     }
 
     if (this.postForm.valid  && this.postId) {
-      const userId = 1; 
-      const postId = this.postId; 
-      this.editPost(userId, postId); 
+      const userId = 1;
+      const postId = this.postId;
+      this.editPost(userId, postId);
     } else {
       console.error('Form is invalid');
     }
