@@ -1,5 +1,5 @@
 import { Club } from "app/models/club";
-import { User } from "app/models/user";
+import { User } from "../Pi-User/Models/User";
 
 export class ProfileId {
     club!: Club;
@@ -10,7 +10,7 @@ export enum ProfileRole {
     ADMIN = 'ADMIN',
     MEMBER = 'MEMBER'
   }
-  
+
 export enum State {
     ACTIVE = 'ACTIVE',
     BANNED = 'BANNED'
@@ -23,9 +23,8 @@ export class Profile {
 }
 
 
-  
- 
-  
- 
-  
-  
+
+
+
+
+

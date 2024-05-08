@@ -44,12 +44,7 @@ import { ClubJoinedComponent } from './club-joined/club-joined.component';
 import { EventListComponent } from './event-list/event-list.component';
 export const APP_ROUTE: Route[] = [
   {path:'main', component:FrontofficeComponent , loadChildren: ()=> import('./frontoffice/frontoffice.module').then(m=>m.FrontofficeModule)},
-  {
-    path: 'home/:idUtilisateur',
-    component: EventJoinedComponent,
-    loadChildren: () =>
-      import('./home/home.routes').then((m) => m.HOME_ROUTE),
-  },
+
   {
     path: 'login',
     component: LoginComponent,
@@ -68,12 +63,12 @@ export const APP_ROUTE: Route[] = [
     loadChildren: () =>
       import('./insructors/instuctor.routes').then((m) => m.INSTRUCTORS_ROUTE),
   },
-  {
-    path: 'home-seconde',
-    component: MyclubComponent,
-    loadChildren: () =>
-      import('./home-seconde/HomeSeconde.routes').then((m) => m.HOMESECONDE_ROUTE),
-  },
+  // {
+  //   path: 'home-seconde',
+  //   component: MyclubComponent,
+  //   loadChildren: () =>
+  //     import('./home-seconde/HomeSeconde.routes').then((m) => m.HOMESECONDE_ROUTE),
+  // },
   // {
   //   path: 'profile',
   //   component: ProfileComponent,
@@ -91,12 +86,7 @@ export const APP_ROUTE: Route[] = [
     loadChildren: () =>
       import('./profile/profile.routes').then((m) => m.PROFILE_ROUTE),
   },
-  {
-    path: 'profile/:idUser/:idClub',
-    component: MyprofileComponent,
-    loadChildren: () =>
-      import('./profile/profile.routes').then((m) => m.PROFILE_ROUTE),
-  },
+
 
   {
     path: 'event',
@@ -104,12 +94,7 @@ export const APP_ROUTE: Route[] = [
     loadChildren: () =>
       import('./event/event.routes').then((m) => m.EVENT_ROUTE),
   },
-  {
-    path: 'event-side-bar',
-    component: EventListComponent,
-    loadChildren: () =>
-      import('./event-side-bar/event-side-bar.routes').then((m) => m.EVENTSIDEBAR_ROUTE),
-  },
+
   {
     path: 'event-single',
     component: EventSingleComponent,
@@ -130,24 +115,14 @@ export const APP_ROUTE: Route[] = [
     loadChildren: () =>
       import('./coureses/coureses.routes').then((m) => m.COURESES_ROUTE),
   },
-  {
-    path: 'coureses-list/:id',
-    component: ClubJoinedComponent,
-    loadChildren: () =>
-      import('./coureses-list/coureses-list.routes').then((m) => m.COURESESLIST_ROUTE),
-  },
+
   {
     path: 'coureses-right-side',
     component: CouresesRightSideBarComponent,
     loadChildren: () =>
       import('./coureses-right-side-bar/coureses-right-side-bar.routes').then((m) => m.COURESESRIGHTSIDE_ROUTE),
   },
-  {
-    path: 'coureses-single/:id',
-    component: ClubDetailComponent,
-    loadChildren: () =>
-      import('./coureses-single/coureses-single.routes').then((m) => m.COURESESSINGLE_ROUTE),
-  },
+
 
   {
     path: '',

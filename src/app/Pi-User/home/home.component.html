@@ -221,10 +221,11 @@
                                 </div>
                             </div>
 
-                          <div class="single-studies col-lg-4 grid-item filter5 filter1 "*ngFor="let element of listUsers">
+                          <div class="single-studies col-lg-4 grid-item filter5 filter1 "*ngFor="let club of clubs">
                                 <div class="inner-course">
                                     <div class="case-img">
-                                        <a href="#" class="cate-w">{{element.firstName}}</a>
+                                        <!-- <a href="#" class="cate-w">{{club.clubName}}</a> -->
+                                        <button class="cate-w" (click)="redirectToCourse(club.idClub)">{{ club.clubName }}</button>
                                         <img src="assets/images/course-filter/2.jpg" alt="Course Image">
                                     </div>
                                     <div class="case-content">
@@ -232,7 +233,7 @@
                                             <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> 3.5 review </li>
                                             <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> 55 Students </li>
                                         </ul>
-                                        <h4 class="case-title"> <a href="coureses-single.html">Everything You Need to Know <br> About Business.</a></h4>
+                                        <h4 class="case-title"> <a href="coureses-single.html">{{club.clubType}}</a></h4>
                                         <div class="react__user">
                                             <img src="assets/images/course/small-image/5.png" alt="user"> Natasha Pawel
                                         </div>

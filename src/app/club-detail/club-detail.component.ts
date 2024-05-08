@@ -21,8 +21,8 @@ export class ClubDetailComponent {
   club!:Club
   clubId!:number
   events:Event[]=[];
-  
-  
+
+
   constructor(private Act : ActivatedRoute, private clubService:ClubService, private eventService:EventService, private router: Router){}
 
 
@@ -31,10 +31,10 @@ export class ClubDetailComponent {
     this.id= this.Act.snapshot.params['id']
     this.clubId = this.Act.snapshot.params['clubId'];
 
-    
+
     this.clubService.getClub(this.id).subscribe(
       data=>this.club=data
-  
+
     )
 
     this.clubService.getEventListByClubId(this.id).subscribe(data =>{
@@ -45,25 +45,25 @@ export class ClubDetailComponent {
 
 
 
-   
+
   }
 
-  
+
   joinClub(clubId: number): void {
-    const userId = 3; // Remplacez 1 par l'ID de l'utilisateur (vous pouvez le récupérer depuis votre service d'authentification ou d'une autre manière)
-    
-    this.clubService.assignUserToClub(clubId, userId).subscribe(() => {
+    const userId =localStorage.getItem('IdUser');/// Remplacez 1 par l'ID de l'utilisateur (vous pouvez le récupérer depuis votre service d'authentification ou d'une autre manière)
+
+    this.clubService.assignUserToClub(clubId, userId as any).subscribe(() => {
       // Redirection vers la page /coureses-single/clubId
-      this.router.navigate(['/coureses-list', userId]);
+      this.router.navigate(['/main/ClubJoined', userId]);
     });
   }
 
-  
+
   //'/profile', this.idUser, idClub]
-  
+
   // joinEvent(idEvent: number): void {
   //   const idutilisateur = 1; // Remplacez 1 par l'ID de l'utilisateur (vous pouvez le récupérer depuis votre service d'authentification ou d'une autre manière)
-    
+
   //   this.eventService.assignUserToEvent(idEvent, idutilisateur).subscribe(data => {
   //     console.log(data)
   //   this.router.navigate(['/profile', idutilisateur, this.clubId])
@@ -71,12 +71,12 @@ export class ClubDetailComponent {
   // }
 
   joinEvent(idEvent: number): void {
-    const idutilisateur = 1; // Remplacez 1 par l'ID de l'utilisateur (vous pouvez le récupérer depuis votre service d'authentification ou d'une autre manière)
-    
-    this.clubService.assignUserToEvent(idEvent, idutilisateur).subscribe(
+    const idutilisateur = localStorage.getItem('IdUser'); // Remplacez 1 par l'ID de l'utilisateur (vous pouvez le récupérer depuis votre service d'authentification ou d'une autre manière)
+
+    this.clubService.assignUserToEvent(idEvent, idutilisateur as any).subscribe(
       data => {
         console.log(data);
-        this.router.navigate(['/home', idutilisateur]);
+        this.router.navigate(['/main/EventJoined', idutilisateur]);
       },
       error => {
         console.error(error);

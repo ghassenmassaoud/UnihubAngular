@@ -10,19 +10,19 @@ import { Observable } from 'rxjs';
 })
 export class ClubService {
 
-  private apiUrl = 'http://localhost:8086/api/clubs/getClubs'; // Remplacez l'URL par votre point de terminaison API
+  private apiUrl = 'http://localhost:8081/api/clubs/getClubs'; // Remplacez l'URL par votre point de terminaison API
 
-  private getClubByIdURL = 'http://localhost:8086/api/clubs/getClub'
+  private getClubByIdURL = 'http://localhost:8081/api/clubs/getClub'
 
-  private getEventByClubIdURL = 'http://localhost:8086/api/events/getEventByClubId'
+  private getEventByClubIdURL = 'http://localhost:8081/api/events/getEventByClubId'
 
-  private getClubsForMemberURL = 'http://localhost:8086/api/clubs/getClubsForMember'
+  private getClubsForMemberURL = 'http://localhost:8081/api/clubs/getClubsForMember'
 
-  private profileUrl = 'http://localhost:8086/api/clubs/assignUserToClub'
+  private profileUrl = 'http://localhost:8081/api/clubs/assignUserToClub'
 
   //private affectEventToUserURL='http://localhost:8086/api/events/addStudentToEvent/{{eventId}}/{{studentId}}'
 
-  private affectEventToUserURL='http://localhost:8086/api/events/addStudentToEvent'
+  private affectEventToUserURL='http://localhost:8081/api/events/addStudentToEvent'
 
 
 
@@ -45,7 +45,7 @@ export class ClubService {
 
   }
 
-  // 
+  //
 
   assignUserToClub(clubId: number, userId: number): Observable<any> {
     return this.httpClient.post(`${this.profileUrl}/${clubId}/${userId}`, {});
@@ -66,6 +66,6 @@ redirectTojoinedEvent(idutilisateur:number): void {
 
 
   }
-  
+
 
 

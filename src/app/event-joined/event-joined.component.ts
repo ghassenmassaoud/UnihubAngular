@@ -21,29 +21,29 @@ export class EventJoinedComponent {
   events:Event[]=[]
   RecEvents:Event[]=[]
   //const userId = 1;
-  
-  
+
+
   constructor(private Act : ActivatedRoute, private eventService:EventService, private router:Router){}
   ngOnInit(): void {
-    
+
       this.loadJsFiles();
       //this.iduser= this.Act.snapshot.params['iduser']
-   
-    const userId = 1;
-    
-   this.eventService.getEventListByUserId(userId).subscribe(data =>{
+
+    const userId =localStorage.getItem('IdUser');
+
+   this.eventService.getEventListByUserId(userId as any).subscribe(data =>{
     console.log(data)
     this.events = data;
   }
   )
 
-  this.eventService.RecommandedEventForUser(userId).subscribe(data =>{
+  this.eventService.RecommandedEventForUser(userId as any).subscribe(data =>{
     console.log(data)
     this.RecEvents=data;
   })
 
 
-    
+
 
 
 
@@ -64,9 +64,9 @@ export class EventJoinedComponent {
     // this.loadExternalScript(" ../../assets/js/isotope.pkgd.min.js");
     // this.loadExternalScript(" ../../assets/js/imagesloaded.pkgd.min.js");
     // this.loadExternalScript(" ../../assets/js/plugins.js");
-  
-  
-  
+
+
+
   }
   loadExternalScript(url: string): void {
     this.loadScript(url)
@@ -81,18 +81,18 @@ export class EventJoinedComponent {
     return new Promise<void>((resolve, reject) => {
       const scriptElement = document.createElement('script');
       scriptElement.src = url;
-  
+
       scriptElement.onload = () => {
         resolve();
       };
-  
+
       scriptElement.onerror = (error) => {
         reject(error);
       };
-  
+
       document.body.appendChild(scriptElement);
     });
   }
   }
-  
+
 

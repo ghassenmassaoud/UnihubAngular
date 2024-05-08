@@ -9,15 +9,15 @@ import { Event } from 'app/models/event';
   providedIn: 'root'
 })
 export class ProfileService {
-  private apiUrl = 'http://localhost:8086/api/clubs/getProfileById'; // Remplacez l'URL par votre point de terminaison API
+  private apiUrl = 'http://localhost:8081/api/clubs/getProfileById'; // Remplacez l'URL par votre point de terminaison API
 
-  private eventByClubUrl = 'http://localhost:8086/api/events/getEventByClubId';
-  
-  private addEventForClubURL = 'http://localhost:8086/api/events/create'
+  private eventByClubUrl = 'http://localhost:8081/api/events/getEventByClubId';
+
+  private addEventForClubURL = 'http://localhost:8081/api/events/create'
 
   constructor(private httpClient: HttpClient) { }
 
-  getProfile(idUser:number, idClub:number): Observable<Profile> {
+  getProfile(idUser:number, idClub:number) {
     return this.httpClient.get<Profile>(`${this.apiUrl}/${idUser}/${idClub}`);
   }
 
@@ -31,8 +31,8 @@ export class ProfileService {
   }
 
 
- 
 
 
-  
+
+
 }

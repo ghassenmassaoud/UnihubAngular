@@ -5,6 +5,8 @@ import { AuthService } from '../Service/auth.service';
 import { User } from '../Models/User';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { ClubService } from 'app/services/club.service';
+import { Club } from 'app/models/club';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -15,17 +17,15 @@ import { CommonModule } from '@angular/common';
 ]
 })
 export class HomeComponent {
-  constructor(private route: Router,private serv:AuthService){
+  constructor(private myclubService: ClubService,private route: Router,private serv:AuthService){
 
   }
   listUsers:User[]=[]
-
+  clubId!:number
+  clubs: Club[]=[];
   ngOnInit(): void {
+    this.getClubs();
 
-    // this.serv.GetAllUser().subscribe({next:(res)=>{
-
-    //   this.listUsers = res
-    //   console.log(this.listUsers);}})
      let access_token= localStorage.getItem('access_token');
      if (access_token) {
 
@@ -33,18 +33,19 @@ export class HomeComponent {
         console.log(res)
         localStorage.setItem('IdUser', (res as any).idUser);
         })
-    //   let decodedAccessToken = jwtDecode(access_token);
-    //   const userRole = (decodedAccessToken as any).role[0].authority;
-    //   if ( userRole === "ROLE_ADMIN") {
-    //     this.route.navigate(['/admin/dashboard/main']);
-    //   } else if (userRole === "ROLE_TEACHER") {
-    //     this.route.navigate(['/teacher/dashboard']);
-    //   } else if (userRole === "ROLE_STUDENT") {
-    //     this.route.navigate(['/student/dashboard']);
-    //   }
+
 
      }
     this.loadJsFiles();
+}
+private getClubs(){
+  this.myclubService.getClubList().subscribe(data => {
+    console.log(data)
+  this.clubs = data;
+
+  });
+}redirectToCourse(clubId: number) {
+  this.route.navigate(['/main/ClubDetail', clubId]);
 }
 loadJsFiles(): void {
   this.loadExternalScript(" ../../../assets/js/main.js");

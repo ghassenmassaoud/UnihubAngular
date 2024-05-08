@@ -12,15 +12,15 @@ export class EventService {
   constructor(private httpClient: HttpClient, private router: Router) { }
   //private eventByClubUrl = 'http://localhost:8086/api/clubs/getClubs'; // Remplacez l'URL par votre point de terminaison API
 
-  private affectEventToUserURL='http://localhost:8086/api/events/addStudentToEvent'
+  private affectEventToUserURL='http://localhost:8081/api/events/addStudentToEvent'
 
-  private ListEventByUserIdURL='http://localhost:8086/api/events/eventsByStudent'
+  private ListEventByUserIdURL='http://localhost:8081/api/events/eventsByStudent'
 
-  private RecommandedEventForUserURL='http://localhost:8086/api/recommendation/users/events/recommended'
+  private RecommandedEventForUserURL='http://localhost:8081/api/recommendation/users/events/recommended'
 
-  private ListeAllEventURL ='http://localhost:8086/api/events/getEvents'
+  private ListeAllEventURL ='http://localhost:8081/api/events/getEvents'
 
-  private RechercheEventURL ='http://localhost:8086/api/events/recommend'
+  private RechercheEventURL ='http://localhost:8081/api/events/recommend'
 
 
 
@@ -55,5 +55,5 @@ assignUserToEvent(idEvent: number, idutilisateur: number): Observable<any> {
 
 
 
-  
+
 }

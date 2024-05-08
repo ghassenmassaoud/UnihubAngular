@@ -2,6 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from 'app/Pi-User/home/home.component';
 import { ProfileComponent } from 'app/Pi-User/profile/profile.component';
+import { ClubDetailComponent } from 'app/club-detail/club-detail.component';
+import { ClubJoinedComponent } from 'app/club-joined/club-joined.component';
+import { EventJoinedComponent } from 'app/event-joined/event-joined.component';
+import { EventListComponent } from 'app/event-list/event-list.component';
+import { MyclubComponent } from 'app/myclub/myclub.component';
+import { MyprofileComponent } from 'app/myprofile/myprofile.component';
 import { UserAddPostsComponent } from 'app/posts/user-add-posts/user-add-posts.component';
 import { UserDetailsPostsComponent } from 'app/posts/user-details-posts/user-details-posts.component';
 import { UserpostsComponent } from 'app/posts/userposts/userposts.component';
@@ -15,7 +21,8 @@ import { SeenDemandsComponent } from 'app/student/seen-demands/seen-demands.comp
 import { UnSeenDemandsComponent } from 'app/student/un-seen-demands/un-seen-demands.component';
 const routes: Routes = [
 
-    {path:'home',component:HomeComponent},
+     {path:'home',component:HomeComponent},
+    // {path:'home',component:MyclubComponent},
 
     {
         path: 'profile',
@@ -89,6 +96,36 @@ const routes: Routes = [
         component:ResourceSpaceComponent,
         loadChildren:()=>
           import('../resource-space/resource-space.routes').then((m) => m.Space_Route)
+      },
+      {
+        path: 'EventJoined/:idUtilisateur',
+        component: EventJoinedComponent,
+        loadChildren: () =>
+          import('../home/home.routes').then((m) => m.HOME_ROUTE),
+      },
+      {
+        path: 'profileClub/:idUser/:idClub',
+        component: MyprofileComponent,
+        // loadChildren: () =>
+        //   import('../profile/profile.routes').then((m) => m.PROFILE_ROUTE),
+      },
+      {
+        path: 'eventList',
+        component: EventListComponent,
+        loadChildren: () =>
+          import('../event-side-bar/event-side-bar.routes').then((m) => m.EVENTSIDEBAR_ROUTE),
+      },
+      {
+        path: 'ClubJoined/:id',
+        component: ClubJoinedComponent,
+        loadChildren: () =>
+          import('../coureses-list/coureses-list.routes').then((m) => m.COURESESLIST_ROUTE),
+      },
+      {
+        path: 'ClubDetail/:id',
+        component: ClubDetailComponent,
+        loadChildren: () =>
+          import('../coureses-single/coureses-single.routes').then((m) => m.COURESESSINGLE_ROUTE),
       },
 
 ];

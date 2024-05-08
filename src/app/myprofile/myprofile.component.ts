@@ -7,13 +7,15 @@ import { NgModule } from '@angular/core';
 import { Event } from 'app/models/event';
 import { ActivatedRoute, Router } from '@angular/router';
 import { number } from 'echarts';
+import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
 @Component({
   selector: 'app-myprofile',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,BreadcrumbComponent, MatProgressSpinnerModule],
   templateUrl: './myprofile.component.html',
   styleUrls: ['../../assets/css/menus.css','../../assets/css/animate.css',
   '../../assets/css/animate.css','../../assets/css/owl.carousel.css','../../assets/fonts/elegant-icon.css','../../assets/css/magnific-popup.css',
@@ -27,7 +29,7 @@ export class MyprofileComponent implements OnInit {
   event!: Event
   events:Event[]=[];
   profile!: Profile;
-  
+
 
   constructor(private Act : ActivatedRoute, private profileService:ProfileService, private eventService: EventService,private router: Router){}
 
@@ -38,23 +40,24 @@ export class MyprofileComponent implements OnInit {
     this.idClub= this.Act.snapshot.params['idClub']
     this.id= this.Act.snapshot.params['id']
 
-   
-    
-    this.profileService.getProfile(this.idUser, this.idClub).subscribe(
-      data=>this.profile=data
+   console.log(this.idClub)
 
-  
+    this.profileService.getProfile(this.idUser, this.idClub).subscribe(
+      data=>{ console.log(data)
+        return this.profile=data}
+
+
     )
 
-    
+
 
     this.profileService.geteventByClub(this.idClub).subscribe(
       data=>this.events=data
     )
 
       //const idutilisateur = 1;
-    
-      
+
+
       // this.profileService.addEventForClub(this.idClub, idutilisateur, this.event).subscribe(
       //   data => {
       //     console.log(data);
@@ -66,40 +69,8 @@ export class MyprofileComponent implements OnInit {
       //   }
       // );
     }
-    
-  
 
 
-  
-  
-
-  
-//   constructor(private profileService: ProfileService) { }
-
-//   ngOnInit(): void {
-//     //this.loadProfile();
-//     //this.idUser= this.Act.snapshot.params['id']
-//     this.idUser=this.Act.snapshot.params['idUser']
-//   }
-// /*
-//   loadProfile() {
-//     this.profileService.getProfile().subscribe((data: Profile) => {
-//       this.profile = data;
-//     });
-//   }
-
-  
-  
-    // loadProfile(): void {
-    //   this.profileService.getProfile().subscribe(
-    //     data => {
-    //       console.log('Profil chargé avec succès :', data);
-    //       this.profile = data;
-    //     },
-    //     error => console.log('Erreur lors du chargement du profil :', error)
-    //   );
-    // }
-  
 
 
 loadJsFiles(): void {

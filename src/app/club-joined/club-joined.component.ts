@@ -17,8 +17,8 @@ import { ProfileService } from 'app/services/profile.service';
 export class ClubJoinedComponent {
   id!:number
   clubs:Club[]=[];
-  
-  
+
+
   constructor(private Act : ActivatedRoute, private clubService:ClubService,private profileService:ProfileService, private router:Router){}
   ngOnInit(): void {
     this.loadJsFiles();
@@ -31,16 +31,18 @@ export class ClubJoinedComponent {
     )
 
 
-    
+
 }
 
 
-idUser = 3; // ID de l'utilisateur (à remplacer par votre propre logique pour obtenir l'ID de l'utilisateur)
+// ID de l'utilisateur (à remplacer par votre propre logique pour obtenir l'ID de l'utilisateur)
 
-redirectToProfile(idClub: number): void {
+redirectToProfile(idClub: number) {
   //const idUser = 2;
-  this.profileService.getProfile(this.idUser, idClub).subscribe(() => {
-  this.router.navigate(['/profile', this.idUser, idClub]);
+  const idUser = localStorage.getItem('IdUser');
+  this.profileService.getProfile(idUser as any, idClub).subscribe(
+    () => {
+  this.router.navigate(['/main/profileClub', idUser, idClub]);
 });
 }
 
