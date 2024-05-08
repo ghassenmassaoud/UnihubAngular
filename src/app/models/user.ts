@@ -27,5 +27,4 @@ export class User{
         //ressourceSpaces!: RessourceSpace[];
         classroomStudent!: Classroom[];
         replyTask!: ReplyTask[];
-        events!: Event[];
       }
