@@ -36,10 +36,20 @@ import { UserDetailsPostsComponent } from './posts/user-details-posts/user-detai
 import { UserAddPostsComponent } from './posts/user-add-posts/user-add-posts.component';
 import { ResourcesComponent } from './resources/resources.component';
 import { ResourceSpaceComponent } from './resource-space/resource-space.component';
-
+import { EventJoinedComponent } from './event-joined/event-joined.component';
+import { MyprofileComponent } from './myprofile/myprofile.component';
+import { MyclubComponent } from './myclub/myclub.component';
+import { ClubDetailComponent } from './club-detail/club-detail.component';
+import { ClubJoinedComponent } from './club-joined/club-joined.component';
+import { EventListComponent } from './event-list/event-list.component';
 export const APP_ROUTE: Route[] = [
   {path:'main', component:FrontofficeComponent , loadChildren: ()=> import('./frontoffice/frontoffice.module').then(m=>m.FrontofficeModule)},
-
+  {
+    path: 'home/:idUtilisateur',
+    component: EventJoinedComponent,
+    loadChildren: () =>
+      import('./home/home.routes').then((m) => m.HOME_ROUTE),
+  },
   {
     path: 'login',
     component: LoginComponent,
@@ -60,7 +70,7 @@ export const APP_ROUTE: Route[] = [
   },
   {
     path: 'home-seconde',
-    component: HomeSecondeComponent,
+    component: MyclubComponent,
     loadChildren: () =>
       import('./home-seconde/HomeSeconde.routes').then((m) => m.HOMESECONDE_ROUTE),
   },
@@ -77,6 +87,32 @@ export const APP_ROUTE: Route[] = [
   {
     path: 'event-single/:commentId',
     component: AboutCommentComponent,
+
+    loadChildren: () =>
+      import('./profile/profile.routes').then((m) => m.PROFILE_ROUTE),
+  },
+  {
+    path: 'profile/:idUser/:idClub',
+    component: MyprofileComponent,
+    loadChildren: () =>
+      import('./profile/profile.routes').then((m) => m.PROFILE_ROUTE),
+  },
+
+  {
+    path: 'event',
+    component: EventComponent ,
+    loadChildren: () =>
+      import('./event/event.routes').then((m) => m.EVENT_ROUTE),
+  },
+  {
+    path: 'event-side-bar',
+    component: EventListComponent,
+    loadChildren: () =>
+      import('./event-side-bar/event-side-bar.routes').then((m) => m.EVENTSIDEBAR_ROUTE),
+  },
+  {
+    path: 'event-single',
+    component: EventSingleComponent,
     loadChildren: () =>
       import('./event-single/event-single.routes').then((m) => m.EVENTSINGLE_ROUTE),
   },
@@ -95,8 +131,8 @@ export const APP_ROUTE: Route[] = [
       import('./coureses/coureses.routes').then((m) => m.COURESES_ROUTE),
   },
   {
-    path: 'coureses-list',
-    component: CouresesListComponent,
+    path: 'coureses-list/:id',
+    component: ClubJoinedComponent,
     loadChildren: () =>
       import('./coureses-list/coureses-list.routes').then((m) => m.COURESESLIST_ROUTE),
   },
@@ -107,8 +143,8 @@ export const APP_ROUTE: Route[] = [
       import('./coureses-right-side-bar/coureses-right-side-bar.routes').then((m) => m.COURESESRIGHTSIDE_ROUTE),
   },
   {
-    path: 'coureses-single',
-    component: CouresesSingleComponent,
+    path: 'coureses-single/:id',
+    component: ClubDetailComponent,
     loadChildren: () =>
       import('./coureses-single/coureses-single.routes').then((m) => m.COURESESSINGLE_ROUTE),
   },
