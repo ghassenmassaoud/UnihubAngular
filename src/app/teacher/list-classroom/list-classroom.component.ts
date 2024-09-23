@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 import { FormDialogComponent } from '../lectures/dialogs/form-dialog/form-dialog.component';
 import { MatCell, MatCellDef } from '@angular/material/table';
 import { FeatherIconsComponent } from '@shared/components/feather-icons/feather-icons.component';
-import { User } from 'app/models/User';
+import { User } from 'app/models/user';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 @Component({

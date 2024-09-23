@@ -10,7 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.component';
 import { FileUploadComponent } from '@shared/components/file-upload/file-upload.component';
 import { Classroom } from 'app/models/Classroom';
-import { User } from 'app/models/User';
+import { User } from 'app/models/user';
 import { ClassroomService } from 'app/services/classroom.service';
 
 @Component({

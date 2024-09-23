@@ -1,7 +1,7 @@
 
 import { Task} from "./Task"
 import { Document } from "./Document";
-import { User } from "./User";
+import { User } from "./user";
 export class ReplyTask {
 
   idTaskrep!: number;
